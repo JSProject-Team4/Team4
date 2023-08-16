@@ -1,0 +1,32 @@
+#game-container {
+    display: grid;
+    grid-template-columns: repeat(10, 30px);
+    grid-template-rows: repeat(20, 30px);
+    gap: 1px;
+    border: 1px solid #000;
+    background-image: url('../Image/배경화면.jpg');
+    justify-content: center;
+}
+.cell {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.header h1 {
+    font-weight: 700;
+    font-size: 40px;
+    color: #000;
+}
+
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
