@@ -70,13 +70,14 @@
 .wrapper main .gamelist .gamelist-img ul li {
     width: 22.5%;
     height: 100%;
-
-    
-   
 }
 .wrapper main .gamelist .gamelist-img ul li img{
     width: 100%;
     height: 100%;
+}
+.wrapper main .gamelist .gamelist-img ul li:hover img{
+    transform: scale(1.05);
+    transition: all 0.5s linear;
 }
 
 /* footer style */
