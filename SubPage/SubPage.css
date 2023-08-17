@@ -81,15 +81,38 @@
 /* main */
 .wrapper main {
     padding-top: 200px;
-    height: 1000px;
     display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
-.wrapper main section {
-    width: 50%;
+.wrapper main .section1 {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.wrapper main .section1 .profile {
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: space-evenly;
     
-    text-align: center;
 }
-.wrapper main .mainprofile div {
+.wrapper main .section1 .profile div {
+
+}
+.wrapper main .section1 .profile .mainprofile {
+}
+
+.wrapper main .section1 .profile .mainprofile div {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    
+
     padding: 20px;
 }
 .wrapper main .mainprofile .gmTitle .title {
@@ -114,7 +137,7 @@
     display: flex;
     justify-content: center;
     align-content: center;
-    margin: 0 auto ;
+    width: 40%;
 }
 .wrapper main .mainImg ul li img{
     width: 288px;
@@ -124,3 +147,33 @@
     align-content: center;
 
 }
+.wrapper main .section2 div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+}
+.wrapper main .section2 .others {
+    margin: 60px;
+    padding: 100px 0 40px 40px;
+    font-size: 3em;
+    border-bottom: 2px solid #fff;
+}
+.wrapper main .section2 .othersImg {
+    padding: 80px;
+
+}
+.wrapper main .section2 .othersImg ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-content: center;
+}
+.wrapper main .section2 .othersImg a img {
+    width: 288px;
+    height: 420px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
