@@ -1,6 +1,8 @@
+@import url('../Common/Common.css');
 
 .wrapper{
-    background: #A9BCF5;
+    /* background: #A9BCF5; */
+    background: rgb(13, 39, 57);
     width: 100%;
 
 }
@@ -22,6 +24,22 @@
     display: flex;
     align-items:center;
 }
+.wrapper .header .header-main .header-logo {
+    padding: 30px;
+    color: #fff;
+}
+
+.wrapper .header .header-main .main-nav .main-nav__items  {
+    display: flex;
+    flex-direction: row;
+    color: #fff;
+}
+.wrapper .header .header-main .main-nav .main-nav__item a {
+    display: block;
+    font-weight: 700;
+    padding: 0 15px;
+}
+
 /* main */
 .wrapper main {
     padding-top: 200px;
@@ -38,13 +56,14 @@
     text-align: center;
     font-size: 140px;
     color: #fff;
-    font-family: DM Serif Display;
+    font-family: 'DM Serif Display', serif;
     margin-bottom: 60px;
 }
 .wrapper main .maintitle .title2 {
     text-align: center;
+    font-size: 40px;
     color: #fff;
-    font-family: DM Serif Display;
+    font-family: 'DM Serif Display', serif;
 } 
 .wrapper main p {
     border: 1px solid #fff;
@@ -84,15 +103,11 @@
 .wrapper .footer {
    height: 70px;
 }
-.wrapper .footer .footerbox {
-    width: 100%;
-    height: 70px;
-    background: #A9BCF5;
-}
+
 .wrapper .footer .footer_wrap {
     width: 100%;
     height: 70px;
-    background: rgba(9, 6, 27, 0.8);
+    background: rgb(132, 130, 147);
 
     display: flex;
     flex-direction: row;
