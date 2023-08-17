@@ -5,7 +5,7 @@
     background: rgb(13, 39, 57);
     width: 100%;
     color: #fff;
-
+    font-family: 'DungGeunMo';
 }
 /* header style */
 .wrapper.header {
@@ -116,11 +116,11 @@
     padding: 45px;
 }
 .wrapper main .mainprofile .gmTitle .title {
-    font-family: 'DM Serif Display', serif;
+    font-family: 'DungGeunMo';
     font-size: 4.5em;
 }
 .wrapper main .mainprofile .gamestart {
-    font-family: 'DM Serif Display', serif;
+    font-family: 'DungGeunMo';
     font-size: 4.0em;
     color: rgba(0, 0, 0, 0.8);
 }
