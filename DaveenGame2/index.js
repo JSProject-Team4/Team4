@@ -47,14 +47,32 @@ for (let i = 0; i < blockColumn; i++) {
   }
 }
 
+// 헤더의 스코어 <p>태그
+const $score = document.getElementById('score');
+$score.textContent = 0;
+
 // ============ 주인"공"을 캔버스 위에 그리는 파트 ============ //
 // 주인"공"을 그리는 함수
 function drawBall() {
   ctx.beginPath(); // 그리기 시작
   ctx.arc(x, y, ballRadius, 0, 10); // x: 50, y: 50, 반지름: 10, 시작각도, 끝 각도
-  ctx.fillStyle = '#0095DD';
+  ctx.fillStyle = 'yellow';
   ctx.fill();
   ctx.closePath(); // 그리기 끝
+
+  
+  // 이미지 로드
+  const backgroundImage = new Image();
+  backgroundImage.src = './image/발리볼.png'; // 이미지 파일 경로
+
+  backgroundImage.onload = function () {
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
+    ctx.clip();
+    ctx.drawImage(backgroundImage, x - ballRadius, y - ballRadius, ballRadius * 2, ballRadius * 2);
+    ctx.restore();
+  };
 } // drawBall() 함수 끝
 
 // 라켓을 그리는 함수
@@ -69,8 +87,7 @@ function drawRacket() {
   ctx.fill();
   ctx.closePath();
   ctx.shadowBlur = 0;
-ctx.shadowColor = 'transparent';
-
+  ctx.shadowColor = 'transparent';
 }
 
 // for (let i = 0; i < blockColumn; i++) {
@@ -114,6 +131,7 @@ function blockDelete() {
         ) {
           MovingY = -MovingY;
           target.status = 0;
+          $score.textContent = +$score.textContent + 100;
         }
       }
     }
@@ -135,6 +153,8 @@ function resetGame() {
       blocks[i][z].status = 1;
     }
   }
+
+  $score.textContent = 0;
 }
 
 // 그리기 함수 (10밀리초마다 호출됨 = 무한작동)
@@ -155,7 +175,7 @@ function draw() {
   // 공이 화면 아래로 향했을때의 코드
   else if (y + MovingY > racketY - ballRadius) {
     if (y + movingX > canvas.height - ballRadius) {
-      alert('Game Over...');
+      alert(`Game Over... 스코어: ${$score.textContent}점`);
       // 시작지점으로 돌린다.
       resetGame();
     }
@@ -180,6 +200,7 @@ function draw() {
 
   x += movingX; // x의 값 +2
   y += MovingY; // y의 값 -2
+
 } // draw() 함수 끝
 
 // 키보드 이벤트리스너
@@ -200,4 +221,25 @@ function keyUpHandler(e) {
   }
 }
 
-setInterval(draw, 10); // 10밀리초 간격 draw함수 반복호출
+// =========== 일시정지 버튼과 draw함수 반복호출문 ========== //
+let stop = false;
+let intervalId;
+const $btn = document.querySelector('.header button');
+
+$btn.addEventListener('click', pauseDrawing);
+
+function startDrawing() {
+  intervalId = setInterval(draw, 10); // 10밀리초마다 draw 함수 호출
+}
+function pauseDrawing() {
+  if (stop === false) {
+    stop = true;
+    clearInterval(intervalId); // 타이머 일시정지
+    console.log('멈춰!!');
+  } else {
+    stop = false;
+    intervalId = setInterval(draw, 10); // 10밀리초마다 draw 함수 호출
+    console.log('시간은 다시 흐른다.');
+  }
+}
+startDrawing();
