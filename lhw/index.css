@@ -1,0 +1,17 @@
+@import url(common.css);
+
+h1{
+    color: yellow;
+}
+.case{
+    width: 400px;height: 700px;
+}
+.canvus{
+    position: relative;
+}
+.status{
+    width: 380px;
+    height: 380px;
+    position: absolute;
+    background:url(Image/gameStart.jpg) no-repeat center/cover;
+}
