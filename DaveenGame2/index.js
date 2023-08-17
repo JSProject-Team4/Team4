@@ -26,28 +26,33 @@ let racketX = (canvas.width - racketWidth) / 2; // canvas의 길이에서 라켓
 let rightKey = false;
 let leftKey = false;
 
-
-
-
 // ============ 주인"공"을 캔버스 위에 그리는 파트 ============ //
 
 // 주인"공"을 그리는 함수
 function drawBall() {
-    ctx.beginPath(); // 그리기 시작
-    ctx.arc(x, y, ballRadius, 0, 10); // x: 50, y: 50, 반지름: 10, 시작각도, 끝 각도
-    ctx.fillStyle = '#0095DD';
-    ctx.fill();
-    ctx.closePath(); // 그리기 끝
-  } // drawBall() 함수 끝
-  
-  // 라켓을 그리는 함수
-  function drawRacket() {
-    ctx.beginPath();
-    ctx.rect(racketX, canvas.height - racketHeight, racketWidth, racketHeight);
-    ctx.fillStyle = '#0095DD';
-    ctx.fill();
-    ctx.closePath();
-  }
+  ctx.beginPath(); // 그리기 시작
+  ctx.arc(x, y, ballRadius, 0, 10); // x: 50, y: 50, 반지름: 10, 시작각도, 끝 각도
+  ctx.fillStyle = '#0095DD';
+  ctx.fill();
+  ctx.closePath(); // 그리기 끝
+} // drawBall() 함수 끝
+
+// 라켓을 그리는 함수
+function drawRacket() {
+  ctx.beginPath();
+  ctx.rect(racketX, canvas.height - racketHeight, racketWidth, racketHeight);
+  ctx.fillStyle = '#0095DD';
+  ctx.fill();
+  ctx.closePath();
+}
+
+// 게임을 리셋하는 함수
+function resetGame() {
+  x = canvas.width / 2;
+  y = canvas.height - 30;
+  movingX = 2;
+  MovingY = -2;
+}
 
 // 그리기 함수 (10밀리초마다 호출됨 = 무한작동)
 function draw() {
@@ -58,14 +63,23 @@ function draw() {
   // ============ 주인"공"을 벽에 튕기게 하는 파트 ============ //
   // 만약에 현재의 높이에서 + MovingY( -2 )를 했을때 0보다 작아지는경우(벽을넘어감)
   // plusY를 양수로 바꿔서 반대로 움직이게해서 벽에 튕기는것처럼 보이게 한다
-  // (화면 위를 넘어가거나 화면 아래로 넘어가거나)
-  if (y + MovingY > canvas.height - ballRadius || y + MovingY < ballRadius) {
+  // (화면 위를 넘어갈때)
+  if (y + MovingY < ballRadius) {
     MovingY = -MovingY;
+  }
+  // 공이 화면 아래로 향했을때의 코드
+  if (y + MovingY > canvas.height - ballRadius) {
+    alert('Game Over...');
+    // 공의 위치를 시작지점으로 돌린다.
+    resetGame();
+
   }
   // (화면 왼쪽을 넘어가거나 화면 오른쪽으로 넘어가거나)
   if (x + movingX > canvas.width - ballRadius || x + movingX < ballRadius) {
     movingX = -movingX;
   }
+
+  // 라켓에 주인"공"이 닿았을 때, 벽에 튀긴것처럼 튕기게 하기
 
   // 좌우 각 방향키를 누르면 10의 속도(10px)로 움직인다. 라켓이 벽을 넘지않는 선에서
   if (rightKey && racketX < canvas.width - racketWidth) {
@@ -77,8 +91,6 @@ function draw() {
   x += movingX; // x의 값 +2
   y += MovingY; // y의 값 -2
 } // draw() 함수 끝
-
-
 
 // 키보드 이벤트리스너
 document.addEventListener('keydown', keyDownHandler, false);
