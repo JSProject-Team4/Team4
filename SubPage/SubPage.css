@@ -1,0 +1,126 @@
+@import url('../Common/Common.css');
+
+.wrapper{
+    /* background: #A9BCF5; */
+    background: rgb(13, 39, 57);
+    width: 100%;
+    color: #fff;
+
+}
+/* header style */
+.wrapper.header {
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 999;
+}
+.wrapper .header .header-main{
+    width: 100%;
+    height: 70px;
+    margin: 0 auto;
+    position: fixed;
+    
+    background: rgba(0, 0, 0, 0.5);
+
+    display: flex;
+    align-items:center;
+}
+.wrapper .header .header-main .header-logo {
+    padding: 30px;
+    color: #fff;
+}
+
+.wrapper .header .header-main .main-nav .main-nav__items  {
+    display: flex;
+    flex-direction: row;
+    color: #fff;
+}
+.wrapper .header .header-main .main-nav .main-nav__item a {
+    display: block;
+    font-weight: 700;
+    padding: 0 15px;
+}
+/* footer style */
+.wrapper .footer {
+   height: 70px;
+}
+
+.wrapper .footer .footer_wrap {
+    width: 100%;
+    height: 70px;
+    background: rgb(132, 130, 147);
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.wrapper .footer .footer_wrap .social ul{
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.wrapper .footer .footer_wrap .social ul li img {
+    margin-top: 40px;
+    width: 55px;
+    height: 30px;
+}
+.wrapper .footer .footer_wrap p {
+    margin-top: 30px;
+    text-align: right;
+    font-size: 13px;
+    color: #ccc;
+}
+.wrapper .footer .footer_wrap .copyright {
+    margin: 20px 10px 0 0 ;
+    text-align: right;
+    font-size: 13px;
+    color: #ccc;
+}
+
+/* main */
+.wrapper main {
+    padding-top: 200px;
+    height: 1000px;
+    display: flex;
+}
+.wrapper main section {
+    width: 50%;
+    
+    text-align: center;
+}
+.wrapper main .mainprofile div {
+    padding: 20px;
+}
+.wrapper main .mainprofile .gmTitle .title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 4.5em;
+}
+.wrapper main .mainprofile .gamestart {
+    font-family: 'DM Serif Display', serif;
+    font-size: 4.0em;
+    color: rgba(0, 0, 0, 0.8);
+    padding-top: 60px;
+}
+.wrapper main .mainprofile .gamestart a {
+    background: rgb(255, 255, 255);
+    padding: 0 20px;
+    border-radius: 10px 10px;
+}
+.wrapper main .mainprofile .gmprofile p {
+    padding: 0 0 20px 0; 
+}
+.wrapper main .mainImg {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin: 0 auto ;
+}
+.wrapper main .mainImg ul li img{
+    width: 288px;
+    height: 420px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+
+}
