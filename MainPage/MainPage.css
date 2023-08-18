@@ -35,10 +35,14 @@
     flex-direction: row;
     color: #fff;
 }
-.wrapper .header .header-main .main-nav .main-nav__item a {
-    display: block;
+.wrapper .header .header-main .main-nav__item a {
     font-weight: 700;
     padding: 0 15px;
+}
+.wrapper .header .header-main .rank {
+    display: flex;
+    flex-direction: row-reverse;
+    text-align: right;
 }
 
 /* main */
