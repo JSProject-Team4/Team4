@@ -2,7 +2,7 @@
 
 .wrapper{
     /* background: #A9BCF5; */
-    background: linear-gradient(180deg, #29043A 0%, #0e0631 50%, #000000 90%);
+    background: linear-gradient(180deg, #29043A 0%, #0e0631 30%, #000000 90%);
     width: 100%;
     color: #fff;
     font-family: 'DungGeunMo';
@@ -80,7 +80,7 @@
 
 /* main */
 .wrapper main {
-    padding-top: 300px;
+    padding-top: 250px;
     
 }
 .wrapper main section {
