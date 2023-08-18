@@ -169,6 +169,7 @@ canvas {
   width: 400px;
   margin: 0px auto;
   margin-top: 100px;
+  margin-bottom: -10px;
   background: #f5ce6b;
 
   border: 5px solid #d89797;
@@ -178,6 +179,7 @@ canvas {
   /* font-family: 'Bagel Fat One', cursive; */
   color: #000;
   padding: 5px;
+
 }
 
 .wrap {
@@ -212,9 +214,19 @@ canvas {
   margin-top: 30px;
 }
 
-.setting #pause,
-.setting #bgm {
+.setting #pause {
   background: #000;
+  font-size: 15px;
+  color: #fff;
+  font-weight: 700;
+  padding: 10px;
+}
+.setting #bgm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: #949494;
   font-size: 15px;
   color: #fff;
   font-weight: 700;
@@ -240,4 +252,24 @@ canvas {
   border: 5px solid #d89797;
   border-radius: 30px;
   
+}
+
+.custom-loader {
+  width:22.5px;
+  height:30px;
+  --c:linear-gradient(#21E5BA 0 0);
+  background: 
+    var(--c) 0%   50%,
+    var(--c) 50%  50%,
+    var(--c) 100% 50%;
+  background-size:4.5px 50%;
+  background-repeat: no-repeat;
+  animation:b7 1s infinite linear alternate;
+  margin-right: 10px;
+}
+@keyframes b7 {
+    20% {background-size:4.5px 20% ,4.5px 50% ,4.5px 50% }
+    40% {background-size:4.5px 100%,4.5px 20% ,4.5px 50% }
+    60% {background-size:4.5px 50% ,4.5px 100%,4.5px 20% }
+    80% {background-size:4.5px 50% ,4.5px 50% ,4.5px 100%}
 }

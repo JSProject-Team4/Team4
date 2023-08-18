@@ -16,7 +16,6 @@ const ballRadius = 10;
 // 공튕기는 소리
 let bSound = new Audio('./Sound/ballSound.mp3');
 
-
 // 공의 좌표를 계속 변하게 하기 위해서 프레임마다 x와 y에 추가될 값
 let movingX = 2;
 let MovingY = -2;
@@ -56,13 +55,17 @@ for (let i = 0; i < blockColumn; i++) {
 let ballImageLoaded = false;
 let ballImage = new Image();
 ballImage.src = './image/발리볼.png'; // 이미지 파일 경로로 바꿔야 함
-ballImage.onload = function() {
+ballImage.onload = function () {
   ballImageLoaded = true;
 };
 
 // 헤더의 스코어 <p>태그
 const $score = document.getElementById('score');
 $score.textContent = 0;
+
+
+let firstMusic = false;
+
 
 // ============ 주인"공"을 캔버스 위에 그리는 파트 ============ //
 // 주인"공"을 그리는 함수
@@ -83,7 +86,13 @@ function drawBall() {
   ctx.closePath(); // 그리기 끝
 
   if (ballImageLoaded) {
-    ctx.drawImage(ballImage, x - ballRadius, y - ballRadius, ballRadius * 2, ballRadius * 2);
+    ctx.drawImage(
+      ballImage,
+      x - ballRadius,
+      y - ballRadius,
+      ballRadius * 2,
+      ballRadius * 2
+    );
   }
 } // drawBall() 함수 끝
 
@@ -134,8 +143,7 @@ const bSoundPlay = () => {
   console.log(`ss`);
   bSound.volume = 1;
   bSound.play();
-}
-
+};
 
 // 주인"공"이 블록에 닿았을때 블록을 삭제하는 함수
 function blockDelete() {
@@ -148,14 +156,16 @@ function blockDelete() {
           x < target.x + blockWidth &&
           y + ballRadius + target.y &&
           // y < target.y + blockHeight*2.4
-          y < target.y + blockHeight*1.6
+          y < target.y + blockHeight * 1.6
         ) {
           MovingY = -MovingY;
           target.status = 0;
           $score.textContent = +$score.textContent + 100;
           bSoundPlay();
 
+          // 처음 실행이면 음악실행
           if (firstMusic === false) {
+            firstMusic = true;
             isPlaying = true;
             audio.volume = 1;
             audio.play();
@@ -252,7 +262,6 @@ function keyUpHandler(e) {
 
 const $bgmBtn = document.getElementById('bgm');
 let isPlaying = false;
-let firstMusic = false;
 let audio = new Audio('./Sound/song.mp3');
 $bgmBtn.addEventListener('click', () => {
   if (isPlaying === false) {
