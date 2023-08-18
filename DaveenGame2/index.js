@@ -47,18 +47,39 @@ for (let i = 0; i < blockColumn; i++) {
   }
 }
 
+// 이미지 로딩 및 그리기
+let ballImageLoaded = false;
+let ballImage = new Image();
+ballImage.src = './image/발리볼.png'; // 이미지 파일 경로로 바꿔야 함
+ballImage.onload = function() {
+  ballImageLoaded = true;
+};
+
 // 헤더의 스코어 <p>태그
 const $score = document.getElementById('score');
 $score.textContent = 0;
 
 // ============ 주인"공"을 캔버스 위에 그리는 파트 ============ //
 // 주인"공"을 그리는 함수
+function drawBallWithImage(image) {
+  ctx.drawImage(
+    image,
+    x - ballRadius,
+    y - ballRadius,
+    ballRadius * 2,
+    ballRadius * 2
+  );
+}
 function drawBall() {
   ctx.beginPath(); // 그리기 시작
   ctx.arc(x, y, ballRadius, 0, 10); // x: 50, y: 50, 반지름: 10, 시작각도, 끝 각도
-  ctx.fillStyle = 'yellow';
-  ctx.fill();
+  // ctx.fillStyle = 'yellow';
+  // ctx.fill();
   ctx.closePath(); // 그리기 끝
+
+  if (ballImageLoaded) {
+    ctx.drawImage(ballImage, x - ballRadius, y - ballRadius, ballRadius * 2, ballRadius * 2);
+  }
 } // drawBall() 함수 끝
 
 // 라켓을 그리는 함수
@@ -69,7 +90,7 @@ function drawRacket() {
   ctx.shadowOffsetX = 5; // 그림자의 X축 오프셋
   ctx.shadowOffsetY = 5; // 그림자의 Y축 오프셋
   ctx.rect(racketX, racketY, racketWidth, racketHeight);
-  ctx.fillStyle = '#0095DD';
+  ctx.fillStyle = 'yellowgreen';
   ctx.fill();
   ctx.closePath();
   ctx.shadowBlur = 0;
