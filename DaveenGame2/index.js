@@ -59,20 +59,6 @@ function drawBall() {
   ctx.fillStyle = 'yellow';
   ctx.fill();
   ctx.closePath(); // 그리기 끝
-
-  
-  // 이미지 로드
-  const backgroundImage = new Image();
-  backgroundImage.src = './image/발리볼.png'; // 이미지 파일 경로
-
-  backgroundImage.onload = function () {
-    ctx.save();
-    ctx.beginPath();
-    ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
-    ctx.clip();
-    ctx.drawImage(backgroundImage, x - ballRadius, y - ballRadius, ballRadius * 2, ballRadius * 2);
-    ctx.restore();
-  };
 } // drawBall() 함수 끝
 
 // 라켓을 그리는 함수
@@ -118,6 +104,7 @@ function makeBlock() {
   }
 }
 
+// 주인"공"이 블록에 닿았을때 블록을 삭제하는 함수
 function blockDelete() {
   for (let i = 0; i < blockColumn; i++) {
     for (let z = 0; z < blockRow; z++) {
@@ -200,7 +187,6 @@ function draw() {
 
   x += movingX; // x의 값 +2
   y += MovingY; // y의 값 -2
-
 } // draw() 함수 끝
 
 // 키보드 이벤트리스너
@@ -221,10 +207,24 @@ function keyUpHandler(e) {
   }
 }
 
+const $bgmBtn = document.getElementById('bgm');
+let isPlaying = false;
+let audio = new Audio('./Sound/song.mp3');
+$bgmBtn.addEventListener('click', () => {
+  if (isPlaying === false) {
+    isPlaying = true;
+    audio.volume = 1;
+    audio.play();
+  } else {
+    isPlaying = false;
+    audio.pause();
+  }
+});
+
 // =========== 일시정지 버튼과 draw함수 반복호출문 ========== //
 let stop = false;
 let intervalId;
-const $btn = document.querySelector('.header button');
+const $btn = document.getElementById('pause');
 
 $btn.addEventListener('click', pauseDrawing);
 

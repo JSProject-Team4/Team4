@@ -2,6 +2,15 @@
   padding: 0;
   margin: 0;
 }
+
+body {
+  background-image: url('./image/해변가.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  height: 100vh;
+}
+
 canvas {
   background-image: url('./image/모래사장.jpg');
   background-repeat: no-repeat;
@@ -16,10 +25,42 @@ canvas {
   display: flex;
   justify-content: center;
   align-items: center;
+
+  width: 40%;
+  margin: 20px auto;
+  background: #f5ce6b;
+
+  border: 5px solid #d89797;
+  border-radius: 30px;
 }
 
 .header {
   display: flex;
   justify-content: center;
   align-items: center;
+
+  width: 30%;
+  margin: 20px auto;
+  background: #f5ce6b;
+
+  border: 5px solid #d89797;
+  border-radius: 30px;
+}
+
+.setting {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  margin-top: 30px;
+}
+
+.setting #pause,
+.setting #bgm {
+  background: #000;
+  font-size: 15px;
+  color: #fff;
+  font-weight: 700;
+  padding: 10px;
 }
