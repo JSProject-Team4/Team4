@@ -43,18 +43,14 @@
 
 /* main */
 .wrapper main {
-    padding-top: 200px;
+    padding-top: 260px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
-.wrapper main p {
-    border: 1.5px solid #fff;
-    margin: 40px;
-}
 .wrapper main .maintitle {
     width: 100%;
-    padding-bottom: 100px;
+    padding-bottom: 200px;
     display: flex;
     flex-direction: column;
 }
