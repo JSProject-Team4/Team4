@@ -92,9 +92,11 @@ const loadImage = () => {
   gameOverImage.src = 'Image/gameOver.jpg';
 };
 const createBullet = () => {
-  let b = new Bullet(); //총알 하나 생성
-  b.init();
-  console.log(bulletList);
+  if(gameStatus){
+    let b = new Bullet(); //총알 하나 생성
+    b.init();
+  }
+
 };
 const createEnemy = () => {
   const interval = setInterval(() => {
