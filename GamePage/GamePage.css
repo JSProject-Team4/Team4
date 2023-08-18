@@ -80,7 +80,7 @@
 
 /* main */
 .wrapper main {
-    padding-top: 150px;
+    padding-top: 120px;
     
 }
 
@@ -90,7 +90,7 @@
     flex-direction: column;
 }
 .wrapper main .maingame div {
-    padding: 50px;
+    padding: 30px;
 }
 
 .wrapper main .maingame .gmTitle .title {
@@ -121,6 +121,5 @@
     justify-content: center;
 }
 .wrapper main .mainImg ul li img{
-    width: 432px;
-    height: 630px;
+    width: 100%;
 }
