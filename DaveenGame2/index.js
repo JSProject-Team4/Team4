@@ -7,10 +7,15 @@ const ctx = canvas.getContext('2d');
 
 // 공의 시작위치 지정 ( 화면 중앙 + 하단부터 30px 윗칸)
 let x = canvas.width / 2;
-let y = canvas.height - 60;
+let y = canvas.height - 70;
 
 // 공의 반지름
 const ballRadius = 10;
+// const ballRadius = 30;
+
+// 공튕기는 소리
+let bSound = new Audio('./Sound/ballSound.mp3');
+
 
 // 공의 좌표를 계속 변하게 하기 위해서 프레임마다 x와 y에 추가될 값
 let movingX = 2;
@@ -125,6 +130,13 @@ function makeBlock() {
   }
 }
 
+const bSoundPlay = () => {
+  console.log(`ss`);
+  bSound.volume = 1;
+  bSound.play();
+}
+
+
 // 주인"공"이 블록에 닿았을때 블록을 삭제하는 함수
 function blockDelete() {
   for (let i = 0; i < blockColumn; i++) {
@@ -134,12 +146,20 @@ function blockDelete() {
         if (
           x > target.x &&
           x < target.x + blockWidth &&
-          y + ballRadius > target.y &&
-          y < target.y + blockHeight
+          y + ballRadius + target.y &&
+          // y < target.y + blockHeight*2.4
+          y < target.y + blockHeight*1.6
         ) {
           MovingY = -MovingY;
           target.status = 0;
           $score.textContent = +$score.textContent + 100;
+          bSoundPlay();
+
+          if (firstMusic === false) {
+            isPlaying = true;
+            audio.volume = 1;
+            audio.play();
+          }
         }
       }
     }
@@ -149,7 +169,7 @@ function blockDelete() {
 // 게임을 리셋하는 함수
 function resetGame() {
   x = canvas.width / 2;
-  y = canvas.height - 60;
+  y = canvas.height - 70;
   movingX = 2;
   MovingY = -2;
 
@@ -197,6 +217,8 @@ function draw() {
   // 라켓에 주인"공"이 닿았을 때, 벽에 튀긴것처럼 튕기게 하기
   if (x > racketX && x < racketX + racketWidth && y + ballRadius > racketY) {
     MovingY = -MovingY;
+    // bSound.volume = 5;
+    // bSound.play();
   }
 
   // 좌우 각 방향키를 누르면 10의 속도(10px)로 움직인다. 라켓이 벽을 넘지않는 선에서
@@ -230,6 +252,7 @@ function keyUpHandler(e) {
 
 const $bgmBtn = document.getElementById('bgm');
 let isPlaying = false;
+let firstMusic = false;
 let audio = new Audio('./Sound/song.mp3');
 $bgmBtn.addEventListener('click', () => {
   if (isPlaying === false) {
