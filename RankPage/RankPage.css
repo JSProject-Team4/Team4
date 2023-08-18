@@ -1,0 +1,137 @@
+@import url('../Common/Common.css');
+
+.wrapper{
+    /* background: #A9BCF5; */
+    font-family: 'DungGeunMo';
+    background: linear-gradient(200deg, #29043A 0%, #0e0631 30%, #000000 90%);
+    width: 100%;
+
+}
+/* header style */
+.wrapper.header {
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 999;
+     color: #fff;
+}
+.wrapper .header .header-main{
+    width: 100%;
+    height: 70px;
+    margin: 0 auto;
+    
+    background: rgba(10, 10, 10, 0.8);
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+
+    font-weight: 700;
+    font-size: 20px;
+    align-items:center;
+}
+.wrapper .header .header-main .header-logo {
+    padding: 20px;
+}
+
+.wrapper .header .header-main .main-nav .main-nav__items  {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between
+   
+}
+.wrapper .header .header-main .main-nav__item a {
+    padding: 0 60px;
+}
+.wrapper .header .header-main .rank  {
+}
+
+/* main */
+.wrapper main {
+    padding-top: 260px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.wrapper main .maintitle {
+    width: 100%;
+    padding-bottom: 200px;
+    display: flex;
+    flex-direction: column;
+}
+.wrapper main .maintitle .title {
+    text-align: center;
+    font-size: 140px;
+    color: #fff;
+    font-family: 'DM Serif Display', serif;
+    margin-bottom: 60px;
+}
+.wrapper main .maintitle .title2 {
+    text-align: center;
+    font-size: 40px;
+    color: #fff;
+    font-family: 'DM Serif Display', serif;
+} 
+.wrapper main .list {
+    width: 100%;
+}
+.wrapper main .gamelist{
+    width: 95%;
+    margin: 0 auto ;
+    padding: 80px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.wrapper main .gamelist .gamelist-img ul{
+    margin: 0  ;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.wrapper main .gamelist .gamelist-img ul li {
+    width: 22.5%;
+}
+.wrapper main .gamelist .gamelist-img ul li img{
+    width: 100%;
+}
+.wrapper main .gamelist .gamelist-img ul li:hover img{
+    transform: scale(1.05);
+    transition: all 0.5s linear;
+}
+
+/* footer style */
+.wrapper .footer {
+   height: 70px;
+}
+
+.wrapper .footer .footer_wrap {
+    width: 100%;
+    height: 70px;
+    background: rgb(33, 32, 39);
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.wrapper .footer .footer_wrap .social ul{
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.wrapper .footer .footer_wrap .social ul li img {
+    margin-top: 40px;
+    width: 55px;
+    height: 30px;
+}
+.wrapper .footer .footer_wrap p {
+    margin-top: 30px;
+    text-align: right;
+    font-size: 13px;
+    color: #ccc;
+}
+.wrapper .footer .footer_wrap .copyright {
+    margin: 20px 10px 0 0 ;
+    text-align: right;
+    font-size: 13px;
+    color: #ccc;
+}
