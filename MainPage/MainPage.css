@@ -20,7 +20,7 @@
     margin: 0 auto;
     position: fixed;
     
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(10, 10, 10, 0.8);
 
     display: flex;
     align-items:center;
