@@ -1,0 +1,98 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background-image: url('./image/해변가.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  height: 100vh;
+}
+
+canvas {
+  background-image: url('./image/모래사장.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: block;
+  margin: 0 auto;
+  border: 5px solid #d89797;
+  border-radius: 30px;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 40%;
+  margin: 20px auto;
+  background: #f5ce6b;
+
+  border: 5px solid #d89797;
+  border-radius: 30px;
+}
+.title h1 {
+  font-family: 'Bagel Fat One', cursive;
+}
+
+.wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 30%;
+  margin-top: 20px;
+  background: #f5ce6b;
+
+  border: 5px solid #d89797;
+  border-radius: 30px;
+}
+
+.setting {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+
+  margin-top: 30px;
+}
+
+.setting #pause,
+.setting #bgm {
+  background: #000;
+  font-size: 15px;
+  color: #fff;
+  font-weight: 700;
+  padding: 10px;
+}
+
+.keyHelp {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-top: 10px;
+}
+.keyHelp .keySet {
+
+  width: 34%;
+  height: 200px;
+  background-image: url('./image/Howtomove.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+
+  border: 5px solid #d89797;
+  border-radius: 30px;
+  
+}
