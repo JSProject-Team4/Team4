@@ -4,13 +4,15 @@ const c = canvas.getContext('2d');
 const $gameStart = document.querySelector('.gameStart');
 const $backDrop = document.querySelector('body .backdrop');
 const $gameOver = document.querySelector('.gameOver');
+const $main = document.querySelector('.main')
 // 크기
-const WIDTH = 600;
-const HEIGHT = 1200;
+const WIDTH = 615;
+const HEIGHT = 1215;
 
 canvas.width = WIDTH;
 canvas.height = HEIGHT;
 
+$main.appendChild(canvas);
 
 let bgImage, charecterImg, bulletImage, enemyImage, gameOverImage;
 

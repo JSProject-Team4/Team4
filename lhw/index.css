@@ -12,6 +12,12 @@ body {
     background-position: center;
     background-origin: content-box;
 }
+.main{
+    padding-top: 76px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 h1{
     color: yellow;
     text-align: center;
@@ -22,6 +28,10 @@ h1{
     width: 600px;height: 1200px;
     position: absolute;
     top: 44px;
+}
+.box{
+    width: 600px;height: 1200px;
+    position: absolute;
 }
 .canvus{
     display: block;
