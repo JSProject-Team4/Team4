@@ -1,0 +1,65 @@
+@import url(common.css);
+
+body {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    justify-content: center;
+    align-items: center;
+    background: url(./Image/plenet.jpg) no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-origin: content-box;
+}
+h1{
+    color: yellow;
+    text-align: center;
+    font-size: 1.5em;
+    margin: 10px;
+}
+.totlaBox{
+    width: 600px;height: 1200px;
+    position: absolute;
+    top: 44px;
+}
+.canvus{
+    display: block;
+    position: absolute; 
+}
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.60);
+  }
+.gameStart{
+    z-index: 11;
+    width: 380px;
+    height: 380px;
+    position: absolute;
+    background:url(Image/gameStart.jpg) no-repeat;
+    background-size: contain;
+    background-position: center;
+    background-origin: content-box;
+    top: 380px;
+    left: 110px;
+}
+.gameOver{
+    z-index: 11;
+    width: 380px;
+    height: 380px;
+    position: absolute;
+    background:url(Image/gameOver.jpg) no-repeat;
+    background-size: contain;
+    background-position: center;
+    background-origin: content-box;
+    top: 380px;
+    left: 110px;
+    display: none;
+}
+
+  
