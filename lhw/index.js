@@ -6,8 +6,11 @@ const $backDrop = document.querySelector('body .backdrop');
 const $gameOver = document.querySelector('.gameOver');
 const $main = document.querySelector('.main')
 // 크기
-const WIDTH = 615;
-const HEIGHT = 1215;
+const WIDTH = 415;
+const HEIGHT = 1015;
+
+// 최대 총알 갯수
+const MAX_BULLETS=10;
 
 canvas.width = WIDTH;
 canvas.height = HEIGHT;
@@ -15,6 +18,7 @@ canvas.height = HEIGHT;
 $main.appendChild(canvas);
 
 let bgImage, charecterImg, bulletImage, enemyImage, gameOverImage;
+let currentBullets=MAX_BULLETS;
 
 let gameOver = false;
 let gameStatus = false;
@@ -29,6 +33,9 @@ function Bullet() {
   this.x = 0;
   this.y = 0;
   this.init = () => {
+    if (bulletList.length >= MAX_BULLETS) {
+      return;
+    }
     this.x = spaceShipX + 20;
     this.y = spaceShipY;
     this.alive = true;
@@ -47,8 +54,10 @@ function Bullet() {
         score++;
         this.alive = false;
         enemyList.splice(i, 1);
+
       }
     }
+    
   };
 }
 const rendomMaker = (MIN, MAX) => {
@@ -95,6 +104,11 @@ const createBullet = () => {
   if(gameStatus){
     let b = new Bullet(); //총알 하나 생성
     b.init();
+    if(!currentBullets===0){
+      currentBullets--;
+    }
+    
+    console.log(currentBullets);
   }
 
 };
@@ -167,13 +181,34 @@ const rederHendler = () => {
 
 const startEvent = () => {
   const removeUi = () => {
-    $backDrop.style.display = 'none';
-    $gameStart.style.display = 'none';
-    gameStatus = true;
+    if(!gameOver){   
+      $backDrop.style.display = 'none';
+      $gameStart.style.display = 'none';
+      gameStatus = true;
+    }
+
   };
   $backDrop.addEventListener('click', () => removeUi());
   $gameStart.addEventListener('click', () => removeUi());
 };
+const restartGame = () => {
+  // 초기화 작업
+  gameOver = false;
+  gameStatus = true;
+  score = 0;
+  spaceShipX = 160;
+  bulletList = [];
+  enemyList = [];
+
+  // 숨겨진 UI들 표시
+  $gameOver.style.display = 'none';
+  $backDrop.style.display = 'none';
+
+  // 다시 게임 시작
+  createEnemy();
+  main();
+};
+
 
 const main = () => {
   if (!gameOver) {
@@ -185,6 +220,10 @@ const main = () => {
   } else {
     $gameOver.style.display = 'block';
     $backDrop.style.display = 'block';
+    $gameOver.addEventListener('click', () => {
+        restartGame();
+      });
+    
   }
 };
 

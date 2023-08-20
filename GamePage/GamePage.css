@@ -1,5 +1,8 @@
 @import url('../Common/Common.css');
 
+body{
+  overflow: hidden;
+}
 .wrapper {
   /* background: #A9BCF5; */
   width: 100%;
