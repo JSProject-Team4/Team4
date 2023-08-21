@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap');
+
 @import url('https://cdn.jsdelivr.net/npm/galmuri@latest/dist/galmuri.css');
+
 @font-face {
     font-family: 'DOSIyagiMedium';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/DOSIyagiMedium.woff2') format('woff2');
@@ -20,7 +22,6 @@ a {
     text-decoration: none;
 }
 .clearfix::after {
-    content: '';
     display: block;
     clear: both;
 

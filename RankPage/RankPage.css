@@ -3,10 +3,10 @@
 .wrapper{
     /* background: #A9BCF5; */
     font-family: 'DungGeunMo';
-    background: url(./MainPageImg/spacemoon.jpg) no-repeat;
+    background: url(../MainPage/MainPageImg/spacemoon.jpg) no-repeat;
     background-position: 0 0;
     background-size: cover;
-    
+
 }
 /* header style */
 .wrapper.header {
@@ -14,13 +14,12 @@
     top: 0;
     left: 0;
     z-index: 999;
-    color: #fff;
+     color: #fff;
 }
 .wrapper .header .header-main{
     width: 100%;
     height: 70px;
     margin: 0 auto;
-    position: fixed;
     
     background: rgba(10, 10, 10, 0.8);
     color: #fff;
@@ -28,7 +27,7 @@
     justify-content: space-between;
 
     font-weight: 700;
-    font-size: 1.2em;
+    font-size: 20px;
     align-items:center;
 }
 .wrapper .header .header-main .header-logo {
@@ -44,60 +43,16 @@
 .wrapper .header .header-main .main-nav__item a {
     padding: 0 60px;
 }
-.wrapper .header .header-main .rank  {
-}
 
 /* main */
 .wrapper main {
-    padding-top: 260px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-}
-.wrapper main .maintitle {
+    justify-content: center;
+    align-content: center;
+
     width: 100%;
-    padding-bottom: 200px;
-    display: flex;
-    flex-direction: column;
-}
-.wrapper main .maintitle .title {
-    text-align: center;
-    font-size: 140px;
-    color: #fff;
-    font-family: 'DM Serif Display', serif;
-    margin-bottom: 60px;
-}
-.wrapper main .maintitle .title2 {
-    text-align: center;
-    font-size: 40px;
-    color: #fff;
-    font-family: 'DM Serif Display', serif;
-} 
-.wrapper main .list {
-    width: 100%;
-}
-.wrapper main .gamelist{
-    width: 95%;
-    margin: 0 auto ;
-    padding: 80px;
-    display: flex;
-    flex-wrap: wrap;
-}
-.wrapper main .gamelist .gamelist-img ul{
-    margin: 0  ;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-.wrapper main .gamelist .gamelist-img ul li {
-    width: 22.5%;
-}
-.wrapper main .gamelist .gamelist-img ul li img{
-    width: 100%;
-}
-.wrapper main .gamelist .gamelist-img ul li:hover img{
-    transform: scale(1.05);
-    transition: all 0.5s linear;
+    height: 1800px;
 }
 
 /* footer style */
@@ -137,3 +92,4 @@
     font-size: 13px;
     color: #ccc;
 }
+/* main */
