@@ -503,3 +503,7 @@ canvas {
   border: 5px solid #985959;
   color: #bababa;
 }
+
+.canvasWrap {
+  position: relative;
+}
