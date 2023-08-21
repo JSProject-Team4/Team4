@@ -65,14 +65,12 @@ $score.textContent = 0;
 
 let firstMusic = false;
 
-
 // 일시정지 스코어
 let $pauseScore = document.querySelector('.sscore');
 // 게임오버 스코어
 let $gameOverScore = document.querySelector('.ssscore');
 
 const $gameOverModal = document.querySelector('.gameOverModal');
-
 
 // ============ 주인"공"을 캔버스 위에 그리는 파트 ============ //
 // 주인"공"을 그리는 함수
@@ -147,8 +145,7 @@ function makeBlock() {
 }
 
 const bSoundPlay = () => {
-  if(firstMusic)
-  bSound.volume = 1;
+  if (firstMusic) bSound.volume = 1;
   bSound.play();
 };
 
@@ -157,21 +154,23 @@ function blockDelete() {
   for (let i = 0; i < blockColumn; i++) {
     for (let z = 0; z < blockRow; z++) {
       const target = blocks[i][z];
+
       if (target.status === 1) {
         if (
           x > target.x &&
           x < target.x + blockWidth &&
-          y + ballRadius + target.y &&
+          y > ballRadius + target.y &&
           // y < target.y + blockHeight*2.4
           y < target.y + blockHeight * 1.6
         ) {
           MovingY = -MovingY;
           target.status = 0;
           $score.textContent = +$score.textContent + 100;
-          $pauseScore.textContent = $score.textContent;
-          $gameOverScore.textContent = $score.textContent;
           bSoundPlay();
         }
+       
+        $pauseScore.textContent = $score.textContent;
+        $gameOverScore.textContent = $score.textContent;
       }
     }
   }
@@ -198,23 +197,21 @@ function resetGame() {
 
 // 게임을 종료하는 함수
 function gameOver() {
-
-  if(+$score.textContent === 4200) {
-    setTimeout(function(){
+  if (+$score.textContent === 4200) {
+    setTimeout(function () {
       clearInterval(intervalId);
-      
-      $gameOverModal.style.display='flex';
-      $pauseBackdrop.style.display='flex';
-    },200);
+
+      $gameOverModal.style.display = 'flex';
+      $pauseBackdrop.style.display = 'flex';
+    }, 200);
     return;
   }
-  setTimeout(function(){
+  setTimeout(function () {
     clearInterval(intervalId);
-    
-    $gameOverModal.style.display='flex';
-    $pauseBackdrop.style.display='flex';
-  },200);
 
+    $gameOverModal.style.display = 'flex';
+    $pauseBackdrop.style.display = 'flex';
+  }, 200);
 }
 
 // 그리기 함수 (10밀리초마다 호출됨 = 무한작동)
@@ -271,14 +268,6 @@ function keyDownHandler(e) {
   } else if (e.keyCode == 37) {
     leftKey = true;
   }
-
-  // 처음 실행이면 음악실행
-  if (firstMusic === false) {
-    firstMusic = true;
-    isPlaying = true;
-    audio.volume = 1;
-    audio.play();
-  }
 }
 function keyUpHandler(e) {
   if (e.keyCode == 39) {
@@ -286,15 +275,15 @@ function keyUpHandler(e) {
   } else if (e.keyCode == 37) {
     leftKey = false;
   }
-
-  // 처음 실행이면 음악실행
-  if (firstMusic === false) {
-    firstMusic = true;
-    isPlaying = true;
-    audio.volume = 1;
-    audio.play();
-  }
 }
+// document.addEventListener("mousemove", mouseMoveHandler, false);
+// function mouseMoveHandler(e) {
+//   const relativeX = e.clientX - canvas.offsetLeft;
+//   if (relativeX > 0 && relativeX < canvas.width) {
+//     racketX = relativeX - racketWidthWidth / 2;
+//   }
+// }
+
 
 const $bgmBtn = document.getElementById('bgm');
 const $musicIcon = document.querySelector('.custom-loader');
@@ -305,22 +294,21 @@ $bgmBtn.addEventListener('click', () => {
     isPlaying = true;
     audio.volume = 1;
     audio.play();
-    $musicIcon.style.width= '22.5px';
-    $musicIcon.style.height= '30px';
+    $musicIcon.style.width = '22.5px';
+    $musicIcon.style.height = '30px';
   } else {
     isPlaying = false;
     audio.pause();
-    $musicIcon.style.width= 0;
-    $musicIcon.style.height= 0;
+    $musicIcon.style.width = 0;
+    $musicIcon.style.height = 0;
   }
 });
-
 
 // 일시정지 모달
 const $pauseModal = document.querySelector('.pauseModal');
 const $pauseBackdrop = document.querySelector('.backdrop');
 const pauseHandler = () => {
-  pauseDrawing()
+  pauseDrawing();
 
   if ($pauseModal.style.display === '') {
     $pauseModal.style.display = 'flex';
@@ -338,44 +326,37 @@ function returnBtnClick() {
     $pauseModal.style.display = '';
     $pauseBackdrop.style.display = '';
 
-    setTimeout(function(){
-      pauseDrawing()
-    },500);
+    setTimeout(function () {
+      pauseDrawing();
+    }, 500);
     // pauseDrawing()
-  } 
+  }
 }
 
 // 일시정지 모달에서 처음부터 버튼
 const $resetBtn = document.querySelector('.pauseResetBtn');
 $resetBtn.addEventListener('click', resetBtnClick);
 const $gameOverResetBtn = document.querySelector('.gameOverResetBtn');
-$gameOverResetBtn.addEventListener('click', resetBtnClick)
+$gameOverResetBtn.addEventListener('click', resetBtnClick);
 
 function resetBtnClick() {
   if ($pauseModal.style.display === 'flex') {
     $pauseModal.style.display = '';
     $pauseBackdrop.style.display = '';
 
-
-    setTimeout(function(){
-      resetGame()
-      pauseDrawing()
-    },500);
-  } 
-  else if ($gameOverModal.style.display === 'flex') {
+    setTimeout(function () {
+      resetGame();
+      pauseDrawing();
+    }, 500);
+  } else if ($gameOverModal.style.display === 'flex') {
     $gameOverModal.style.display = '';
     $pauseBackdrop.style.display = '';
 
-    resetGame()
-    pauseDrawing()
-    pauseDrawing()
+    resetGame();
+    pauseDrawing();
+    pauseDrawing();
   }
-
-
-
 }
-
-
 
 // =========== 일시정지 버튼과 draw함수 반복호출문 ========== //
 let stop = false;
@@ -397,7 +378,6 @@ function pauseDrawing() {
   }
 }
 
-
 // 게임시작 버튼
 const $gameStartModal = document.querySelector('.gameStartModal');
 const $gameStartBtn = document.querySelector('.gameStartModal .gameStartBtn');
@@ -406,9 +386,17 @@ console.log($gameStartModal.style.display);
 
 function gameStartHandler() {
   $gameStartModal.style.display = 'flex';
-  if($gameStartModal.style.display === 'flex'){
+  if ($gameStartModal.style.display === 'flex') {
     $gameStartModal.style.display = 'none';
     startDrawing();
+
+    // 처음 실행이면 음악실행
+    if (firstMusic === false) {
+      firstMusic = true;
+      isPlaying = true;
+      audio.volume = 1;
+      audio.play();
+    }
   }
 }
 
