@@ -312,7 +312,7 @@ canvas {
   border: 5px solid #d89797;
   border-radius: 30px;
 
-  z-index: 20;
+  z-index: 100;
 }
 .pauseModal .pauseTitle {
   color: #000;

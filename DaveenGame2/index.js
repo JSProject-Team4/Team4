@@ -168,7 +168,7 @@ function blockDelete() {
           $score.textContent = +$score.textContent + 100;
           bSoundPlay();
         }
-       
+
         $pauseScore.textContent = $score.textContent;
         $gameOverScore.textContent = $score.textContent;
       }
@@ -199,16 +199,16 @@ function resetGame() {
 function gameOver() {
   if (+$score.textContent === 4200) {
     setTimeout(function () {
-      clearInterval(intervalId);
-
+      // clearInterval(intervalId);
+      pauseDrawing();
       $gameOverModal.style.display = 'flex';
       $pauseBackdrop.style.display = 'flex';
     }, 200);
     return;
   }
   setTimeout(function () {
-    clearInterval(intervalId);
-
+    // clearInterval(intervalId);
+    pauseDrawing();
     $gameOverModal.style.display = 'flex';
     $pauseBackdrop.style.display = 'flex';
   }, 200);
@@ -257,6 +257,10 @@ function draw() {
 
   x += movingX; // x의 값 +2
   y += MovingY; // y의 값 -2
+
+  if (stop === false) {
+    requestAnimationFrame(draw);
+  }
 } // draw() 함수 끝
 
 // 키보드 이벤트리스너
@@ -284,7 +288,7 @@ function keyUpHandler(e) {
 //   }
 // }
 
-
+// BGM 온오프 버튼
 const $bgmBtn = document.getElementById('bgm');
 const $musicIcon = document.querySelector('.custom-loader');
 let isPlaying = false;
@@ -336,6 +340,7 @@ function returnBtnClick() {
 // 일시정지 모달에서 처음부터 버튼
 const $resetBtn = document.querySelector('.pauseResetBtn');
 $resetBtn.addEventListener('click', resetBtnClick);
+// 게임오버 모달에서 처음부터 버튼
 const $gameOverResetBtn = document.querySelector('.gameOverResetBtn');
 $gameOverResetBtn.addEventListener('click', resetBtnClick);
 
@@ -347,34 +352,33 @@ function resetBtnClick() {
     setTimeout(function () {
       resetGame();
       pauseDrawing();
-    }, 500);
+    }, 200);
   } else if ($gameOverModal.style.display === 'flex') {
+    console.log(`시작부분`);
     $gameOverModal.style.display = '';
     $pauseBackdrop.style.display = '';
 
-    resetGame();
-    pauseDrawing();
-    pauseDrawing();
+    window.location.reload();
   }
 }
 
 // =========== 일시정지 버튼과 draw함수 반복호출문 ========== //
 let stop = false;
-let intervalId;
+// let intervalId;
 const $btn = document.getElementById('pause');
 
 $btn.addEventListener('click', pauseHandler);
 
 function startDrawing() {
-  intervalId = setInterval(draw, 10); // 10밀리초마다 draw 함수 호출
+  draw(); // 10밀리초마다 draw 함수 호출
 }
 function pauseDrawing() {
   if (stop === false) {
     stop = true;
-    clearInterval(intervalId); // 타이머 일시정지
+    clearInterval(draw); // 타이머 일시정지
   } else {
     stop = false;
-    intervalId = setInterval(draw, 10); // 10밀리초마다 draw 함수 호출
+    draw(); // 10밀리초마다 draw 함수 호출
   }
 }
 
@@ -383,12 +387,15 @@ const $gameStartModal = document.querySelector('.gameStartModal');
 const $gameStartBtn = document.querySelector('.gameStartModal .gameStartBtn');
 $gameStartBtn.addEventListener('click', gameStartHandler);
 console.log($gameStartModal.style.display);
+$btn.disabled = true;
 
 function gameStartHandler() {
+  
   $gameStartModal.style.display = 'flex';
   if ($gameStartModal.style.display === 'flex') {
     $gameStartModal.style.display = 'none';
     startDrawing();
+    $btn.disabled = false;
 
     // 처음 실행이면 음악실행
     if (firstMusic === false) {
