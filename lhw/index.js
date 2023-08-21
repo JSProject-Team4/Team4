@@ -7,7 +7,7 @@ const $gameOver = document.querySelector('.gameOver');
 const $main = document.querySelector('.main')
 // 크기
 const WIDTH = 415;
-const HEIGHT = 1215;
+let HEIGHT = window.innerHeight-78;
 
 // 최대 총알 갯수
 const MAX_BULLETS=10;
@@ -16,7 +16,6 @@ canvas.width = WIDTH;
 canvas.height = HEIGHT;
 
 $main.appendChild(canvas);
-
 let bgImage, charecterImg, bulletImage, enemyImage, gameOverImage;
 let currentBullets=MAX_BULLETS;
 
@@ -28,6 +27,12 @@ let score = 0;
 // 캐릭터 좌표
 let spaceShipX = 160;
 let spaceShipY = HEIGHT - 64;
+
+// 창화면시 게임 크기 조절
+window.addEventListener('resize',()=>{
+  let HEIGHT = window.innerHeight-78;
+  canvas.style.height = `${HEIGHT}px`; // 높이 설정
+});
 
 let bulletList = []; //총알들을 저장하는 리스트
 

@@ -155,5 +155,16 @@ h1{
     position: absolute;
     right: 5px;
 }
+@media screen and (max-height: 1080px) {
+    .totlaBox{
+        width: 600px;height: 1080px;
+        position: absolute;
+        top: 44px;
+    }
+    .box{
+        width: 600px;height: 1080px;
+        position: absolute;
+    }
+  }
 
   
