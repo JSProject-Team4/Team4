@@ -1,0 +1,104 @@
+.wrapper{
+    /* background: #A9BCF5; */
+    background: rgb(13, 39, 57);
+    width: 100%;
+
+}
+/* header style */
+.wrapper.header {
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 999;
+}
+.wrapper .header .header-main{
+    width: 100%;
+    height: 70px;
+    margin: 0 auto;
+    position: fixed;
+    
+    background: rgba(0, 0, 0, 0.5);
+
+    display: flex;
+    align-items:center;
+}
+.wrapper .header .header-main .header-logo {
+    padding: 30px;
+    color: #fff;
+}
+
+.wrapper .header .header-main .main-nav .main-nav__items  {
+    display: flex;
+    flex-direction: row;
+    color: #fff;
+}
+.wrapper .header .header-main .main-nav .main-nav__item a {
+    display: block;
+    font-weight: 700;
+    padding: 0 15px;
+}
+/*------main*----------------*/
+.wrapper .main-body1{
+    float:right;
+    margin: 40%;
+
+}
+.wrapper .main-body1 .main-body1-img1{
+    width: 400px;
+    height: 450px;
+  
+
+}
+.wrapper .main-body2{
+    position: relative;
+        left: 300px;
+        top: 50px;
+}
+.wrapper .main-body2 .main-body2-img2{
+    width: 200px;
+    height: 100px;
+
+}
+.wrapper .main-body3{
+    font-size: 10em;
+    color: #fff;
+
+}
+/*-------------------------main------------------------------------*/
+/* footer style */
+.wrapper .footer {
+   height: 70px;
+}
+
+.wrapper .footer .footer_wrap {
+    width: 100%;
+    height: 70px;
+    background: rgb(132, 130, 147);
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.wrapper .footer .footer_wrap .social ul{
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.wrapper .footer .footer_wrap .social ul li img {
+    margin-top: 40px;
+    width: 55px;
+    height: 30px;
+}
+.wrapper .footer .footer_wrap p {
+    margin-top: 30px;
+    text-align: right;
+    font-size: 13px;
+    color: #ccc;
+}
+.wrapper .footer .footer_wrap .copyright {
+    margin: 20px 10px 0 0 ;
+    text-align: right;
+    font-size: 13px;
+    color: #ccc;
+}
