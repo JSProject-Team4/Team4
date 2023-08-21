@@ -3,7 +3,7 @@
 .wrapper{
     /* background: #A9BCF5; */
     font-family: 'DungGeunMo';
-    background: url(./MainPageImg/spacemoon.jpg) no-repeat;
+    background: url(./MainPageImg/main.png) no-repeat;
     background-position: 0 0;
     background-size: cover;
     
@@ -64,14 +64,12 @@
     text-align: center;
     font-size: 140px;
     color: #fff;
-    font-family: 'DM Serif Display', serif;
     margin-bottom: 60px;
 }
 .wrapper main .maintitle .title2 {
     text-align: center;
     font-size: 40px;
     color: #fff;
-    font-family: 'DM Serif Display', serif;
 } 
 .wrapper main .list {
     width: 100%;
