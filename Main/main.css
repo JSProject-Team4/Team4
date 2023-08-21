@@ -1,0 +1,30 @@
+body{
+    background-image: url(./9.png);
+    background-size: cover;
+ }
+header .header{
+    background: #1C1C1C;
+}
+h1{
+    text-align: center;
+    font-size: 140px;
+    color: whitesmoke;
+    font-family: DM Serif Display;
+    text-shadow: 2px 2px 2px gray;
+}
+h2{
+    text-align: center;
+    color: whitesmoke;
+    font-family: DM Serif Display;
+    text-shadow: 2px 2px 2px darkgray;
+}
+img{
+    padding: 5px;
+    border : 15px solid white; 
+    width: 200px;
+    height: 200px;
+    filter: drop-shadow(10px 6px 6px #6E6E6E);
+}
+div{
+    text-align: center;
+}
