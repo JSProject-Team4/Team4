@@ -63,9 +63,12 @@ ballImage.onload = function () {
 const $score = document.getElementById('score');
 $score.textContent = 0;
 
-
 let firstMusic = false;
 
+
+// 일시정지 스코어
+let $pauseScore = document.querySelector('.sscore');
+console.log($pauseScore);
 
 // ============ 주인"공"을 캔버스 위에 그리는 파트 ============ //
 // 주인"공"을 그리는 함수
@@ -140,7 +143,7 @@ function makeBlock() {
 }
 
 const bSoundPlay = () => {
-  console.log(`ss`);
+  if(firstMusic)
   bSound.volume = 1;
   bSound.play();
 };
@@ -161,15 +164,9 @@ function blockDelete() {
           MovingY = -MovingY;
           target.status = 0;
           $score.textContent = +$score.textContent + 100;
+          $pauseScore.textContent = $score.textContent;
           bSoundPlay();
-
-          // 처음 실행이면 음악실행
-          if (firstMusic === false) {
-            firstMusic = true;
-            isPlaying = true;
-            audio.volume = 1;
-            audio.play();
-          }
+          gameOver();
         }
       }
     }
@@ -193,6 +190,20 @@ function resetGame() {
   }
 
   $score.textContent = 0;
+}
+
+// 게임을 종료하는 함수
+function gameOver() {
+
+  if(+$score.textContent === 4200) {
+    setTimeout(function(){
+      clearInterval(intervalId);
+      alert('게임종료');
+    },200);
+    
+  }
+
+  
 }
 
 // 그리기 함수 (10밀리초마다 호출됨 = 무한작동)
@@ -251,6 +262,14 @@ function keyDownHandler(e) {
   } else if (e.keyCode == 37) {
     leftKey = true;
   }
+
+  // 처음 실행이면 음악실행
+  if (firstMusic === false) {
+    firstMusic = true;
+    isPlaying = true;
+    audio.volume = 1;
+    audio.play();
+  }
 }
 function keyUpHandler(e) {
   if (e.keyCode == 39) {
@@ -258,9 +277,18 @@ function keyUpHandler(e) {
   } else if (e.keyCode == 37) {
     leftKey = false;
   }
+
+  // 처음 실행이면 음악실행
+  if (firstMusic === false) {
+    firstMusic = true;
+    isPlaying = true;
+    audio.volume = 1;
+    audio.play();
+  }
 }
 
 const $bgmBtn = document.getElementById('bgm');
+const $musicIcon = document.querySelector('.custom-loader');
 let isPlaying = false;
 let audio = new Audio('./Sound/song.mp3');
 $bgmBtn.addEventListener('click', () => {
@@ -268,18 +296,69 @@ $bgmBtn.addEventListener('click', () => {
     isPlaying = true;
     audio.volume = 1;
     audio.play();
+    $musicIcon.style.width= '22.5px';
+    $musicIcon.style.height= '30px';
   } else {
     isPlaying = false;
     audio.pause();
+    $musicIcon.style.width= 0;
+    $musicIcon.style.height= 0;
   }
 });
+
+
+// 일시정지 모달
+const $pauseModal = document.querySelector('.pauseModal');
+const $pauseBackdrop = document.querySelector('.backdrop');
+console.log($pauseModal.style.display);
+const pauseHandler = () => {
+  pauseDrawing()
+
+  if ($pauseModal.style.display === '') {
+    $pauseModal.style.display = 'flex';
+    $pauseBackdrop.style.display = 'flex';
+  }
+};
+
+// 일시정지 모달에서 돌아가기 버튼
+const $returnBtn = document.querySelector('.pauseExitBtn');
+$returnBtn.addEventListener('click', returnBtnClick);
+
+function returnBtnClick() {
+  if ($pauseModal.style.display === 'flex') {
+    $pauseModal.style.display = '';
+    $pauseBackdrop.style.display = '';
+
+    setTimeout(function(){
+      pauseDrawing()
+    },1000);
+    
+  } 
+}
+
+// 일시정지 모달에서 처음부터 버튼
+const $resetBtn = document.querySelector('.pauseResetBtn');
+$resetBtn.addEventListener('click', resetBtnClick);
+
+function resetBtnClick() {
+  if ($pauseModal.style.display === 'flex') {
+    $pauseModal.style.display = '';
+    $pauseBackdrop.style.display = '';
+
+  } 
+  setTimeout(function(){
+    resetGame()
+    pauseDrawing()
+  },1000);
+}
+
 
 // =========== 일시정지 버튼과 draw함수 반복호출문 ========== //
 let stop = false;
 let intervalId;
 const $btn = document.getElementById('pause');
 
-$btn.addEventListener('click', pauseDrawing);
+$btn.addEventListener('click', pauseHandler);
 
 function startDrawing() {
   intervalId = setInterval(draw, 10); // 10밀리초마다 draw 함수 호출
@@ -288,11 +367,9 @@ function pauseDrawing() {
   if (stop === false) {
     stop = true;
     clearInterval(intervalId); // 타이머 일시정지
-    console.log('멈춰!!');
   } else {
     stop = false;
     intervalId = setInterval(draw, 10); // 10밀리초마다 draw 함수 호출
-    console.log('시간은 다시 흐른다.');
   }
 }
 startDrawing();

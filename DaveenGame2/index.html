@@ -21,7 +21,7 @@
       type="module"
       defer
     ></script>
-
+    <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
     <link
       href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&family=Pangolin&display=swap"
       rel="stylesheet"
@@ -69,10 +69,33 @@
           </h2>
         </div>
         <div class="setting">
-          <button id="pause">테스트용 일시중단 버튼</button>
+          <button id="pause">일시정지</button>
           <button id="bgm"><div class="custom-loader"></div>BGM ON/OFF</button>
         </div>
       </div>
+
+      <div class="pauseModal">
+        <div class="pauseTitle">
+          일시정지
+        </div>
+        <div class="scoreStatus">
+          현재 스코어: <p class="sscore">0</p>점
+        </div>
+        <div class="pauseChoice">
+          <button class="pauseResetBtn">
+            <span class="lnr lnr-undo">
+            </span>
+            처음부터
+          </button>
+          <button class="pauseExitBtn">
+            <span class="lnr lnr-cross">
+            </span>
+            돌아가기
+          </button>
+        </div>
+      </div>
+      <div class="backdrop"></div>
+
 
       <!-- <canvas
       id="Canvas"
