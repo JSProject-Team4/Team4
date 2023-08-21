@@ -147,5 +147,13 @@ h1{
     left: 110px;
     display: none;
 }
+.bulletbox{
+    width: 20px;
+    height: 1200px;
+    background: red;
+    z-index: 11;
+    position: absolute;
+    right: 5px;
+}
 
   

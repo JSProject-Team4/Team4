@@ -7,7 +7,7 @@ const $gameOver = document.querySelector('.gameOver');
 const $main = document.querySelector('.main')
 // 크기
 const WIDTH = 415;
-const HEIGHT = 1015;
+const HEIGHT = 1215;
 
 // 최대 총알 갯수
 const MAX_BULLETS=10;
