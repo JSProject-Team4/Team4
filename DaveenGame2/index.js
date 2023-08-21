@@ -68,7 +68,11 @@ let firstMusic = false;
 
 // 일시정지 스코어
 let $pauseScore = document.querySelector('.sscore');
-console.log($pauseScore);
+// 게임오버 스코어
+let $gameOverScore = document.querySelector('.ssscore');
+
+const $gameOverModal = document.querySelector('.gameOverModal');
+
 
 // ============ 주인"공"을 캔버스 위에 그리는 파트 ============ //
 // 주인"공"을 그리는 함수
@@ -165,8 +169,8 @@ function blockDelete() {
           target.status = 0;
           $score.textContent = +$score.textContent + 100;
           $pauseScore.textContent = $score.textContent;
+          $gameOverScore.textContent = $score.textContent;
           bSoundPlay();
-          gameOver();
         }
       }
     }
@@ -198,12 +202,19 @@ function gameOver() {
   if(+$score.textContent === 4200) {
     setTimeout(function(){
       clearInterval(intervalId);
-      alert('게임종료');
+      
+      $gameOverModal.style.display='flex';
+      $pauseBackdrop.style.display='flex';
     },200);
-    
+    return;
   }
+  setTimeout(function(){
+    clearInterval(intervalId);
+    
+    $gameOverModal.style.display='flex';
+    $pauseBackdrop.style.display='flex';
+  },200);
 
-  
 }
 
 // 그리기 함수 (10밀리초마다 호출됨 = 무한작동)
@@ -224,9 +235,7 @@ function draw() {
   // 공이 화면 아래로 향했을때의 코드
   else if (y + MovingY > racketY - ballRadius) {
     if (y + movingX > canvas.height - ballRadius) {
-      alert(`Game Over... 스코어: ${$score.textContent}점`);
-      // 시작지점으로 돌린다.
-      resetGame();
+      gameOver();
     }
   }
 
@@ -310,7 +319,6 @@ $bgmBtn.addEventListener('click', () => {
 // 일시정지 모달
 const $pauseModal = document.querySelector('.pauseModal');
 const $pauseBackdrop = document.querySelector('.backdrop');
-console.log($pauseModal.style.display);
 const pauseHandler = () => {
   pauseDrawing()
 
@@ -323,6 +331,7 @@ const pauseHandler = () => {
 // 일시정지 모달에서 돌아가기 버튼
 const $returnBtn = document.querySelector('.pauseExitBtn');
 $returnBtn.addEventListener('click', returnBtnClick);
+$pauseBackdrop.addEventListener('click', returnBtnClick);
 
 function returnBtnClick() {
   if ($pauseModal.style.display === 'flex') {
@@ -331,26 +340,41 @@ function returnBtnClick() {
 
     setTimeout(function(){
       pauseDrawing()
-    },1000);
-    
+    },500);
+    // pauseDrawing()
   } 
 }
 
 // 일시정지 모달에서 처음부터 버튼
 const $resetBtn = document.querySelector('.pauseResetBtn');
 $resetBtn.addEventListener('click', resetBtnClick);
+const $gameOverResetBtn = document.querySelector('.gameOverResetBtn');
+$gameOverResetBtn.addEventListener('click', resetBtnClick)
 
 function resetBtnClick() {
   if ($pauseModal.style.display === 'flex') {
     $pauseModal.style.display = '';
     $pauseBackdrop.style.display = '';
 
+
+    setTimeout(function(){
+      resetGame()
+      pauseDrawing()
+    },500);
   } 
-  setTimeout(function(){
+  else if ($gameOverModal.style.display === 'flex') {
+    $gameOverModal.style.display = '';
+    $pauseBackdrop.style.display = '';
+
     resetGame()
     pauseDrawing()
-  },1000);
+    pauseDrawing()
+  }
+
+
+
 }
+
 
 
 // =========== 일시정지 버튼과 draw함수 반복호출문 ========== //
@@ -372,4 +396,22 @@ function pauseDrawing() {
     intervalId = setInterval(draw, 10); // 10밀리초마다 draw 함수 호출
   }
 }
-startDrawing();
+
+
+// 게임시작 버튼
+const $gameStartModal = document.querySelector('.gameStartModal');
+const $gameStartBtn = document.querySelector('.gameStartModal .gameStartBtn');
+$gameStartBtn.addEventListener('click', gameStartHandler);
+console.log($gameStartModal.style.display);
+
+function gameStartHandler() {
+  $gameStartModal.style.display = 'flex';
+  if($gameStartModal.style.display === 'flex'){
+    $gameStartModal.style.display = 'none';
+    startDrawing();
+  }
+}
+
+// if (!$gameStartModal.style.display === 'flex'){
+//   startDrawing();
+// }
