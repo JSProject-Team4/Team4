@@ -20,6 +20,8 @@ $main.appendChild(canvas);
 let bgImage, charecterImg, bulletImage, enemyImage, gameOverImage;
 let currentBullets=MAX_BULLETS;
 
+let gameLoopInterval; // 게임 루프의 타이머 변수
+
 let gameOver = false;
 let gameStatus = false;
 let score = 0;
@@ -194,40 +196,41 @@ const startEvent = () => {
 const restartGame = () => {
   // 초기화 작업
   gameOver = false;
-  gameStatus = true;
   score = 0;
   spaceShipX = 160;
   bulletList = [];
   enemyList = [];
+  clearInterval(gameLoopInterval); // 기존의 게임 루프 중단
 
-  // 숨겨진 UI들 표시
-  $gameOver.style.display = 'none';
-  $backDrop.style.display = 'none';
-
-  // 다시 게임 시작
-  createEnemy();
-  main();
-};
-
-
-const main = () => {
-  if (!gameOver) {
-    // 1좌표 변경, 렌더링 순서
-    startEvent();
-    update();
-    rederHendler();
-    requestAnimationFrame(main);
-  } else {
-    $gameOver.style.display = 'block';
-    $backDrop.style.display = 'block';
-    $gameOver.addEventListener('click', () => {
-        restartGame();
-      });
+  // 다시 게임 루프 시작
+  gameLoopInterval = setInterval(() => {
     
-  }
+    if (gameOver) {
+      clearInterval(gameLoopInterval); // 게임 종료 시 타이머 중단
+      $gameOver.style.display = 'block';
+      $backDrop.style.display = 'block';
+
+      $gameOver.addEventListener('click', () => {
+        // 숨겨진 UI들 표시
+        $gameOver.style.display = 'none';
+        $backDrop.style.display = 'none';
+        gameStatus = true;
+        restartGame();
+        console.log('중복테스트');
+      });
+    } else {
+      // 게임 루프 내용 실행
+      update();
+      rederHendler();
+    }
+  }, 1000 / 60); // 60FPS에 가까운 속도로 실행하도록 설정
 };
 
+
+// 게임 초기화 및 루프 시작
 loadImage();
 keyboardListener();
 createEnemy();
-main();
+startEvent();
+restartGame();
+
