@@ -14,6 +14,9 @@ const MAX_BULLETS=10;
 
 canvas.width = WIDTH;
 canvas.height = HEIGHT;
+if(HEIGHT<720){
+  canvas.width = 342;
+}
 
 $main.appendChild(canvas);
 let bgImage, charecterImg, bulletImage, enemyImage, gameOverImage;

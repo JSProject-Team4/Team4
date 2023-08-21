@@ -124,27 +124,25 @@ h1{
   }
 .gameStart{
     z-index: 11;
-    width: 380px;
-    height: 380px;
+    width: 50%;
+    height: 100%;
     position: absolute;
     background:url(Image/gameStart.jpg) no-repeat;
     background-size: contain;
     background-position: center;
     background-origin: content-box;
-    top: 380px;
-    left: 110px;
+    left: 150px;
 }
 .gameOver{
     z-index: 11;
-    width: 380px;
-    height: 380px;
+    width: 50%;
+    height: 100%;
     position: absolute;
     background:url(Image/gameOver.jpg) no-repeat;
     background-size: contain;
     background-position: center;
     background-origin: content-box;
-    top: 380px;
-    left: 110px;
+    left: 150px;
     display: none;
 }
 .bulletbox{
@@ -157,13 +155,29 @@ h1{
 }
 @media screen and (max-height: 1080px) {
     .totlaBox{
-        width: 600px;height: 1080px;
+        width: 342px;
+        height: 1080px;
         position: absolute;
         top: 44px;
     }
     .box{
-        width: 600px;height: 1080px;
+        width: 342px;
+        height: 1080px;
         position: absolute;
+    }
+    .gameStart{
+        width: 70%;
+        left: 50px;
+        bottom: 150px;
+    }
+    .gameOver{
+        width: 70%;
+        height: 100%;
+        bottom: 150px;
+        left: 50px;
+    }
+    .canvus{
+        width: 342PX;
     }
   }
 
