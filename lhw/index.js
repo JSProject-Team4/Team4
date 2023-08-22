@@ -105,17 +105,11 @@ const rendomMaker = (MIN, MAX) => {
   let rendomNum = Math.floor(Math.random() * (MAX - MIN + 1));
   return rendomNum;
 };
+let hpcount= 0;
 const decreaseHp=()=> {
-  const heightValues = ['100%', '66%', '33%', '0']; // 높이 값 목록
-  const currentHpValueWithUnit = $hp.style.height + 'px';
-  const currentHpIndex = heightValues.indexOf(currentHpValueWithUnit);
-  console.log(currentHpIndex);
-  if (currentHpIndex !== -1) {
-    const newHpIndex = currentHpIndex - 1;
-    if (newHpIndex >= 0) {
-      $hp.style.height = heightValues[newHpIndex];
-    }
-  }
+  const heightValues = ['66%', '33%', '0'];
+  
+      $hp.style.height = heightValues[hpcount];
 }
 let enemyList = [];
 function Enemy() {
@@ -129,13 +123,13 @@ function Enemy() {
   };
   this.update = () => {
     this.y += 2;
-
+  };
     if (this.y >= canvas.height - 48) {
-      decreaseHp();
-      
+        decreaseHp();
+        hpcount++;
       // gameOver = true;
     }
-  };
+  
 }
 
 const loadImage = () => {
