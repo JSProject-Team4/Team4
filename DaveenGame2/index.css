@@ -42,47 +42,7 @@
   font-weight: 700;
   padding: 0 15px;
 }
-/* footer style */
-.wrapper .footer {
-  height: 70px;
-
-  width: 100%;
-  position: absolute;
-}
-
-.wrapper .footer .footer_wrap {
-  width: 100%;
-  height: 70px;
-  background: rgb(33, 32, 39);
-
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-.wrapper .footer .footer_wrap .social ul {
-  height: 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.wrapper .footer .footer_wrap .social ul li img {
-  margin-top: 40px;
-  width: 55px;
-  height: 30px;
-}
-.wrapper .footer .footer_wrap p {
-  margin-top: 30px;
-  text-align: right;
-  font-size: 13px;
-  color: #ccc;
-}
-.wrapper .footer .footer_wrap .copyright {
-  margin: 20px 10px 0 0;
-  text-align: right;
-  font-size: 13px;
-  color: #ccc;
-}
-
+/* footer s
 /* main */
 .wrapper main {
   padding-top: 120px;
