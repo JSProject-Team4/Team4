@@ -18,7 +18,7 @@ const MAX_BULLETS = 10;
 canvas.width = WIDTH;
 canvas.height = HEIGHT;
 
-let bgImage, charecterImg, bulletImage, enemyImage, gameOverImage;
+let bgImage, charecterImg, bulletImage, enemyImage, gameOverImage, itemImage;
 let currentBullets = MAX_BULLETS;
 
 let gameLoopInterval; // 게임 루프의 타이머 변수
@@ -116,6 +116,37 @@ const rendomMaker = (MIN, MAX) => {
   let rendomNum = Math.floor(Math.random() * (MAX - MIN + 1));
   return rendomNum;
 };
+const decreaseHp=()=> {
+  const heightValues = ['100%', '66%', '33%', '0']; // 높이 값 목록
+  const currentHpValueWithUnit = $hp.style.height + 'px';
+  const currentHpIndex = heightValues.indexOf(currentHpValueWithUnit);
+  console.log(currentHpIndex);
+  if (currentHpIndex !== -1) {
+    const newHpIndex = currentHpIndex - 1;
+    if (newHpIndex >= 0) {
+      $hp.style.height = heightValues[newHpIndex];
+    }
+  }
+}
+let itemList = [];
+function Item() {
+  this.x = 0;
+  this.y = 0;
+  this.init = () => {
+    this.x = rendomMaker(0, canvas.width - 48);
+    this.y = 0;
+
+    itemList.push(this);
+  };
+  this.update = () => {
+    this.y += 2;
+
+    if (this.y >= canvas.height - 48) {
+      itemList.splice(1,1);
+    }
+  };
+}
+
 let hpcount = 0;
 const decreaseHp = () => {
   hpcount += 1;
@@ -164,6 +195,11 @@ const loadImage = () => {
   enemyImage.src = "Image/enemy.png";
 
   gameOverImage = new Image();
+  gameOverImage.src = 'Image/gameOver.jpg';
+
+  itemImage = new Image();
+  itemImage.src = 'Image/item.png';
+
   gameOverImage.src = "Image/gameOver.jpg";
 };
 const createBullet = () => {
@@ -179,7 +215,9 @@ const createEnemy = () => {
   const interval = setInterval(() => {
     if (gameStatus) {
       let e = new Enemy();
+      let x = new Item();
       e.init();
+      x.init();
     }
   }, 1500);
 };
@@ -225,12 +263,23 @@ const update = () => {
   for (let i = 0; i < enemyList.length; i++) {
     enemyList[i].update();
   }
-};
+  for (let i = 0; i < itemList.length; i++) {
+    itemList[i].update();
+  }
+}
 const rederHendler = () => {
   c.drawImage(bgImage, 0, 0, canvas.width, canvas.height);
   c.drawImage(charecterImg, spaceShipX, spaceShipY);
   // 스코어
   c.fillText(`Score : ${score}`, 20, 20);
+  
+  c.fillStyle = 'white';
+  c.font = '20px Arial';
+
+  // 아이템 드랍
+  for (let i = 0; i < itemList.length; i++) {
+    c.drawImage(itemImage, itemList[i].x, itemList[i].y);
+  }
   c.fillStyle = "white";
   c.font = "20px Arial";
   for (let i = 0; i < bulletList.length; i++) {
