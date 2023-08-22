@@ -95,7 +95,7 @@ body {
     background-size: contain;
     background-position: center;
     background-origin: content-box;
-    left: 105px;
+    left: 130px;
 }
 .gameOver{
     z-index: 11;
@@ -106,7 +106,7 @@ body {
     background-size: contain;
     background-position: center;
     background-origin: content-box;
-    left: 105px;
+    left: 130px;
     display: none;
 }
 .leftboxs .hpbox{
@@ -155,26 +155,5 @@ body {
   width: 100%;
   margin-bottom: 5px;
 }
-@media screen and (max-height: 1080px) {
-  .main{
-      padding-top: 76px;
-      position: relative;
-      display: flex;
-  }
-    .gameStart{
-        width: 70%;
-        left: 50px;
-        bottom: 150px;
-    }
-    .gameOver{
-        width: 70%;
-        height: 100%;
-        bottom: 150px;
-        left: 50px;
-    }
-    .canvus{
-        width: 342PX;
-    }
-  }
 
   
