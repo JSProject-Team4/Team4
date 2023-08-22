@@ -82,11 +82,22 @@ function Bullet() {
   };
   this.checkHit = () => {
     for (let i = 0; i < enemyList.length; i++) {
-      if (
-        this.y <= enemyList[i].y &&
-        this.x > enemyList[i].x &&
-        this.x <= enemyList[i].x + 40
-      ) {
+      const bulletLeft = this.x;
+      const bulletRight = this.x + bulletImage.width;
+      const bulletTop = this.y;
+      const bulletBottom = this.y + bulletImage.height;
+  
+      const enemyLeft = enemyList[i].x;
+      const enemyRight = enemyList[i].x + enemyImage.width;
+      const enemyTop = enemyList[i].y;
+      const enemyBottom = enemyList[i].y + enemyImage.height;
+      
+    if (
+      bulletBottom > enemyTop &&
+      bulletTop < enemyBottom &&
+      bulletRight > enemyLeft &&
+      bulletLeft < enemyRight
+    ) {
         score++;
         this.alive = false;
         enemyList.splice(i, 1);
