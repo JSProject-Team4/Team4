@@ -4,7 +4,8 @@ const c = canvas.getContext('2d');
 const $gameStart = document.querySelector('.gameStart');
 const $backDrop = document.querySelector('body .backdrop');
 const $gameOver = document.querySelector('.gameOver');
-const $main = document.querySelector('.main')
+const $main = document.querySelector('.main');
+const $gamebox=document.querySelector('.gamebox');
 // 크기
 const WIDTH = 415;
 let HEIGHT = window.innerHeight-78;
@@ -14,11 +15,8 @@ const MAX_BULLETS=10;
 
 canvas.width = WIDTH;
 canvas.height = HEIGHT;
-if(HEIGHT<720){
-  canvas.width = 342;
-}
 
-$main.appendChild(canvas);
+$gamebox.appendChild(canvas);
 let bgImage, charecterImg, bulletImage, enemyImage, gameOverImage;
 let currentBullets=MAX_BULLETS;
 
