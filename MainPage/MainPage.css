@@ -92,8 +92,11 @@
     height: 90%;
 }
 .wrapper main .gamelist .gamelist-img ul li:hover img{
+    box-shadow: 15px 10px 6px rgba(0, 0, 0, 0.7);
+}
+.wrapper main .gamelist .gamelist-img ul li:active img{
     transform: scale(1.05);
-    transition: all 0.5s linear;
+    transition: all 0.01s linear;
 }
 
 /* footer style */
