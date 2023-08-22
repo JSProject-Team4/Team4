@@ -18,7 +18,7 @@ const MAX_BULLETS = 10;
 canvas.width = WIDTH;
 canvas.height = HEIGHT;
 
-let bgImage, charecterImg, bulletImage, enemyImage, gameOverImage;
+let bgImage, charecterImg, bulletImage, enemyImage, gameOverImage, itemImage;
 let currentBullets = MAX_BULLETS;
 
 let gameLoopInterval; // 게임 루프의 타이머 변수
@@ -117,6 +117,27 @@ const decreaseHp=()=> {
     }
   }
 }
+let itemList = [];
+function Item() {
+  this.x = 0;
+  this.y = 0;
+  this.init = () => {
+    this.x = rendomMaker(0, canvas.width - 48);
+    this.y = 0;
+
+    itemList.push(this);
+  };
+  this.update = () => {
+    this.y += 2;
+
+    if (this.y >= canvas.height - 48) {
+      // decreaseHp();
+      
+      // gameOver = true;
+    }
+  };
+}
+
 let enemyList = [];
 function Enemy() {
   this.x = 0;
@@ -153,6 +174,10 @@ const loadImage = () => {
 
   gameOverImage = new Image();
   gameOverImage.src = 'Image/gameOver.jpg';
+
+  itemImage = new Image();
+  itemImage.src = 'Image/item.png';
+
 };
 const createBullet = () => {
   if (gameStatus) {
@@ -167,7 +192,9 @@ const createEnemy = () => {
   const interval = setInterval(() => {
     if (gameStatus) {
       let e = new Enemy();
+      let x = new Item();
       e.init();
+      x.init();
     }
   }, 1000);
 };
@@ -213,7 +240,10 @@ const update = () => {
   for (let i = 0; i < enemyList.length; i++) {
     enemyList[i].update();
   }
-};
+  for (let i = 0; i < itemList.length; i++) {
+    itemList[i].update();
+  }
+}
 const rederHendler = () => {
   c.drawImage(bgImage, 0, 0, canvas.width, canvas.height);
   c.drawImage(charecterImg, spaceShipX, spaceShipY);
@@ -221,6 +251,14 @@ const rederHendler = () => {
   c.fillText(`Score : ${score}`, 20, 20);
   c.fillStyle = 'white';
   c.font = '20px Arial';
+
+  // 아이템 드랍
+  for (let i = 0; i < itemList.length; i++) {
+    c.drawImage(itemImage, itemList[i].x, itemList[i].y);
+  }
+
+
+
   for (let i = 0; i < bulletList.length; i++) {
     if (bulletList[i].alive) {
       c.drawImage(bulletImage, bulletList[i].x, bulletList[i].y);
