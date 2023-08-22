@@ -10,8 +10,16 @@ let x = canvas.width / 2;
 let y = canvas.height - 70;
 
 // 공의 반지름
-const ballRadius = 10;
+let ballRadius = 10;
 // const ballRadius = 30;
+
+// 아이템의 반지름
+const itemRadius = 20;
+// 아이템의 시작위치
+let itemX;
+let itemY;
+let itemDrop = false;
+let randomNum = 0;
 
 // 공튕기는 소리
 let bSound = new Audio('./Sound/ballSound.mp3');
@@ -57,6 +65,12 @@ let ballImage = new Image();
 ballImage.src = './image/발리볼.png'; // 이미지 파일 경로로 바꿔야 함
 ballImage.onload = function () {
   ballImageLoaded = true;
+};
+let itemImageLoaded = false;
+let itemImage = new Image();
+itemImage.src = './image/star.png'; // 이미지 파일 경로로 바꿔야 함
+itemImage.onload = function () {
+  itemImageLoaded = true;
 };
 
 // 헤더의 스코어 <p>태그
@@ -123,6 +137,13 @@ function drawRacket() {
 //       blocks[i][z] = { x: 0, y: 0 };
 //   }
 // }
+// const randomNum = Math.floor(Math.random() * (10 - 1) + 1);
+// console.log(randomNum);
+// if (randomNum === 7) {
+//   ctx.fillStyle = 'gray';
+// } else {
+//   ctx.fillStyle = '#0095DD';
+// }
 
 // 파괴할 오브젝트(블록)을 그리는 함수
 function makeBlock() {
@@ -147,23 +168,60 @@ function makeBlock() {
 const bSoundPlay = () => {
   if (firstMusic) bSound.volume = 1;
   bSound.play();
+  randomNum = Math.floor(Math.random() * (8 - 1) + 1);
+  console.log(randomNum);
 };
 
 // 주인"공"이 블록에 닿았을때 블록을 삭제하는 함수
+// && 공이 블록에 닿았을때 튕기는 함수
 function blockDelete() {
   for (let i = 0; i < blockColumn; i++) {
     for (let z = 0; z < blockRow; z++) {
       const target = blocks[i][z];
 
+      // if (target.status === 1) {
+      //   if (
+      //     x > target.x &&
+      //     x < target.x + blockWidth &&
+      //     y > ballRadius + target.y &&
+      //     // y < target.y + blockHeight*2.4
+      //     y < target.y + blockHeight * 1.6
+      //   ) {
+      //     MovingY = -MovingY;
+      //     target.status = 0;
+      //     $score.textContent = +$score.textContent + 100;
+      //     bSoundPlay();
+      //   }
+
+      //   $pauseScore.textContent = $score.textContent;
+      //   $gameOverScore.textContent = $score.textContent;
+      // }
+
       if (target.status === 1) {
         if (
-          x > target.x &&
-          x < target.x + blockWidth &&
-          y > ballRadius + target.y &&
-          // y < target.y + blockHeight*2.4
-          y < target.y + blockHeight * 1.6
+          x >= target.x &&
+          x <= target.x + blockWidth &&
+          y - ballRadius <= target.y + blockHeight
         ) {
           MovingY = -MovingY;
+          target.status = 0;
+          $score.textContent = +$score.textContent + 100;
+          bSoundPlay();
+          if (randomNum === 2) {
+            console.log('1');
+            itemDrop = true;
+            itemX = target.x + blockWidth / 2 - 12;
+            itemY = target.y;
+          }
+        }
+
+        if (
+          y >= target.y &&
+          y <= target.y + blockHeight &&
+          x + ballRadius >= target.x &&
+          x - ballRadius <= target.x + blockWidth
+        ) {
+          movingX = -movingX;
           target.status = 0;
           $score.textContent = +$score.textContent + 100;
           bSoundPlay();
@@ -173,6 +231,37 @@ function blockDelete() {
         $gameOverScore.textContent = $score.textContent;
       }
     }
+  }
+}
+
+function drawItem() {
+  ctx.beginPath(); // 그리기 시작
+  ctx.rect(itemX, itemY, 30, 30);
+  // ctx.fillStyle = 'yellow';
+  // ctx.fill();
+  ctx.closePath(); // 그리기 끝
+
+  if (itemImageLoaded) {
+    ctx.drawImage(
+      itemImage,
+      itemX ,
+      itemY ,
+      30,
+      30
+    );
+  }
+}
+
+let isBig = false;
+// 떨어지는 아이템을 라켓으로 먹으면 능력이 발동하는 함수!!
+function catchItemHandler() {
+  if (isBig === false) {
+    isBig = true;
+    ballRadius = 30;
+    setTimeout(function () {
+      ballRadius = 10;
+      isBig = false;
+    }, 10000);
   }
 }
 
@@ -222,6 +311,11 @@ function draw() {
   drawRacket(); // 라켓 그리기 함수 호출
   blockDelete();
 
+  if (itemDrop === true) {
+    drawItem();
+    itemY += 2;
+  }
+
   // ============ 주인"공"을 벽에 튕기게 하는 파트 ============ //
   // 만약에 현재의 높이에서 + MovingY( -2 )를 했을때 0보다 작아지는경우(벽을넘어감)
   // plusY를 양수로 바꿔서 반대로 움직이게해서 벽에 튕기는것처럼 보이게 한다
@@ -248,8 +342,15 @@ function draw() {
     // bSound.play();
   }
 
-  // 좌우 각 방향키를 누르면 10의 속도(10px)로 움직인다. 라켓이 벽을 넘지않는 선에서
+  // 라켓으로 아이템을 먹으면?
+  if (itemX > racketX && racketX + racketWidth && itemY + 10 > racketY) {
+    itemDrop = false;
+    console.log('아이템 먹었다~');
+    catchItemHandler();
+  }
+
   if (rightKey && racketX < canvas.width - racketWidth) {
+    // 좌우 각 방향키를 누르면 10의 속도(10px)로 움직인다. 라켓이 벽을 넘지않는 선에서
     racketX += 10;
   } else if (leftKey && racketX > 0) {
     racketX -= 10;
@@ -353,13 +454,9 @@ function resetBtnClick() {
       resetGame();
       pauseDrawing();
     }, 200);
-  } else if (
-    $gameOverModal.style.display === 'flex'
-  ) {
+  } else if ($gameOverModal.style.display === 'flex') {
     window.location.reload();
-  } else if (
-    $gameClearModal.style.display === 'flex'
-  ) {
+  } else if ($gameClearModal.style.display === 'flex') {
     window.location.reload();
   }
 }
@@ -416,9 +513,7 @@ function gameStartHandler() {
 
 // 게임 클리어 모달
 const $gameClearModal = document.querySelector('.gameClearModal');
-const $gameClearResetBtn = document.querySelector(
-  '.gameClearResetBtn'
-);
+const $gameClearResetBtn = document.querySelector('.gameClearResetBtn');
 console.log($gameClearResetBtn);
 $gameClearResetBtn.addEventListener('click', resetBtnClick);
 
@@ -428,4 +523,3 @@ function clearHack() {
   $score.textContent = 4200;
   gameOver();
 }
-
