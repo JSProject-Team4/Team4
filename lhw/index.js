@@ -131,9 +131,7 @@ function Item() {
     this.y += 2;
 
     if (this.y >= canvas.height - 48) {
-      // decreaseHp();
-      
-      // gameOver = true;
+      itemList.splice(1,1);
     }
   };
 }
@@ -256,8 +254,6 @@ const rederHendler = () => {
   for (let i = 0; i < itemList.length; i++) {
     c.drawImage(itemImage, itemList[i].x, itemList[i].y);
   }
-
-
 
   for (let i = 0; i < bulletList.length; i++) {
     if (bulletList[i].alive) {
