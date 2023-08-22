@@ -249,6 +249,50 @@ canvas {
   border: 5px solid #968181;
 }
 
+
+.timerWrapper {
+  width: 297px;
+  height: 200px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  color: #000;
+  background: #f6e98c;
+
+  border: 5px solid #d89797;
+  border-radius: 30px;
+}
+.timerWrapper .timerTitle {
+  font-weight: 700;
+  font-size: 1.3em;
+  /* margin-top: -40px; */
+  /* margin-bottom: 30px; */
+  padding: 5px;
+  color: #000;
+}
+
+.timerWrapper .bigStat,
+.timerWrapper .longStat {
+  margin-top: 10px;
+  width: 80%;
+  display: flex;
+  padding: 10px;
+  font-weight: 700;
+  font-size: 1.1em;
+  background: #73c4fd;
+  border-radius: 30px;
+}
+.timerWrapper .bigStat .bigTimer {
+  
+}
+.timerWrapper .bigStat .longTimer {
+
+}
+
+
 .keyHelp {
   display: flex;
   justify-content: center;

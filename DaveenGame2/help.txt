@@ -4,7 +4,4 @@ https://developer.mozilla.org/ko/docs/Games/Tutorials/2D_Breakout_game_pure_Java
 
 
 
-- 블록 x축 해결
-
-- 랜덤아이템 드랍하기 / 랜덤능력 부여 1~2개
 
