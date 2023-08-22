@@ -10,8 +10,18 @@ let x = canvas.width / 2;
 let y = canvas.height - 70;
 
 // 공의 반지름
-const ballRadius = 10;
+let ballRadius = 10;
 // const ballRadius = 30;
+
+// 아이템의 반지름
+const itemRadius = 20;
+// 아이템의 시작위치
+let itemX;
+let itemY;
+let itemDrop = false;
+let randomNum = 0;
+
+let rndm;
 
 // 공튕기는 소리
 let bSound = new Audio('./Sound/ballSound.mp3');
@@ -54,9 +64,21 @@ for (let i = 0; i < blockColumn; i++) {
 // 이미지 로딩 및 그리기
 let ballImageLoaded = false;
 let ballImage = new Image();
-ballImage.src = './image/발리볼.png'; // 이미지 파일 경로로 바꿔야 함
+ballImage.src = './image/발리볼.png'; 
 ballImage.onload = function () {
   ballImageLoaded = true;
+};
+let itemImageLoaded = false;
+let itemImage = new Image();
+itemImage.src = './image/star.png'; 
+itemImage.onload = function () {
+  itemImageLoaded = true;
+};
+let blockImageLoaded = false;
+let blockImage = new Image();
+blockImage.src = './image/block.jpg'; 
+blockImage.onload = function () {
+  blockImageLoaded = true;
 };
 
 // 헤더의 스코어 <p>태그
@@ -65,14 +87,12 @@ $score.textContent = 0;
 
 let firstMusic = false;
 
-
 // 일시정지 스코어
 let $pauseScore = document.querySelector('.sscore');
 // 게임오버 스코어
 let $gameOverScore = document.querySelector('.ssscore');
 
 const $gameOverModal = document.querySelector('.gameOverModal');
-
 
 // ============ 주인"공"을 캔버스 위에 그리는 파트 ============ //
 // 주인"공"을 그리는 함수
@@ -125,6 +145,13 @@ function drawRacket() {
 //       blocks[i][z] = { x: 0, y: 0 };
 //   }
 // }
+// const randomNum = Math.floor(Math.random() * (10 - 1) + 1);
+// console.log(randomNum);
+// if (randomNum === 7) {
+//   ctx.fillStyle = 'gray';
+// } else {
+//   ctx.fillStyle = '#0095DD';
+// }
 
 // 파괴할 오브젝트(블록)을 그리는 함수
 function makeBlock() {
@@ -138,42 +165,166 @@ function makeBlock() {
 
         ctx.beginPath();
         ctx.rect(blockX, blockY, blockWidth, blockHeight);
-        ctx.fillStyle = '#0095DD';
-        ctx.fill();
+        // ctx.fillStyle = '#0095DD';
+        // ctx.fill();
         ctx.closePath();
+
+        if (itemImageLoaded) {
+          ctx.drawImage(blockImage, blockX, blockY, blockWidth, blockHeight);
+        }
       }
     }
   }
 }
 
 const bSoundPlay = () => {
-  if(firstMusic)
-  bSound.volume = 1;
+  if (firstMusic) bSound.volume = 1;
   bSound.play();
+  randomNum = Math.floor(Math.random() * (8 - 1) + 1);
+  console.log(randomNum);
+
+  rndm = Math.floor(Math.random() * (3 - 1) + 1);
 };
 
 // 주인"공"이 블록에 닿았을때 블록을 삭제하는 함수
+// && 공이 블록에 닿았을때 튕기는 함수
 function blockDelete() {
   for (let i = 0; i < blockColumn; i++) {
     for (let z = 0; z < blockRow; z++) {
       const target = blocks[i][z];
+
+      // if (target.status === 1) {
+      //   if (
+      //     x > target.x &&
+      //     x < target.x + blockWidth &&
+      //     y > ballRadius + target.y &&
+      //     // y < target.y + blockHeight*2.4
+      //     y < target.y + blockHeight * 1.6
+      //   ) {
+      //     MovingY = -MovingY;
+      //     target.status = 0;
+      //     $score.textContent = +$score.textContent + 100;
+      //     bSoundPlay();
+      //   }
+
+      //   $pauseScore.textContent = $score.textContent;
+      //   $gameOverScore.textContent = $score.textContent;
+      // }
+
       if (target.status === 1) {
         if (
-          x > target.x &&
-          x < target.x + blockWidth &&
-          y + ballRadius + target.y &&
-          // y < target.y + blockHeight*2.4
-          y < target.y + blockHeight * 1.6
+          x >= target.x &&
+          x <= target.x + blockWidth &&
+          y - ballRadius <= target.y + blockHeight
         ) {
           MovingY = -MovingY;
           target.status = 0;
           $score.textContent = +$score.textContent + 100;
-          $pauseScore.textContent = $score.textContent;
-          $gameOverScore.textContent = $score.textContent;
+          bSoundPlay();
+          if (randomNum === 2) {
+            console.log('1');
+            itemDrop = true;
+            itemX = target.x + blockWidth / 2 - 12;
+            itemY = target.y;
+          }
+        }
+
+        if (
+          y >= target.y &&
+          y <= target.y + blockHeight &&
+          x + ballRadius >= target.x &&
+          x - ballRadius <= target.x + blockWidth
+        ) {
+          movingX = -movingX;
+          target.status = 0;
+          $score.textContent = +$score.textContent + 100;
           bSoundPlay();
         }
+
+        $pauseScore.textContent = $score.textContent;
+        $gameOverScore.textContent = $score.textContent;
       }
     }
+  }
+}
+
+function drawItem() {
+  ctx.beginPath(); // 그리기 시작
+  ctx.rect(itemX, itemY, 30, 30);
+  // ctx.fillStyle = 'yellow';
+  // ctx.fill();
+  ctx.closePath(); // 그리기 끝
+
+  if (itemImageLoaded) {
+    ctx.drawImage(itemImage, itemX, itemY, 30, 30);
+  }
+}
+const $bigTimer = document.querySelector('.bigTimer');
+const $longTimer = document.querySelector('.longTimer');
+function setTT(e) {
+  e.textContent = 10;
+  setTimeout(function () {
+    e.textContent = 9;
+  }, 1000);
+  setTimeout(function () {
+    e.textContent = 8;
+  }, 2000);
+  setTimeout(function () {
+    e.textContent = 7;
+  }, 3000);
+  setTimeout(function () {
+    e.textContent = 6;
+  }, 4000);
+  setTimeout(function () {
+    e.textContent = 5;
+  }, 5000);
+  setTimeout(function () {
+    e.textContent = 4;
+  }, 6000);
+  setTimeout(function () {
+    e.textContent = 3;
+  }, 7000);
+  setTimeout(function () {
+    e.textContent = 2;
+  }, 8000);
+  setTimeout(function () {
+    e.textContent = 1;
+  }, 9000);
+  setTimeout(function () {
+    e.textContent = 0;
+  }, 10000);
+
+}
+
+let isBig = false;
+// 떨어지는 아이템을 라켓으로 먹으면 능력이 발동하는 함수!!
+function catchItemHandler() {
+  if (isBig === false) {
+    isBig = true;
+    ballRadius = 30;
+
+    setTT($bigTimer);
+
+    setTimeout(function () {
+      ballRadius = 10;
+      isBig = false;
+    }, 10000);
+  }
+}
+let isLong = false;
+function catchItemHandler2() {
+  if (isLong === false) {
+    isLong = true;
+    racketWidth = 150;
+    racketHeight = 20;
+
+    setTT($longTimer);
+
+    setTimeout(function () {
+      racketWidth = 75;
+      racketHeight = 10;
+      isLong = false;
+    }, 10000);
   }
 }
 
@@ -198,23 +349,21 @@ function resetGame() {
 
 // 게임을 종료하는 함수
 function gameOver() {
-
-  if(+$score.textContent === 4200) {
-    setTimeout(function(){
-      clearInterval(intervalId);
-      
-      $gameOverModal.style.display='flex';
-      $pauseBackdrop.style.display='flex';
-    },200);
+  if (+$score.textContent > 4100) {
+    setTimeout(function () {
+      // clearInterval(intervalId);
+      pauseDrawing();
+      $gameClearModal.style.display = 'flex';
+      $pauseBackdrop.style.display = 'flex';
+    }, 200);
     return;
   }
-  setTimeout(function(){
-    clearInterval(intervalId);
-    
-    $gameOverModal.style.display='flex';
-    $pauseBackdrop.style.display='flex';
-  },200);
-
+  setTimeout(function () {
+    // clearInterval(intervalId);
+    pauseDrawing();
+    $gameOverModal.style.display = 'flex';
+    $pauseBackdrop.style.display = 'flex';
+  }, 200);
 }
 
 // 그리기 함수 (10밀리초마다 호출됨 = 무한작동)
@@ -224,6 +373,11 @@ function draw() {
   drawBall(); // 주인"공" 그리기 함수 호출
   drawRacket(); // 라켓 그리기 함수 호출
   blockDelete();
+
+  if (itemDrop === true) {
+    drawItem();
+    itemY += 2;
+  }
 
   // ============ 주인"공"을 벽에 튕기게 하는 파트 ============ //
   // 만약에 현재의 높이에서 + MovingY( -2 )를 했을때 0보다 작아지는경우(벽을넘어감)
@@ -251,8 +405,21 @@ function draw() {
     // bSound.play();
   }
 
-  // 좌우 각 방향키를 누르면 10의 속도(10px)로 움직인다. 라켓이 벽을 넘지않는 선에서
+  // 라켓으로 아이템을 먹으면?
+  if (itemX > racketX && racketX + racketWidth && itemY + 10 > racketY) {
+    itemDrop = false;
+    console.log('아이템 먹었다~');
+
+    console.log(`rndm: ${rndm}`);
+    if (rndm === 2) {
+      catchItemHandler();
+    } else {
+      catchItemHandler2();
+    }
+  }
+
   if (rightKey && racketX < canvas.width - racketWidth) {
+    // 좌우 각 방향키를 누르면 10의 속도(10px)로 움직인다. 라켓이 벽을 넘지않는 선에서
     racketX += 10;
   } else if (leftKey && racketX > 0) {
     racketX -= 10;
@@ -260,6 +427,10 @@ function draw() {
 
   x += movingX; // x의 값 +2
   y += MovingY; // y의 값 -2
+
+  if (stop === false) {
+    requestAnimationFrame(draw);
+  }
 } // draw() 함수 끝
 
 // 키보드 이벤트리스너
@@ -271,14 +442,6 @@ function keyDownHandler(e) {
   } else if (e.keyCode == 37) {
     leftKey = true;
   }
-
-  // 처음 실행이면 음악실행
-  if (firstMusic === false) {
-    firstMusic = true;
-    isPlaying = true;
-    audio.volume = 1;
-    audio.play();
-  }
 }
 function keyUpHandler(e) {
   if (e.keyCode == 39) {
@@ -286,16 +449,16 @@ function keyUpHandler(e) {
   } else if (e.keyCode == 37) {
     leftKey = false;
   }
-
-  // 처음 실행이면 음악실행
-  if (firstMusic === false) {
-    firstMusic = true;
-    isPlaying = true;
-    audio.volume = 1;
-    audio.play();
-  }
 }
+// document.addEventListener("mousemove", mouseMoveHandler, false);
+// function mouseMoveHandler(e) {
+//   const relativeX = e.clientX - canvas.offsetLeft;
+//   if (relativeX > 0 && relativeX < canvas.width) {
+//     racketX = relativeX - racketWidthWidth / 2;
+//   }
+// }
 
+// BGM 온오프 버튼
 const $bgmBtn = document.getElementById('bgm');
 const $musicIcon = document.querySelector('.custom-loader');
 let isPlaying = false;
@@ -305,22 +468,21 @@ $bgmBtn.addEventListener('click', () => {
     isPlaying = true;
     audio.volume = 1;
     audio.play();
-    $musicIcon.style.width= '22.5px';
-    $musicIcon.style.height= '30px';
+    $musicIcon.style.width = '22.5px';
+    $musicIcon.style.height = '30px';
   } else {
     isPlaying = false;
     audio.pause();
-    $musicIcon.style.width= 0;
-    $musicIcon.style.height= 0;
+    $musicIcon.style.width = 0;
+    $musicIcon.style.height = 0;
   }
 });
-
 
 // 일시정지 모달
 const $pauseModal = document.querySelector('.pauseModal');
 const $pauseBackdrop = document.querySelector('.backdrop');
 const pauseHandler = () => {
-  pauseDrawing()
+  pauseDrawing();
 
   if ($pauseModal.style.display === '') {
     $pauseModal.style.display = 'flex';
@@ -338,80 +500,95 @@ function returnBtnClick() {
     $pauseModal.style.display = '';
     $pauseBackdrop.style.display = '';
 
-    setTimeout(function(){
-      pauseDrawing()
-    },500);
+    setTimeout(function () {
+      pauseDrawing();
+    }, 500);
     // pauseDrawing()
-  } 
+  }
 }
 
 // 일시정지 모달에서 처음부터 버튼
 const $resetBtn = document.querySelector('.pauseResetBtn');
 $resetBtn.addEventListener('click', resetBtnClick);
+// 게임오버 모달에서 처음부터 버튼
 const $gameOverResetBtn = document.querySelector('.gameOverResetBtn');
-$gameOverResetBtn.addEventListener('click', resetBtnClick)
+$gameOverResetBtn.addEventListener('click', resetBtnClick);
 
 function resetBtnClick() {
   if ($pauseModal.style.display === 'flex') {
     $pauseModal.style.display = '';
     $pauseBackdrop.style.display = '';
 
-
-    setTimeout(function(){
-      resetGame()
-      pauseDrawing()
-    },500);
-  } 
-  else if ($gameOverModal.style.display === 'flex') {
-    $gameOverModal.style.display = '';
-    $pauseBackdrop.style.display = '';
-
-    resetGame()
-    pauseDrawing()
-    pauseDrawing()
+    setTimeout(function () {
+      resetGame();
+      pauseDrawing();
+    }, 200);
+  } else if ($gameOverModal.style.display === 'flex') {
+    window.location.reload();
+  } else if ($gameClearModal.style.display === 'flex') {
+    window.location.reload();
   }
-
-
-
 }
-
-
 
 // =========== 일시정지 버튼과 draw함수 반복호출문 ========== //
 let stop = false;
-let intervalId;
+// let intervalId;
 const $btn = document.getElementById('pause');
 
 $btn.addEventListener('click', pauseHandler);
 
 function startDrawing() {
-  intervalId = setInterval(draw, 10); // 10밀리초마다 draw 함수 호출
+  draw(); // 10밀리초마다 draw 함수 호출
 }
 function pauseDrawing() {
   if (stop === false) {
     stop = true;
-    clearInterval(intervalId); // 타이머 일시정지
+    clearInterval(draw); // 타이머 일시정지
   } else {
     stop = false;
-    intervalId = setInterval(draw, 10); // 10밀리초마다 draw 함수 호출
+    draw(); // 10밀리초마다 draw 함수 호출
   }
 }
-
 
 // 게임시작 버튼
 const $gameStartModal = document.querySelector('.gameStartModal');
 const $gameStartBtn = document.querySelector('.gameStartModal .gameStartBtn');
 $gameStartBtn.addEventListener('click', gameStartHandler);
 console.log($gameStartModal.style.display);
+$btn.disabled = true;
 
 function gameStartHandler() {
   $gameStartModal.style.display = 'flex';
-  if($gameStartModal.style.display === 'flex'){
+  if ($gameStartModal.style.display === 'flex') {
     $gameStartModal.style.display = 'none';
     startDrawing();
+    $btn.disabled = false;
+
+    // 처음 실행이면 음악실행
+    if (firstMusic === false && !isPlaying === true) {
+      firstMusic = true;
+      isPlaying = true;
+      audio.volume = 1;
+      audio.play();
+      $musicIcon.style.width = '22.5px';
+      $musicIcon.style.height = '30px';
+    }
   }
 }
 
 // if (!$gameStartModal.style.display === 'flex'){
 //   startDrawing();
 // }
+
+// 게임 클리어 모달
+const $gameClearModal = document.querySelector('.gameClearModal');
+const $gameClearResetBtn = document.querySelector('.gameClearResetBtn');
+console.log($gameClearResetBtn);
+$gameClearResetBtn.addEventListener('click', resetBtnClick);
+
+const $hackBtn = document.querySelector('.hack');
+$hackBtn.addEventListener('click', clearHack);
+function clearHack() {
+  $score.textContent = 4200;
+  gameOver();
+}
