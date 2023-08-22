@@ -21,6 +21,8 @@ let itemY;
 let itemDrop = false;
 let randomNum = 0;
 
+let rndm;
+
 // 공튕기는 소리
 let bSound = new Audio('./Sound/ballSound.mp3');
 
@@ -62,15 +64,21 @@ for (let i = 0; i < blockColumn; i++) {
 // 이미지 로딩 및 그리기
 let ballImageLoaded = false;
 let ballImage = new Image();
-ballImage.src = './image/발리볼.png'; // 이미지 파일 경로로 바꿔야 함
+ballImage.src = './image/발리볼.png'; 
 ballImage.onload = function () {
   ballImageLoaded = true;
 };
 let itemImageLoaded = false;
 let itemImage = new Image();
-itemImage.src = './image/star.png'; // 이미지 파일 경로로 바꿔야 함
+itemImage.src = './image/star.png'; 
 itemImage.onload = function () {
   itemImageLoaded = true;
+};
+let blockImageLoaded = false;
+let blockImage = new Image();
+blockImage.src = './image/block.jpg'; 
+blockImage.onload = function () {
+  blockImageLoaded = true;
 };
 
 // 헤더의 스코어 <p>태그
@@ -157,9 +165,13 @@ function makeBlock() {
 
         ctx.beginPath();
         ctx.rect(blockX, blockY, blockWidth, blockHeight);
-        ctx.fillStyle = '#0095DD';
-        ctx.fill();
+        // ctx.fillStyle = '#0095DD';
+        // ctx.fill();
         ctx.closePath();
+
+        if (itemImageLoaded) {
+          ctx.drawImage(blockImage, blockX, blockY, blockWidth, blockHeight);
+        }
       }
     }
   }
@@ -170,6 +182,8 @@ const bSoundPlay = () => {
   bSound.play();
   randomNum = Math.floor(Math.random() * (8 - 1) + 1);
   console.log(randomNum);
+
+  rndm = Math.floor(Math.random() * (3 - 1) + 1);
 };
 
 // 주인"공"이 블록에 닿았을때 블록을 삭제하는 함수
@@ -242,14 +256,44 @@ function drawItem() {
   ctx.closePath(); // 그리기 끝
 
   if (itemImageLoaded) {
-    ctx.drawImage(
-      itemImage,
-      itemX ,
-      itemY ,
-      30,
-      30
-    );
+    ctx.drawImage(itemImage, itemX, itemY, 30, 30);
   }
+}
+const $bigTimer = document.querySelector('.bigTimer');
+const $longTimer = document.querySelector('.longTimer');
+function setTT(e) {
+  e.textContent = 10;
+  setTimeout(function () {
+    e.textContent = 9;
+  }, 1000);
+  setTimeout(function () {
+    e.textContent = 8;
+  }, 2000);
+  setTimeout(function () {
+    e.textContent = 7;
+  }, 3000);
+  setTimeout(function () {
+    e.textContent = 6;
+  }, 4000);
+  setTimeout(function () {
+    e.textContent = 5;
+  }, 5000);
+  setTimeout(function () {
+    e.textContent = 4;
+  }, 6000);
+  setTimeout(function () {
+    e.textContent = 3;
+  }, 7000);
+  setTimeout(function () {
+    e.textContent = 2;
+  }, 8000);
+  setTimeout(function () {
+    e.textContent = 1;
+  }, 9000);
+  setTimeout(function () {
+    e.textContent = 0;
+  }, 10000);
+
 }
 
 let isBig = false;
@@ -258,9 +302,28 @@ function catchItemHandler() {
   if (isBig === false) {
     isBig = true;
     ballRadius = 30;
+
+    setTT($bigTimer);
+
     setTimeout(function () {
       ballRadius = 10;
       isBig = false;
+    }, 10000);
+  }
+}
+let isLong = false;
+function catchItemHandler2() {
+  if (isLong === false) {
+    isLong = true;
+    racketWidth = 150;
+    racketHeight = 20;
+
+    setTT($longTimer);
+
+    setTimeout(function () {
+      racketWidth = 75;
+      racketHeight = 10;
+      isLong = false;
     }, 10000);
   }
 }
@@ -346,7 +409,13 @@ function draw() {
   if (itemX > racketX && racketX + racketWidth && itemY + 10 > racketY) {
     itemDrop = false;
     console.log('아이템 먹었다~');
-    catchItemHandler();
+
+    console.log(`rndm: ${rndm}`);
+    if (rndm === 2) {
+      catchItemHandler();
+    } else {
+      catchItemHandler2();
+    }
   }
 
   if (rightKey && racketX < canvas.width - racketWidth) {
