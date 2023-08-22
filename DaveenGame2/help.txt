@@ -3,7 +3,6 @@ https://developer.mozilla.org/ko/docs/Games/Tutorials/2D_Breakout_game_pure_Java
 벽돌 부수기 강의 홈페이지(도움)
 
 
-- 게임 클리어 화면 만들기 / 바로깨는 치트만들기
 
 - 블록 x축 해결
 

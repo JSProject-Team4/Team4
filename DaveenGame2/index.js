@@ -197,11 +197,11 @@ function resetGame() {
 
 // 게임을 종료하는 함수
 function gameOver() {
-  if (+$score.textContent === 4200) {
+  if (+$score.textContent > 4100) {
     setTimeout(function () {
       // clearInterval(intervalId);
       pauseDrawing();
-      $gameOverModal.style.display = 'flex';
+      $gameClearModal.style.display = 'flex';
       $pauseBackdrop.style.display = 'flex';
     }, 200);
     return;
@@ -353,11 +353,13 @@ function resetBtnClick() {
       resetGame();
       pauseDrawing();
     }, 200);
-  } else if ($gameOverModal.style.display === 'flex') {
-    console.log(`시작부분`);
-    $gameOverModal.style.display = '';
-    $pauseBackdrop.style.display = '';
-
+  } else if (
+    $gameOverModal.style.display === 'flex'
+  ) {
+    window.location.reload();
+  } else if (
+    $gameClearModal.style.display === 'flex'
+  ) {
     window.location.reload();
   }
 }
@@ -390,7 +392,6 @@ console.log($gameStartModal.style.display);
 $btn.disabled = true;
 
 function gameStartHandler() {
-  
   $gameStartModal.style.display = 'flex';
   if ($gameStartModal.style.display === 'flex') {
     $gameStartModal.style.display = 'none';
@@ -398,11 +399,13 @@ function gameStartHandler() {
     $btn.disabled = false;
 
     // 처음 실행이면 음악실행
-    if (firstMusic === false) {
+    if (firstMusic === false && !isPlaying === true) {
       firstMusic = true;
       isPlaying = true;
       audio.volume = 1;
       audio.play();
+      $musicIcon.style.width = '22.5px';
+      $musicIcon.style.height = '30px';
     }
   }
 }
@@ -410,3 +413,19 @@ function gameStartHandler() {
 // if (!$gameStartModal.style.display === 'flex'){
 //   startDrawing();
 // }
+
+// 게임 클리어 모달
+const $gameClearModal = document.querySelector('.gameClearModal');
+const $gameClearResetBtn = document.querySelector(
+  '.gameClearResetBtn'
+);
+console.log($gameClearResetBtn);
+$gameClearResetBtn.addEventListener('click', resetBtnClick);
+
+const $hackBtn = document.querySelector('.hack');
+$hackBtn.addEventListener('click', clearHack);
+function clearHack() {
+  $score.textContent = 4200;
+  gameOver();
+}
+
