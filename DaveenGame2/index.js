@@ -181,7 +181,7 @@ const bSoundPlay = () => {
   if (firstMusic) bSound.volume = 1;
   bSound.play();
   randomNum = Math.floor(Math.random() * (8 - 1) + 1);
-  console.log(randomNum);
+  // console.log('숫자:', randomNum);
 
   rndm = Math.floor(Math.random() * (3 - 1) + 1);
 };
@@ -222,7 +222,7 @@ function blockDelete() {
           $score.textContent = +$score.textContent + 100;
           bSoundPlay();
           if (randomNum === 2) {
-            console.log('1');
+            console.log('랜덤아이템 드랍!');
             itemDrop = true;
             itemX = target.x + blockWidth / 2 - 12;
             itemY = target.y;
@@ -300,6 +300,13 @@ let isBig = false;
 // 떨어지는 아이템을 라켓으로 먹으면 능력이 발동하는 함수!!
 function catchItemHandler() {
   if (isBig === false) {
+    if (x < 30) {
+      x = 30;
+      console.log('왼쪽벽으로부터 이동!');
+    } else if (x > 520) {
+      x = 520;
+      console.log('오른벽으로부터 이동!');
+    }
     isBig = true;
     ballRadius = 30;
 
@@ -373,10 +380,9 @@ function draw() {
   drawBall(); // 주인"공" 그리기 함수 호출
   drawRacket(); // 라켓 그리기 함수 호출
   blockDelete();
-
   if (itemDrop === true) {
     drawItem();
-    itemY += 2;
+    itemY += 1;
   }
 
   // ============ 주인"공"을 벽에 튕기게 하는 파트 ============ //
@@ -401,6 +407,14 @@ function draw() {
   // 라켓에 주인"공"이 닿았을 때, 벽에 튀긴것처럼 튕기게 하기
   if (x > racketX && x < racketX + racketWidth && y + ballRadius > racketY) {
     MovingY = -MovingY;
+    if (y + ballRadius >=460) {
+      y = 450
+    }
+    if (isBig) {
+      if (y + ballRadius >=460) {
+        y = 430
+      }
+    }
     // bSound.volume = 5;
     // bSound.play();
   }
@@ -408,9 +422,7 @@ function draw() {
   // 라켓으로 아이템을 먹으면?
   if (itemX > racketX && racketX + racketWidth && itemY + 10 > racketY) {
     itemDrop = false;
-    console.log('아이템 먹었다~');
 
-    console.log(`rndm: ${rndm}`);
     if (rndm === 2) {
       catchItemHandler();
     } else {
@@ -554,7 +566,7 @@ function pauseDrawing() {
 const $gameStartModal = document.querySelector('.gameStartModal');
 const $gameStartBtn = document.querySelector('.gameStartModal .gameStartBtn');
 $gameStartBtn.addEventListener('click', gameStartHandler);
-console.log($gameStartModal.style.display);
+// console.log($gameStartModal.style.display);
 $btn.disabled = true;
 
 function gameStartHandler() {
@@ -583,7 +595,7 @@ function gameStartHandler() {
 // 게임 클리어 모달
 const $gameClearModal = document.querySelector('.gameClearModal');
 const $gameClearResetBtn = document.querySelector('.gameClearResetBtn');
-console.log($gameClearResetBtn);
+// console.log($gameClearResetBtn);
 $gameClearResetBtn.addEventListener('click', resetBtnClick);
 
 const $hackBtn = document.querySelector('.hack');
