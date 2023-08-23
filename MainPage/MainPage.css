@@ -28,7 +28,12 @@
     align-items: center;
   }
   .wrapper .header .header-main .header-logo {
-    padding: 30px;
+    height: 76px;
+    padding: 0 10px;
+  }
+  .wrapper .header .header-main .header-logo img {
+    width: 76px;
+    height: 76px;
   }
   
   .wrapper .header .header-main .main-nav .main-nav__items {
