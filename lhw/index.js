@@ -1,17 +1,3 @@
-
-// 캔버스와 그래픽 컨텍스트 설정
-const canvas = document.querySelector('canvas');
-const c = canvas.getContext('2d');
-
-// HTML 요소 가져오기
-const $gameStart = document.querySelector('.gameStart');
-const $backDrop = document.querySelector('body .backdrop');
-const $gameOver = document.querySelector('.gameOver');
-const $gamebox = document.querySelector('.gamebox');
-const $bulletbox = document.querySelector('.Ybox');
-const $hp = document.querySelector('.hp');
-const $createH2 = document.createElement('h2');
-
 const canvas = document.querySelector('canvas');
 const c = canvas.getContext('2d');
 // html 태그 불러오기
@@ -51,14 +37,14 @@ window.addEventListener('resize', () => {
   canvas.style.height = `${HEIGHT}px`; // 높이 설정
 });
 // 총알 hp UI
+const $createH2 = document.createElement('h2');
+
 const uiEvent = () => {
   function removeAllChildren(parent) {
     while (parent.firstChild) {
       parent.removeChild(parent.firstChild);
     }
   }
-  const $createH2 = document.createElement('h2');
-
   if (!gameStatus) {
     for (let i = 0; i < MAX_BULLETS; i++) {
       const $bullet = document.createElement('img');
@@ -75,12 +61,11 @@ const uiEvent = () => {
       $bulletbox.appendChild($bullet);
     }
   }
-  $createH2.classList = 'bulletCount';
-  $createH2.textContent = `${currentBullets}`;
+  $createH2.textContent=`${currentBullets}`;
+  $createH2.classList='bulletCount';
   $bulletbox.appendChild($createH2);
 };
 uiEvent();
-
 let bulletList = []; //총알들을 저장하는 리스트
 // 아이템 리스트 채워두기
 
@@ -203,7 +188,7 @@ function Enemy() {
       this.y += 5;
     } else if (score <= 20) {
       this.y += 6;
-    } else if (score <= 25) {
+    } else  {
       this.y += 7;
     }
 
@@ -251,27 +236,11 @@ const createBullet = () => {
     }
   }
 };
-const enemyRetouch = (value) => {
-  if (score <= 5) {
-    let result = value === true ? 3 : 1500;
-  } else if (score <= 10) {
-    this.y += 4;
-  } else if (score <= 15) {
-    this.y += 5;
-  } else if (score <= 20) {
-    this.y += 6;
-  } else if (score <= 25) {
-    this.y += 7;
-  } else {
-    this.y += 4;
-  }
-  return value;
-};
 const createEnemy = () => {
   const interval = setInterval(() => {
     if (gameStatus) {
       let e = new Enemy();
-      console.log(enemyRetouch(true));
+
       e.init();
     }
   }, 1500);
