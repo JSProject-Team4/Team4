@@ -1,13 +1,16 @@
-const canvas = document.querySelector("canvas");
-const c = canvas.getContext("2d");
-// html 태그 불러오기
-const $gameStart = document.querySelector(".gameStart");
-const $backDrop = document.querySelector("body .backdrop");
-const $gameOver = document.querySelector(".gameOver");
-const $main = document.querySelector(".main");
-const $gamebox = document.querySelector(".gamebox");
-const $bulletbox = document.querySelector(".Ybox");
-const $hp = document.querySelector(".hp");
+// 캔버스와 그래픽 컨텍스트 설정
+const canvas = document.querySelector('canvas');
+const c = canvas.getContext('2d');
+
+// HTML 요소 가져오기
+const $gameStart = document.querySelector('.gameStart');
+const $backDrop = document.querySelector('body .backdrop');
+const $gameOver = document.querySelector('.gameOver');
+const $gamebox = document.querySelector('.gamebox');
+const $bulletbox = document.querySelector('.Ybox');
+const $hp = document.querySelector('.hp');
+const $createH2 = document.createElement('h2');
+
 // 크기
 const WIDTH = 465;
 let HEIGHT = window.innerHeight - 78;
@@ -32,7 +35,7 @@ let spaceShipY = HEIGHT - 64;
 // 컨버스 그리기
 
 // 창화면시 게임 크기 조절
-window.addEventListener("resize", () => {
+window.addEventListener('resize', () => {
   let HEIGHT = window.innerHeight - 78;
   canvas.style.height = `${HEIGHT}px`; // 높이 설정
 });
@@ -43,22 +46,27 @@ const uiEvent = () => {
       parent.removeChild(parent.firstChild);
     }
   }
+  const $createH2 = document.createElement('h2');
+
   if (!gameStatus) {
     for (let i = 0; i < MAX_BULLETS; i++) {
-      const $bullet = document.createElement("img");
-      $bullet.src = "Image/bullet.png";
-      $bullet.alt = "";
+      const $bullet = document.createElement('img');
+      $bullet.src = 'Image/bullet.png';
+      $bullet.alt = '';
       $bulletbox.appendChild($bullet);
     }
   } else if (gameStatus) {
     removeAllChildren($bulletbox);
     for (let i = 0; i < currentBullets; i++) {
-      const $bullet = document.createElement("img");
-      $bullet.src = "Image/bullet.png";
-      $bullet.alt = "";
+      const $bullet = document.createElement('img');
+      $bullet.src = 'Image/bullet.png';
+      $bullet.alt = '';
       $bulletbox.appendChild($bullet);
     }
   }
+  $createH2.classList = 'bulletCount';
+  $createH2.textContent = `${currentBullets}`;
+  $bulletbox.appendChild($createH2);
 };
 uiEvent();
 
@@ -103,42 +111,40 @@ function Bullet() {
         enemyList.splice(i, 1);
         uiEvent(); // UI 업데이트
       }
-    if (itemList){
-      for (let i = 0; i < itemList.length; i++) {
-        const bulletLeft = this.x;
-        const bulletRight = this.x + bulletImage.width;
-        const bulletTop = this.y;
-        const bulletBottom = this.y + bulletImage.height;
-  
-        const itemLeft = itemList[i].x;
-        const itemRight = itemList[i].x + itemImage.width;
-        const itemTop = itemList[i].y;
-        const itemBottom = itemList[i].y + itemImage.height;
-        if (
-          bulletBottom > itemTop &&
-          bulletTop < itemBottom &&
-          bulletRight > itemLeft &&
-          bulletLeft < itemRight
-        ) {
-          this.alive = false;
-          itemList.splice(i, 1);
-          if(currentBullets<30){
-            currentBullets = currentBullets + 5;
-            uiEvent(); // UI 업데이트
-        }
-      }
-          
+      if (itemList) {
+        for (let i = 0; i < itemList.length; i++) {
+          const bulletLeft = this.x;
+          const bulletRight = this.x + bulletImage.width;
+          const bulletTop = this.y;
+          const bulletBottom = this.y + bulletImage.height;
+
+          const itemLeft = itemList[i].x;
+          const itemRight = itemList[i].x + itemImage.width;
+          const itemTop = itemList[i].y;
+          const itemBottom = itemList[i].y + itemImage.height;
+          if (
+            bulletBottom > itemTop &&
+            bulletTop < itemBottom &&
+            bulletRight > itemLeft &&
+            bulletLeft < itemRight
+          ) {
+            this.alive = false;
+            itemList.splice(i, 1);
+            if (currentBullets < 30) {
+              currentBullets = currentBullets + 5;
+              uiEvent(); // UI 업데이트
+            }
+          }
         }
       }
     }
-   
   };
 }
 const rendomMaker = (MIN, MAX) => {
   let rendomNum = Math.floor(Math.random() * (MAX - MIN + 1));
   return rendomNum;
 };
-let itemList = []
+let itemList = [];
 function Item() {
   this.x = 0;
   this.y = 0;
@@ -164,7 +170,7 @@ let hpcount = 0;
 const decreaseHp = () => {
   hpcount += 1;
   console.log(hpcount);
-  const heightValues = ["100", "66%", "33%", "0"];
+  const heightValues = ['100', '66%', '33%', '0'];
   $hp.style.height = heightValues[hpcount];
 };
 let enemyList = [];
@@ -178,7 +184,17 @@ function Enemy() {
     enemyList.push(this);
   };
   this.update = () => {
-    this.y += 3;
+    if (score <= 5) {
+      this.y += 3;
+    } else if (score <= 10) {
+      this.y += 4;
+    } else if (score <= 15) {
+      this.y += 5;
+    } else if (score <= 20) {
+      this.y += 6;
+    } else if (score <= 25) {
+      this.y += 7;
+    }
 
     const indexToRemove = enemyList.indexOf(this);
 
@@ -196,24 +212,24 @@ function Enemy() {
 
 const loadImage = () => {
   bgImage = new Image();
-  bgImage.src = "Image/backgruond.jpg";
+  bgImage.src = 'Image/backgruond.jpg';
 
   charecterImg = new Image();
-  charecterImg.src = "Image/spaceShip.png";
+  charecterImg.src = 'Image/spaceShip.png';
 
   bulletImage = new Image();
-  bulletImage.src = "Image/bullet.png";
+  bulletImage.src = 'Image/bullet.png';
 
   enemyImage = new Image();
-  enemyImage.src = "Image/enemy.png";
+  enemyImage.src = 'Image/enemy.png';
 
   gameOverImage = new Image();
-  gameOverImage.src = "Image/gameOver.jpg";
+  gameOverImage.src = 'Image/gameOver.jpg';
 
   itemImage = new Image();
-  itemImage.src = "Image/item.png";
+  itemImage.src = 'Image/item.png';
 
-  gameOverImage.src = "Image/gameOver.jpg";
+  gameOverImage.src = 'Image/gameOver.jpg';
 };
 const createBullet = () => {
   if (gameStatus) {
@@ -224,11 +240,27 @@ const createBullet = () => {
     }
   }
 };
+const enemyRetouch = (value) => {
+  if (score <= 5) {
+    let result = value === true ? 3 : 1500;
+  } else if (score <= 10) {
+    this.y += 4;
+  } else if (score <= 15) {
+    this.y += 5;
+  } else if (score <= 20) {
+    this.y += 6;
+  } else if (score <= 25) {
+    this.y += 7;
+  } else {
+    this.y += 4;
+  }
+  return value;
+};
 const createEnemy = () => {
   const interval = setInterval(() => {
     if (gameStatus) {
       let e = new Enemy();
-
+      console.log(enemyRetouch(true));
       e.init();
     }
   }, 1500);
@@ -249,10 +281,10 @@ const createItem = () => {
 };
 let keysDown = {};
 const keyboardListener = () => {
-  document.addEventListener("keydown", (e) => {
+  document.addEventListener('keydown', (e) => {
     keysDown[e.keyCode] = true;
   });
-  document.addEventListener("keyup", (e) => {
+  document.addEventListener('keyup', (e) => {
     delete keysDown[e.keyCode];
     if (e.keyCode === 32) {
       createBullet();
@@ -299,15 +331,15 @@ const rederHendler = () => {
   // 스코어
   c.fillText(`Score : ${score}`, 20, 20);
 
-  c.fillStyle = "white";
-  c.font = "20px Arial";
+  c.fillStyle = 'white';
+  c.font = '20px Arial';
 
   // 아이템 드랍
   for (let i = 0; i < itemList.length; i++) {
     c.drawImage(itemImage, itemList[i].x, itemList[i].y);
   }
-  c.fillStyle = "white";
-  c.font = "20px Arial";
+  c.fillStyle = 'white';
+  c.font = '20px Arial';
   for (let i = 0; i < bulletList.length; i++) {
     if (bulletList[i].alive) {
       c.drawImage(bulletImage, bulletList[i].x, bulletList[i].y);
@@ -321,13 +353,13 @@ const rederHendler = () => {
 const startEvent = () => {
   const removeUi = () => {
     if (!gameOver) {
-      $backDrop.style.display = "none";
-      $gameStart.style.display = "none";
+      $backDrop.style.display = 'none';
+      $gameStart.style.display = 'none';
       gameStatus = true;
     }
   };
-  $backDrop.addEventListener("click", () => removeUi());
-  $gameStart.addEventListener("click", () => removeUi());
+  $backDrop.addEventListener('click', () => removeUi());
+  $gameStart.addEventListener('click', () => removeUi());
 };
 const restartGame = () => {
   // 초기화 작업
@@ -345,19 +377,19 @@ const restartGame = () => {
   gameLoopInterval = setInterval(() => {
     if (gameOver) {
       clearInterval(gameLoopInterval); // 게임 종료 시 타이머 중단
-      $gameOver.style.display = "block";
-      $backDrop.style.display = "block";
+      $gameOver.style.display = 'block';
+      $backDrop.style.display = 'block';
 
-      $gameOver.addEventListener("click", () => {
+      $gameOver.addEventListener('click', () => {
         hpcount = 0; // hp 초기화
-        $hp.style.height = "100%";
+        $hp.style.height = '100%';
         uiEvent();
         // 숨겨진 UI들 표시
-        $gameOver.style.display = "none";
-        $backDrop.style.display = "none";
+        $gameOver.style.display = 'none';
+        $backDrop.style.display = 'none';
         gameStatus = true;
         restartGame();
-        console.log("중복테스트");
+        console.log('중복테스트');
       });
     } else {
       // 게임 루프 내용 실행
