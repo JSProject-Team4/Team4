@@ -69,6 +69,7 @@ uiEvent();
 let bulletList = []; //총알들을 저장하는 리스트
 // 아이템 리스트 채워두기
 let enemy2Spawned = false;
+let hitcount = 0;
 function Bullet() {
   this.x = 0;
   this.y = 0;
@@ -83,7 +84,7 @@ function Bullet() {
     }
   };
   this.update = () => {
-    this.y -= 7;
+    this.y -= 9;
   };
   this.checkHit = () => {
     for (let i = 0; i < enemyList.length; i++) {
@@ -109,6 +110,7 @@ function Bullet() {
       }
     }
     if (enemy2List) {
+      
       for (let i = 0; i < enemy2List.length; i++) {
         const bulletLeft = this.x;
         const bulletRight = this.x + bulletImage.width;
@@ -125,9 +127,15 @@ function Bullet() {
           bulletRight > enemyLeft &&
           bulletLeft < enemyRight
         ) {
-          score++;
+          hitcount++;
           this.alive = false;
-          enemy2List.splice(i, 1);
+          console.log(hitcount);
+          if (hitcount === 2) {
+            enemy2List.splice(i, 1);
+            score=score+2;
+            hitcount=0;
+          }
+
           uiEvent(); // UI 업데이트
         }
       }
@@ -194,9 +202,9 @@ const decreaseHp = () => {
 };
 const EnemyRetouch = (value) => {
   if (score <= 5) {
-    result = value === true ? 3 : 0;
+    result = value === true ? 3 : 5;
   } else if (score <= 10) {
-    result = value === true ? 4 : 0;
+    result = value === true ? 4 : 5;
   } else if (score <= 15) {
     result = value === true ? 5 : 0;
   } else if (score <= 20) {
@@ -338,6 +346,13 @@ const createItem = () => {
     }
   }, 5000);
 };
+setInterval(()=>{
+  if(gameStatus){
+    currentBullets++
+    uiEvent();
+  }
+
+},3000);
 let keysDown = {};
 const keyboardListener = () => {
   document.addEventListener("keydown", (e) => {
@@ -346,7 +361,6 @@ const keyboardListener = () => {
   document.addEventListener("keyup", (e) => {
     delete keysDown[e.keyCode];
     if (e.keyCode === 32) {
-      console.log(enemy2List);
       createBullet();
       uiEvent();
     }
