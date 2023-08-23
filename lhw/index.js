@@ -1,3 +1,4 @@
+
 // 캔버스와 그래픽 컨텍스트 설정
 const canvas = document.querySelector('canvas');
 const c = canvas.getContext('2d');
@@ -11,6 +12,16 @@ const $bulletbox = document.querySelector('.Ybox');
 const $hp = document.querySelector('.hp');
 const $createH2 = document.createElement('h2');
 
+const canvas = document.querySelector('canvas');
+const c = canvas.getContext('2d');
+// html 태그 불러오기
+const $gameStart = document.querySelector('.gameStart');
+const $backDrop = document.querySelector('body .backdrop');
+const $gameOver = document.querySelector('.gameOver');
+const $main = document.querySelector('.main');
+const $gamebox = document.querySelector('.gamebox');
+const $bulletbox = document.querySelector('.Ybox');
+const $hp = document.querySelector('.hp');
 // 크기
 const WIDTH = 465;
 let HEIGHT = window.innerHeight - 78;
@@ -388,8 +399,12 @@ const restartGame = () => {
         $gameOver.style.display = 'none';
         $backDrop.style.display = 'none';
         gameStatus = true;
+        saveScore = score;
         restartGame();
         console.log('중복테스트');
+
+        // 스코어보드에 점수 추가
+        addScoreRankHandler();
       });
     } else {
       // 게임 루프 내용 실행
@@ -398,6 +413,20 @@ const restartGame = () => {
     }
   }, 1000 / 60); // 60FPS에 가까운 속도로 실행하도록 설정
 };
+
+// 게임 스코어 보드(랭킹) div
+const $ScoreBoard = document.querySelector('.ScoreBoard');
+const $ScoreBoardUl = document.querySelector('.scoreRank');
+let saveScore;
+function addScoreRankHandler() {
+  if (saveScore > 0) {
+    const addLi = document.createElement('li');
+    const addT = document.createTextNode(`${saveScore} Point`);
+    addLi.appendChild(addT);
+
+    $ScoreBoardUl.appendChild(addLi);
+  }
+}
 
 // 게임 초기화 및 루프 시작
 loadImage();
