@@ -61,14 +61,14 @@ const uiEvent = () => {
       $bulletbox.appendChild($bullet);
     }
   }
-  $createH2.textContent=`${currentBullets}`;
-  $createH2.classList='bulletCount';
+  $createH2.textContent = `${currentBullets}`;
+  $createH2.classList = 'bulletCount';
   $bulletbox.appendChild($createH2);
 };
 uiEvent();
 let bulletList = []; //총알들을 저장하는 리스트
 // 아이템 리스트 채워두기
-
+let enemy2Spawned = false;
 function Bullet() {
   this.x = 0;
   this.y = 0;
@@ -107,29 +107,53 @@ function Bullet() {
         enemyList.splice(i, 1);
         uiEvent(); // UI 업데이트
       }
-      if (itemList) {
-        for (let i = 0; i < itemList.length; i++) {
-          const bulletLeft = this.x;
-          const bulletRight = this.x + bulletImage.width;
-          const bulletTop = this.y;
-          const bulletBottom = this.y + bulletImage.height;
+    }
+    if (enemy2List) {
+      for (let i = 0; i < enemy2List.length; i++) {
+        const bulletLeft = this.x;
+        const bulletRight = this.x + bulletImage.width;
+        const bulletTop = this.y;
+        const bulletBottom = this.y + bulletImage.height;
 
-          const itemLeft = itemList[i].x;
-          const itemRight = itemList[i].x + itemImage.width;
-          const itemTop = itemList[i].y;
-          const itemBottom = itemList[i].y + itemImage.height;
-          if (
-            bulletBottom > itemTop &&
-            bulletTop < itemBottom &&
-            bulletRight > itemLeft &&
-            bulletLeft < itemRight
-          ) {
-            this.alive = false;
-            itemList.splice(i, 1);
-            if (currentBullets < 30) {
-              currentBullets = currentBullets + 5;
-              uiEvent(); // UI 업데이트
-            }
+        const enemyLeft = enemy2List[i].x;
+        const enemyRight = enemy2List[i].x + enemyImage.width;
+        const enemyTop = enemy2List[i].y;
+        const enemyBottom = enemy2List[i].y + enemyImage.height;
+        if (
+          bulletBottom > enemyTop &&
+          bulletTop < enemyBottom &&
+          bulletRight > enemyLeft &&
+          bulletLeft < enemyRight
+        ) {
+          score++;
+          this.alive = false;
+          enemy2List.splice(i, 1);
+          uiEvent(); // UI 업데이트
+        }
+      }
+    }
+    if (itemList) {
+      for (let i = 0; i < itemList.length; i++) {
+        const bulletLeft = this.x;
+        const bulletRight = this.x + bulletImage.width;
+        const bulletTop = this.y;
+        const bulletBottom = this.y + bulletImage.height;
+
+        const itemLeft = itemList[i].x;
+        const itemRight = itemList[i].x + itemImage.width;
+        const itemTop = itemList[i].y;
+        const itemBottom = itemList[i].y + itemImage.height;
+        if (
+          bulletBottom > itemTop &&
+          bulletTop < itemBottom &&
+          bulletRight > itemLeft &&
+          bulletLeft < itemRight
+        ) {
+          this.alive = false;
+          itemList.splice(i, 1);
+          if (currentBullets < 30) {
+            currentBullets = currentBullets + 5;
+            uiEvent(); // UI 업데이트
           }
         }
       }
@@ -169,6 +193,29 @@ const decreaseHp = () => {
   const heightValues = ['100', '66%', '33%', '0'];
   $hp.style.height = heightValues[hpcount];
 };
+const EnemyRetouch = (value) => {
+  if (score <= 5) {
+    result = value === true ? 3 : 1;
+  } else if (score <= 10) {
+    result = value === true ? 4 : 2;
+    createEnemy2();
+  } else if (score <= 15) {
+    result = value === true ? 5 : 5;
+  } else if (score <= 20) {
+    result = value === true ? 6 : 5;
+  } else if (score <= 25) {
+    result = value === true ? 7 : 6;
+  } else if (score <= 30) {
+    result = value === true ? 7 : 7;
+  } else if (score <= 35) {
+    result = value === true ? 7 : 8;
+  } else if (score <= 40) {
+    result = value === true ? 7 : 9;
+  } else {
+    result = value === true ? 7 : 9;
+  }
+  return result;
+};
 let enemyList = [];
 function Enemy() {
   this.x = 0;
@@ -180,23 +227,40 @@ function Enemy() {
     enemyList.push(this);
   };
   this.update = () => {
-    if (score <= 5) {
-      this.y += 3;
-    } else if (score <= 10) {
-      this.y += 4;
-    } else if (score <= 15) {
-      this.y += 5;
-    } else if (score <= 20) {
-      this.y += 6;
-    } else  {
-      this.y += 7;
-    }
+    console.log(this.y);
+    this.y += EnemyRetouch(true);
 
     const indexToRemove = enemyList.indexOf(this);
 
     if (this.y >= canvas.height - 48) {
       if (indexToRemove !== -1) {
         enemyList.splice(indexToRemove, 1);
+      }
+      decreaseHp();
+      if (hpcount >= 3) {
+        gameOver = true;
+      }
+    }
+  };
+}
+function Enemy2() {
+  this.x = 0;
+  this.y = 0;
+  this.init = () => {
+    this.x = rendomMaker(0, canvas.width - 48);
+    this.y = 0;
+
+    enemy2List.push(this);
+  };
+  this.update = () => {
+    console.log(EnemyRetouch(false));
+    this.y += EnemyRetouch(false);
+
+    const indexToRemove = enemy2List.indexOf(this);
+
+    if (this.y >= canvas.height - 48) {
+      if (indexToRemove !== -1) {
+        enemy2List.splice(indexToRemove, 1);
       }
       decreaseHp();
       if (hpcount >= 3) {
@@ -226,6 +290,9 @@ const loadImage = () => {
   itemImage.src = 'Image/item.png';
 
   gameOverImage.src = 'Image/gameOver.jpg';
+
+  enemy2Image = new Image();
+  enemy2Image.src = 'Image/enemy2.png';
 };
 const createBullet = () => {
   if (gameStatus) {
@@ -237,14 +304,27 @@ const createBullet = () => {
   }
 };
 const createEnemy = () => {
-  const interval = setInterval(() => {
+  const einterval = setInterval(() => {
     if (gameStatus) {
       let e = new Enemy();
-
       e.init();
     }
   }, 1500);
 };
+let enemy2List = [];
+
+function createEnemy2() {
+  if (gameStatus && !enemy2Spawned) {
+  const einterval = setInterval(() => {
+      if (gameStatus) {
+        let e = new Enemy2(); // 새로운 적 객체 생성
+        e.init();
+        enemy2List.push(e); // enemy2List 배열에 추가
+      }
+      
+    
+  }, 5000);enemy2Spawned = true;}
+}
 const createItem = () => {
   const initialItemCount = 5; // 초기 아이템 개수
   for (let i = 0; i < initialItemCount; i++) {
@@ -304,6 +384,9 @@ const update = () => {
   for (let i = 0; i < itemList.length; i++) {
     itemList[i].update();
   }
+  for (let i = 0; i < enemy2List.length; i++) {
+    enemy2List[i].update();
+  }
 };
 const rederHendler = () => {
   c.drawImage(bgImage, 0, 0, canvas.width, canvas.height);
@@ -320,13 +403,17 @@ const rederHendler = () => {
   }
   c.fillStyle = 'white';
   c.font = '20px Arial';
+  // 총알 추가
   for (let i = 0; i < bulletList.length; i++) {
     if (bulletList[i].alive) {
       c.drawImage(bulletImage, bulletList[i].x, bulletList[i].y);
     }
-  }
+  } //적 추가
   for (let i = 0; i < enemyList.length; i++) {
     c.drawImage(enemyImage, enemyList[i].x, enemyList[i].y);
+  }
+  for (let i = 0; i < enemy2List.length; i++) {
+    c.drawImage(enemy2Image, enemy2List[i].x, enemy2List[i].y); // 에너미2 이미지 그리기
   }
 };
 
@@ -349,6 +436,7 @@ const restartGame = () => {
   spaceShipX = 160;
   bulletList = [];
   enemyList = [];
+  enemy2List = [];
   itemList = [];
 
   clearInterval(gameLoopInterval); // 기존의 게임 루프 중단
@@ -373,34 +461,35 @@ const restartGame = () => {
         console.log('중복테스트');
 
         // 스코어보드에 점수 추가
-        addScoreRankHandler();
+        // addScoreRankHandler();
       });
     } else {
       // 게임 루프 내용 실행
+
       update();
       rederHendler();
     }
   }, 1000 / 60); // 60FPS에 가까운 속도로 실행하도록 설정
 };
 
-// 게임 스코어 보드(랭킹) div
-const $ScoreBoard = document.querySelector('.ScoreBoard');
-const $ScoreBoardUl = document.querySelector('.scoreRank');
-let saveScore;
-function addScoreRankHandler() {
-  if (saveScore > 0) {
-    const addLi = document.createElement('li');
-    const addT = document.createTextNode(`${saveScore} Point`);
-    addLi.appendChild(addT);
+// // 게임 스코어 보드(랭킹) div
+// const $ScoreBoard = document.querySelector('.ScoreBoard');
+// const $ScoreBoardUl = document.querySelector('.scoreRank');
+// let saveScore;
+// function addScoreRankHandler() {
+//   if (saveScore > 0) {
+//     const addLi = document.createElement('li');
+//     const addT = document.createTextNode(`${saveScore} Point`);
+//     addLi.appendChild(addT);
 
-    $ScoreBoardUl.appendChild(addLi);
-  }
-}
+//     $ScoreBoardUl.appendChild(addLi);
+//   }
+// }
 
 // 게임 초기화 및 루프 시작
 loadImage();
 keyboardListener();
-createItem();
 createEnemy();
+createItem();
 startEvent();
 restartGame();
