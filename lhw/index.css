@@ -1,0 +1,198 @@
+@import url(common.css);
+  .wrapper {
+    /* background: #A9BCF5; */
+    width: 100%;
+    color: #fff;
+    font-family: 'DungGeunMo';
+  }
+  /* header style */
+  .wrapper.header {
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 999;
+  }
+  .wrapper .header .header-main {
+    width: 100%;
+    margin: 0 auto;
+    position: fixed;
+  
+    background: rgba(0, 0, 0, 0.5);
+  
+    display: flex;
+    align-items: center;
+  }
+  .wrapper .header .header-main .header-logo {
+    padding: 30px;
+    color: #fff;
+  }
+  
+  .wrapper .header .header-main .main-nav .main-nav__items {
+    display: flex;
+    flex-direction: row;
+    color: #fff;
+  }
+  .wrapper .header .header-main .main-nav .main-nav__item a {
+    display: block;
+    font-weight: 700;
+    padding: 0 15px;
+  }
+  /* main */
+body {
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    justify-content: center;
+    align-items: center;
+    background: url(./Image/plenet.jpg) no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-origin: content-box;
+    height: 100%;
+
+}
+.main{
+    padding-top: 76px;
+    position: relative;
+    display: flex;
+}
+.canvus{
+    display: block;
+    position: relative; 
+}
+.boxs{
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.box{
+  width: 415px;height: 100vh;
+  position: absolute;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  position: absolute;
+}
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.60);
+  }
+.gameStart{
+    z-index: 11;
+    width: 50%;
+    height: 100%;
+    position: absolute;
+    background:url(Image/gameStart.jpg) no-repeat;
+    background-size: contain;
+    background-position: center;
+    background-origin: content-box;
+    left: 130px;
+}
+.gameOver{
+    z-index: 11;
+    width: 50%;
+    height: 100%;
+    position: absolute;
+    background:url(Image/gameOver.jpg) no-repeat;
+    background-size: contain;
+    background-position: center;
+    background-origin: content-box;
+    left: 130px;
+    display: none;
+}
+.leftboxs .hpbox{
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  position: absolute;
+  width: 40px;height: 100%;
+  right:0;
+  bottom:0;
+  position: absolute;
+}
+.leftboxs .hpbox h2{
+  font-size: 20px;
+  margin: 5px;
+  color: #fff;
+  border-radius: 700;
+}
+.leftboxs .hpbox .hp{
+  width: 100%;height: 100%;
+  margin-top: 10px;
+  background: yellowgreen;
+}
+
+.rightboxs .bulletbox{
+  width: 40px;height: 100%;
+  border: 2px solid #d35400;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+    border: 2px solid #9b59b6;
+  background: linear-gradient(to bottom, #4a235a, #1a0033);    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+
+}
+.rightboxs .bulletbox .bulletCount{
+  font-size: 20px;
+  margin: 5px;
+  color: #fff;
+  border-radius: 700;
+}
+.rightboxs .bulletbox .Ybox{
+  width: 70%;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+}
+.rightboxs .bulletbox img{
+  border: 3px solid yellow;
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+
+
+/* 스코어 보드 */
+.scoreBoard {
+  width: 300px;
+  height: 20rem;
+  margin-left: 50px;
+  /* position: absolute; */
+  background: #fff;
+  border-radius: 30px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: #000;
+}
+.scoreBoard .scoreTitle {
+  color: #000;
+  font-weight: 700;
+  font-size: 1.5em;
+  padding: 5px;
+  margin-bottom: 20px;
+
+}
+.scoreBoard .scoreRank {
+  width: 80%;
+  height: 70%;
+  background: #82f7ff;
+  border-radius: 30px;
+  padding: 5px;
+}
+
+  

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="MainPage.css">
+    <link rel="stylesheet" href="Login.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css">
     <title>Document</title>
 </head>
@@ -31,42 +31,34 @@
                         </li>
                     </ul>
                 </nav>
-                <div class="login logout">
+                <div class="login">
                     <ul>
                         <li>
-                            <a href="../LoginPage/Login.html">Login</a>
                         </li>
                     </ul>
                 </div>
-                
             </div>
         </div>
         <main>
-            <div class="maintitle">
-                <h1 class="title">Do You Want to <br>Play a Game With Us?</h1>
-                <h2 class="title2">Once You See it, You'll Never Forget it</h2>
-            </div>
-            <div class="gamelist">
-                <div class="gamelist-img">
-                    <ul>
-                        <li>
-                            <a href="../BrickBreaker/SubPage.html">
-                                <img src="./MainPageImg/벽돌부수기 이미지.jpg" alt="예시사진1">
-                            </a>
-                        </li>
-                        <li>
-                            <a href="../ShutingSubPage/SubPage.html">
-                                <img src="./MainPageImg/슈팅게임.png" alt="예시사진2">
-                            </a>
-                        </li>
-                        <li>
-                            <img src="./MainPageImg/gmPoster1.jpg" alt="예시사진3">
-                        </li>
-                        <li>
-                            <img src="./MainPageImg/gmPoster1.jpg" alt="예시사진4">
-                        </li>
-                    </ul>
+            <div class="login-main">
+                <div class="signin">
+                    <p>SIGN IN</p>
                 </div>
+                <section class="section1">
+                    <div class="login-id">
+                        <p>ID</p>
+                        <textarea name="id" id="id" cols="20" rows="1"></textarea>
+                    </div>
+                    <div class="login-password">
+                        <p>PASSWORD</p>
+                        <textarea name="id" id="id" cols="20" rows="1"></textarea>
+                    </div>
+                </section>
+                <section class="section2">
+                    <div class="login-btn">
+                        <a href="../MainPage/MainPage.html">LOGIN</a>
+                    </div>
+                </section>
             </div>
         </main>
         <!-- FOOTER -->

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Document</title>
+    <script
+      src="index.js"
+      defer
+    ></script>
+    <link
+      rel="stylesheet"
+      href="index.css"
+    />
+  </head>
+  <body>
+    <div class="wrapper">
+      <!-- HEADER -->
+      <div class="header">
+        <div class="header-main clearfix">
+          <a
+            href="../MainPage/MainPage.html"
+            class="header-logo"
+          >
+            logo
+          </a>
+          <nav class="main-nav">
+            <ul class="main-nav__items">
+              <li class="main-nav__item">
+                <a href="#">game1</a>
+              </li>
+              <li class="main-nav__item">
+                <a href="#">game2</a>
+              </li>
+              <li class="main-nav__item">
+                <a href="#">game3</a>
+              </li>
+              <li class="main-nav__item">
+                <a href="#">game4</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <!-- MAIN -->
+      <main class="main">
+
+        <div class="scoreBoard">
+          <p class="scoreTitle">Score Ranking</p>
+          <ul class="scoreRank"></ul>
+        </div>
+
+          <div class="rightboxs boxs">
+            
+            <div class="bulletbox">
+              <div class="Ybox"></div>
+              
+            </div>
+        <div class="leftboxs boxs">
+          <div class="hpbox">
+            <div class="hp"></div>
+            <h2>hp</h2>
+          </div>
+        </div>
+
+        <div class="gamebox">
+          <div class="box">
+            <div class="gameStart"></div>
+            <div class="gameOver"></div>
+          </div>
+          <canvas class="canvas"></canvas>
+        </div>
+
+        <div class="rightboxs boxs">
+          <div class="bulletbox">
+            <div class="Ybox"></div>
+          </div>
+        </div>
+
+        <div class="backdrop"></div>
+      </main>
+      <!-- FOOTER -->
+    </div>
+  </body>
+</html>
