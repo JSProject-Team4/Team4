@@ -133,6 +133,8 @@ canvas {
   /* font-family: 'Bagel Fat One', cursive; */
   color: #000;
   padding: 5px;
+  font-size: 1.5em;
+  font-weight: 700;
 }
 
 .wrap {
@@ -148,6 +150,8 @@ canvas {
   align-items: center;
 
   color: #000;
+  font-weight: 700;
+  font-size: 1.5em;
 
   width: 200px;
   margin-top: 20px;
@@ -164,6 +168,7 @@ canvas {
   flex-direction: row;
 
   margin-top: 30px;
+
 }
 
 .setting #pause {
@@ -171,7 +176,7 @@ canvas {
   border: 5px solid #d89797;
   border-radius: 30px;
 
-  font-size: 15px;
+  font-size: 1.5em;
   color: #000;
   font-weight: 700;
   padding: 10px;
@@ -194,7 +199,7 @@ canvas {
   border: 5px solid #d89797;
   border-radius: 30px;
 
-  font-size: 15px;
+  font-size: 1.5em;
   color: #000;
   font-weight: 700;
   padding: 10px;
