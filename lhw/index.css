@@ -1,5 +1,6 @@
 @import url(common.css);
-  .wrapper {
+/* @import url(../Common/Common.css); */
+  .wrapper {  
     /* background: #A9BCF5; */
     width: 100%;
     color: #fff;

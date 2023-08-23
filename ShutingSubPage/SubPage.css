@@ -119,7 +119,7 @@
 }
 .wrapper main .mainprofile .gmTitle .title {
     font-family: 'DungGeunMo';
-    font-size: 4.5em;
+    font-size: 6em;
 }
 .wrapper main .mainprofile .gamestart {
     font-family: 'DungGeunMo';
@@ -129,12 +129,13 @@
 .wrapper main .mainprofile .gamestart a {
     background: rgb(255, 255, 255);
     padding: 0 40px;
-    border-radius: 10px 10px;
+    border-radius: 20px 20px;
 }
 .wrapper main .mainprofile .gmprofile {
     width: 150px;
 }
 .wrapper main .mainprofile .gmprofile p {
+    font-size: 1.5em;
     padding: 0 0 20px 0; 
 }
 .wrapper main .mainImg {
