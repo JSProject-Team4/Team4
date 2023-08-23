@@ -1,7 +1,8 @@
 .wrapper{
     /* background: #A9BCF5; */
-    background-image: url(./12.png);
+    background: rgb(13, 39, 57);
     background-size: cover;
+
     width: 100%;
 
 }
@@ -48,7 +49,7 @@
     width: 400px;
     height: 450px;
   
-}
+
 .wrapper .main-body2{
     font-size: 10em;
     color: #fff;
@@ -66,10 +67,18 @@
         top: 50px;
 }
 .wrapper .main-body4 .main-body2-img2{
+
     width: 200px;
     height: 100px;
 
 }
+
+.wrapper .main-body3{
+    font-size: 10em;
+    color: #fff;
+
+}
+
 /*-------------------------main------------------------------------*/
 /* footer style */
 .wrapper .footer {
