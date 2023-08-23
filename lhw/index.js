@@ -9,7 +9,7 @@ const $gamebox = document.querySelector('.gamebox');
 const $bulletbox = document.querySelector('.Ybox');
 const $hp = document.querySelector('.hp');
 // 크기
-const WIDTH = 465;
+const WIDTH = 415;
 let HEIGHT = window.innerHeight - 78;
 
 // 최대 총알 갯수
@@ -18,7 +18,7 @@ const MAX_BULLETS = 10;
 canvas.width = WIDTH;
 canvas.height = HEIGHT;
 
-let bgImage, charecterImg, bulletImage, enemyImage, gameOverImage, itemImage;
+let bgImage, charecterImg, bulletImage, enemyImage, gameOverImage;
 let currentBullets = MAX_BULLETS;
 
 let gameLoopInterval; // 게임 루프의 타이머 변수
@@ -61,13 +61,14 @@ const uiEvent = () => {
       $bulletbox.appendChild($bullet);
     }
   }
+
   $createH2.textContent=`${currentBullets}`;
   $createH2.classList='bulletCount';
   $bulletbox.appendChild($createH2);
+
 };
 uiEvent();
 let bulletList = []; //총알들을 저장하는 리스트
-// 아이템 리스트 채워두기
 
 function Bullet() {
   this.x = 0;
@@ -87,50 +88,20 @@ function Bullet() {
   };
   this.checkHit = () => {
     for (let i = 0; i < enemyList.length; i++) {
-      const bulletLeft = this.x;
-      const bulletRight = this.x + bulletImage.width;
-      const bulletTop = this.y;
-      const bulletBottom = this.y + bulletImage.height;
-
-      const enemyLeft = enemyList[i].x;
-      const enemyRight = enemyList[i].x + enemyImage.width;
-      const enemyTop = enemyList[i].y;
-      const enemyBottom = enemyList[i].y + enemyImage.height;
       if (
-        bulletBottom > enemyTop &&
-        bulletTop < enemyBottom &&
-        bulletRight > enemyLeft &&
-        bulletLeft < enemyRight
+        this.y <= enemyList[i].y &&
+        this.x > enemyList[i].x &&
+        this.x <= enemyList[i].x + 40
       ) {
         score++;
         this.alive = false;
         enemyList.splice(i, 1);
-        uiEvent(); // UI 업데이트
-      }
-      if (itemList) {
-        for (let i = 0; i < itemList.length; i++) {
-          const bulletLeft = this.x;
-          const bulletRight = this.x + bulletImage.width;
-          const bulletTop = this.y;
-          const bulletBottom = this.y + bulletImage.height;
 
-          const itemLeft = itemList[i].x;
-          const itemRight = itemList[i].x + itemImage.width;
-          const itemTop = itemList[i].y;
-          const itemBottom = itemList[i].y + itemImage.height;
-          if (
-            bulletBottom > itemTop &&
-            bulletTop < itemBottom &&
-            bulletRight > itemLeft &&
-            bulletLeft < itemRight
-          ) {
-            this.alive = false;
-            itemList.splice(i, 1);
-            if (currentBullets < 30) {
-              currentBullets = currentBullets + 5;
-              uiEvent(); // UI 업데이트
-            }
-          }
+        // 에너미와 충돌 시 총알 추가
+        if (currentBullets < MAX_BULLETS) {
+          // 현재 총알 갯수가 최대 갯수 미만인 경우
+          currentBullets++;
+          uiEvent(); // UI 업데이트
         }
       }
     }
@@ -140,35 +111,18 @@ const rendomMaker = (MIN, MAX) => {
   let rendomNum = Math.floor(Math.random() * (MAX - MIN + 1));
   return rendomNum;
 };
-let itemList = [];
-function Item() {
-  this.x = 0;
-  this.y = 0;
-  this.init = () => {
-    this.x = rendomMaker(0, canvas.width - 48);
-    this.y = 0;
-
-    itemList.push(this);
-  };
-  this.update = () => {
-    this.y += 2;
-
-    const indexToRemove = itemList.indexOf(this);
-    if (this.y >= canvas.height - 48) {
-      if (indexToRemove !== -1) {
-        itemList.splice(indexToRemove, 1);
-      }
+const decreaseHp=()=> {
+  const heightValues = ['100%', '66%', '33%', '0']; // 높이 값 목록
+  const currentHpValueWithUnit = $hp.style.height + 'px';
+  const currentHpIndex = heightValues.indexOf(currentHpValueWithUnit);
+  console.log(currentHpIndex);
+  if (currentHpIndex !== -1) {
+    const newHpIndex = currentHpIndex - 1;
+    if (newHpIndex >= 0) {
+      $hp.style.height = heightValues[newHpIndex];
     }
-  };
+  }
 }
-
-let hpcount = 0;
-const decreaseHp = () => {
-  hpcount += 1;
-  console.log(hpcount);
-  const heightValues = ['100', '66%', '33%', '0'];
-  $hp.style.height = heightValues[hpcount];
-};
 let enemyList = [];
 function Enemy() {
   this.x = 0;
@@ -180,6 +134,7 @@ function Enemy() {
     enemyList.push(this);
   };
   this.update = () => {
+
     if (score <= 5) {
       this.y += 3;
     } else if (score <= 10) {
@@ -194,14 +149,11 @@ function Enemy() {
 
     const indexToRemove = enemyList.indexOf(this);
 
+
     if (this.y >= canvas.height - 48) {
-      if (indexToRemove !== -1) {
-        enemyList.splice(indexToRemove, 1);
-      }
       decreaseHp();
-      if (hpcount >= 3) {
-        gameOver = true;
-      }
+      
+      // gameOver = true;
     }
   };
 }
@@ -221,11 +173,6 @@ const loadImage = () => {
 
   gameOverImage = new Image();
   gameOverImage.src = 'Image/gameOver.jpg';
-
-  itemImage = new Image();
-  itemImage.src = 'Image/item.png';
-
-  gameOverImage.src = 'Image/gameOver.jpg';
 };
 const createBullet = () => {
   if (gameStatus) {
@@ -240,24 +187,9 @@ const createEnemy = () => {
   const interval = setInterval(() => {
     if (gameStatus) {
       let e = new Enemy();
-
       e.init();
     }
-  }, 1500);
-};
-const createItem = () => {
-  const initialItemCount = 5; // 초기 아이템 개수
-  for (let i = 0; i < initialItemCount; i++) {
-    let item = new Item();
-    item.init();
-  }
-
-  const interval = setInterval(() => {
-    if (gameStatus) {
-      let item = new Item();
-      item.init();
-    }
-  }, 5000);
+  }, 1000);
 };
 let keysDown = {};
 const keyboardListener = () => {
@@ -301,23 +233,12 @@ const update = () => {
   for (let i = 0; i < enemyList.length; i++) {
     enemyList[i].update();
   }
-  for (let i = 0; i < itemList.length; i++) {
-    itemList[i].update();
-  }
 };
 const rederHendler = () => {
   c.drawImage(bgImage, 0, 0, canvas.width, canvas.height);
   c.drawImage(charecterImg, spaceShipX, spaceShipY);
   // 스코어
   c.fillText(`Score : ${score}`, 20, 20);
-
-  c.fillStyle = 'white';
-  c.font = '20px Arial';
-
-  // 아이템 드랍
-  for (let i = 0; i < itemList.length; i++) {
-    c.drawImage(itemImage, itemList[i].x, itemList[i].y);
-  }
   c.fillStyle = 'white';
   c.font = '20px Arial';
   for (let i = 0; i < bulletList.length; i++) {
@@ -349,7 +270,6 @@ const restartGame = () => {
   spaceShipX = 160;
   bulletList = [];
   enemyList = [];
-  itemList = [];
 
   clearInterval(gameLoopInterval); // 기존의 게임 루프 중단
 
@@ -361,19 +281,13 @@ const restartGame = () => {
       $backDrop.style.display = 'block';
 
       $gameOver.addEventListener('click', () => {
-        hpcount = 0; // hp 초기화
-        $hp.style.height = '100%';
         uiEvent();
         // 숨겨진 UI들 표시
         $gameOver.style.display = 'none';
         $backDrop.style.display = 'none';
         gameStatus = true;
-        saveScore = score;
         restartGame();
         console.log('중복테스트');
-
-        // 스코어보드에 점수 추가
-        addScoreRankHandler();
       });
     } else {
       // 게임 루프 내용 실행
@@ -383,24 +297,9 @@ const restartGame = () => {
   }, 1000 / 60); // 60FPS에 가까운 속도로 실행하도록 설정
 };
 
-// 게임 스코어 보드(랭킹) div
-const $ScoreBoard = document.querySelector('.ScoreBoard');
-const $ScoreBoardUl = document.querySelector('.scoreRank');
-let saveScore;
-function addScoreRankHandler() {
-  if (saveScore > 0) {
-    const addLi = document.createElement('li');
-    const addT = document.createTextNode(`${saveScore} Point`);
-    addLi.appendChild(addT);
-
-    $ScoreBoardUl.appendChild(addLi);
-  }
-}
-
 // 게임 초기화 및 루프 시작
 loadImage();
 keyboardListener();
-createItem();
 createEnemy();
 startEvent();
 restartGame();

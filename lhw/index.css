@@ -17,7 +17,7 @@
     width: 100%;
     margin: 0 auto;
     position: fixed;
-  
+    font-family: 'NeoDunggeunmo';
     background: rgba(0, 0, 0, 0.5);
   
     display: flex;
@@ -52,6 +52,7 @@ body {
     background-position: center;
     background-origin: content-box;
     height: 100%;
+    
 
 }
 .main{
@@ -90,24 +91,25 @@ body {
 .gameStart{
     z-index: 11;
     width: 50%;
-    height: 100%;
+    height: 50%;
     position: absolute;
-    background:url(Image/gameStart.jpg) no-repeat;
+    background:url(Image/start.png) no-repeat;
     background-size: contain;
     background-position: center;
     background-origin: content-box;
-    left: 130px;
+    left: 105px;
+    margin-left: 30px;
 }
 .gameOver{
     z-index: 11;
     width: 50%;
     height: 100%;
     position: absolute;
-    background:url(Image/gameOver.jpg) no-repeat;
+    background:url(Image/gameo.png) no-repeat;
     background-size: contain;
     background-position: center;
     background-origin: content-box;
-    left: 130px;
+    left: 105px;
     display: none;
 }
 .leftboxs .hpbox{
@@ -122,6 +124,7 @@ body {
 }
 .leftboxs .hpbox h2{
   font-size: 20px;
+  font-family: 'NeoDunggeunmo';
   margin: 5px;
   color: #fff;
   border-radius: 700;
@@ -145,12 +148,6 @@ body {
   background: linear-gradient(to bottom, #4a235a, #1a0033);    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 
 }
-.rightboxs .bulletbox .bulletCount{
-  font-size: 20px;
-  margin: 5px;
-  color: #fff;
-  border-radius: 700;
-}
 .rightboxs .bulletbox .Ybox{
   width: 70%;
   display: flex;
@@ -162,38 +159,26 @@ body {
   width: 100%;
   margin-bottom: 5px;
 }
-
-
-
-/* 스코어 보드 */
-.scoreBoard {
-  width: 300px;
-  height: 20rem;
-  margin-left: 50px;
-  /* position: absolute; */
-  background: #fff;
-  border-radius: 30px;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  color: #000;
-}
-.scoreBoard .scoreTitle {
-  color: #000;
-  font-weight: 700;
-  font-size: 1.5em;
-  padding: 5px;
-  margin-bottom: 20px;
-
-}
-.scoreBoard .scoreRank {
-  width: 80%;
-  height: 70%;
-  background: #82f7ff;
-  border-radius: 30px;
-  padding: 5px;
-}
+@media screen and (max-height: 1080px) {
+  .main{
+      padding-top: 76px;
+      position: relative;
+      display: flex;
+  }
+    .gameStart{
+        width: 70%;
+        left: 50px;
+        bottom: 150px;
+    }
+    .gameOver{
+        width: 70%;
+        height: 100%;
+        bottom: 150px;
+        left: 50px;
+    }
+    .canvus{
+        width: 342PX;
+    }
+  }
 
   
