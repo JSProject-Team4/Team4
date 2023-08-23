@@ -239,6 +239,9 @@ function blockDelete() {
           target.status = 0;
           $score.textContent = +$score.textContent + 100;
           bSoundPlay();
+          if (+$score.textContent > 4100) {
+            gameOver();
+          }
         }
 
         $pauseScore.textContent = $score.textContent;
@@ -301,11 +304,13 @@ let isBig = false;
 function catchItemHandler() {
   if (isBig === false) {
     if (x < 30) {
-      x = 30;
+      x = 40;
       console.log('왼쪽벽으로부터 이동!');
     } else if (x > 520) {
       x = 520;
       console.log('오른벽으로부터 이동!');
+    } else if (y < 30) {
+      y = 40
     }
     isBig = true;
     ballRadius = 30;
