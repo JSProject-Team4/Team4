@@ -8,6 +8,7 @@ const $main = document.querySelector(".main");
 const $gamebox = document.querySelector(".gamebox");
 const $bulletbox = document.querySelector(".Ybox");
 const $hp = document.querySelector(".hp");
+const $reloadbox = document.querySelector('.reloadbox');
 // 크기
 const WIDTH = 465;
 let HEIGHT = window.innerHeight - 78;
@@ -27,7 +28,7 @@ let gameOver = false;
 let gameStatus = false;
 let score = 0;
 // 캐릭터 좌표
-let spaceShipX = 160;
+let spaceShipX = 210;
 let spaceShipY = HEIGHT - 64;
 // 컨버스 그리기
 
@@ -37,7 +38,18 @@ window.addEventListener("resize", () => {
   canvas.style.height = `${HEIGHT}px`; // 높이 설정
 });
 // 총알 hp UI
-const $createH2 = document.createElement("h2");
+// 총알 리로드 주기 
+
+const reloadboxcontraller=()=>{
+  if(gameOver){
+    $reloadbox.classList.remove("animate-reloadbox");
+
+  }
+  else{
+    $reloadbox.classList.add("animate-reloadbox");
+  }
+};
+
 
 const uiEvent = () => {
   function removeAllChildren(parent) {
@@ -46,14 +58,21 @@ const uiEvent = () => {
     }
   }
   if (!gameStatus) {
+    
+    removeAllChildren($bulletbox);
+    
     for (let i = 0; i < MAX_BULLETS; i++) {
       const $bullet = document.createElement("img");
       $bullet.src = "Image/bullet.png";
       $bullet.alt = "";
       $bulletbox.appendChild($bullet);
     }
-  } else if (gameStatus) {
+  }
+  if (!gameOver) {
     removeAllChildren($bulletbox);
+    if (currentBullets >= 15) {
+      currentBullets = 15;
+    }
     for (let i = 0; i < currentBullets; i++) {
       const $bullet = document.createElement("img");
       $bullet.src = "Image/bullet.png";
@@ -61,9 +80,6 @@ const uiEvent = () => {
       $bulletbox.appendChild($bullet);
     }
   }
-  $createH2.textContent = `${currentBullets}`;
-  $createH2.classList = "bulletCount";
-  $bulletbox.appendChild($createH2);
 };
 uiEvent();
 let bulletList = []; //총알들을 저장하는 리스트
@@ -110,7 +126,6 @@ function Bullet() {
       }
     }
     if (enemy2List) {
-      
       for (let i = 0; i < enemy2List.length; i++) {
         const bulletLeft = this.x;
         const bulletRight = this.x + bulletImage.width;
@@ -132,8 +147,8 @@ function Bullet() {
           console.log(hitcount);
           if (hitcount === 2) {
             enemy2List.splice(i, 1);
-            score=score+2;
-            hitcount=0;
+            score = score + 2;
+            hitcount = 0;
           }
 
           uiEvent(); // UI 업데이트
@@ -159,7 +174,7 @@ function Bullet() {
         ) {
           this.alive = false;
           itemList.splice(i, 1);
-          if (currentBullets < 30) {
+          if (currentBullets < 15) {
             currentBullets = currentBullets + 5;
             uiEvent(); // UI 업데이트
           }
@@ -215,12 +230,11 @@ const EnemyRetouch = (value) => {
     }
   } else if (score <= 25) {
     result = value === true ? 7 : 8;
-  }  else if (score <= 35) {
+  } else if (score <= 35) {
     result = value === true ? 7 : 9;
-  }    else if (score <= 45) {
+  } else if (score <= 45) {
     result = value === true ? 7 : 10;
-  }
-  else if (score <= 55) {
+  } else if (score <= 55) {
     result = value === true ? 8 : 10;
   } else {
     result = value === true ? 8 : 10;
@@ -346,13 +360,15 @@ const createItem = () => {
     }
   }, 5000);
 };
-setInterval(()=>{
-  if(gameStatus){
-    currentBullets++
+
+
+setInterval(() => {
+  if (gameStatus===true) {
+    reloadboxcontraller();
+    currentBullets++;
     uiEvent();
   }
-
-},3000);
+}, 5000);
 let keysDown = {};
 const keyboardListener = () => {
   document.addEventListener("keydown", (e) => {
@@ -372,10 +388,10 @@ const update = () => {
   }
   // 우주선 이동 관련
   if (39 in keysDown) {
-    spaceShipX += 5;
+    spaceShipX += 6;
   }
   if (37 in keysDown) {
-    spaceShipX -= 5;
+    spaceShipX -= 6;
   }
   // 우주선 탈출 방지
   if (spaceShipX <= -10) {
@@ -407,6 +423,7 @@ const rederHendler = () => {
   c.drawImage(charecterImg, spaceShipX, spaceShipY);
   // 스코어
   c.fillText(`Score : ${score}`, 20, 20);
+  c.fillText(`Bullet : ${currentBullets}`, 360, 20);
 
   c.fillStyle = "white";
   c.font = "20px Arial";
@@ -432,8 +449,10 @@ const rederHendler = () => {
 };
 
 const startEvent = () => {
+  
   const removeUi = () => {
     if (!gameOver) {
+      
       $backDrop.style.display = "none";
       $gameStart.style.display = "none";
       gameStatus = true;
@@ -447,7 +466,7 @@ const restartGame = () => {
   currentBullets = MAX_BULLETS;
   gameOver = false;
   score = 0;
-  spaceShipX = 160;
+  spaceShipX = 210;
   bulletList = [];
   enemyList = [];
   enemy2List = [];
@@ -501,6 +520,7 @@ const restartGame = () => {
 // }
 
 // 게임 초기화 및 루프 시작
+
 loadImage();
 keyboardListener();
 createEnemy();
