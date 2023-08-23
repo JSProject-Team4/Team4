@@ -1,3 +1,17 @@
+
+// 캔버스와 그래픽 컨텍스트 설정
+const canvas = document.querySelector('canvas');
+const c = canvas.getContext('2d');
+
+// HTML 요소 가져오기
+const $gameStart = document.querySelector('.gameStart');
+const $backDrop = document.querySelector('body .backdrop');
+const $gameOver = document.querySelector('.gameOver');
+const $gamebox = document.querySelector('.gamebox');
+const $bulletbox = document.querySelector('.Ybox');
+const $hp = document.querySelector('.hp');
+const $createH2 = document.createElement('h2');
+
 const canvas = document.querySelector('canvas');
 const c = canvas.getContext('2d');
 // html 태그 불러오기
@@ -43,6 +57,8 @@ const uiEvent = () => {
       parent.removeChild(parent.firstChild);
     }
   }
+  const $createH2 = document.createElement('h2');
+
   if (!gameStatus) {
     for (let i = 0; i < MAX_BULLETS; i++) {
       const $bullet = document.createElement('img');
@@ -59,6 +75,9 @@ const uiEvent = () => {
       $bulletbox.appendChild($bullet);
     }
   }
+  $createH2.classList = 'bulletCount';
+  $createH2.textContent = `${currentBullets}`;
+  $bulletbox.appendChild($createH2);
 };
 uiEvent();
 
@@ -176,7 +195,17 @@ function Enemy() {
     enemyList.push(this);
   };
   this.update = () => {
-    this.y += 3;
+    if (score <= 5) {
+      this.y += 3;
+    } else if (score <= 10) {
+      this.y += 4;
+    } else if (score <= 15) {
+      this.y += 5;
+    } else if (score <= 20) {
+      this.y += 6;
+    } else if (score <= 25) {
+      this.y += 7;
+    }
 
     const indexToRemove = enemyList.indexOf(this);
 
@@ -222,11 +251,27 @@ const createBullet = () => {
     }
   }
 };
+const enemyRetouch = (value) => {
+  if (score <= 5) {
+    let result = value === true ? 3 : 1500;
+  } else if (score <= 10) {
+    this.y += 4;
+  } else if (score <= 15) {
+    this.y += 5;
+  } else if (score <= 20) {
+    this.y += 6;
+  } else if (score <= 25) {
+    this.y += 7;
+  } else {
+    this.y += 4;
+  }
+  return value;
+};
 const createEnemy = () => {
   const interval = setInterval(() => {
     if (gameStatus) {
       let e = new Enemy();
-
+      console.log(enemyRetouch(true));
       e.init();
     }
   }, 1500);
