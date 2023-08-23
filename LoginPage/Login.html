@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="RankPage.css">
+    <link rel="stylesheet" href="Login.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css">
     <title>Document</title>
 </head>
@@ -18,10 +18,10 @@
                 <nav class="main-nav">
                     <ul class="main-nav__items ">
                         <li class="main-nav__item">
-                            <a href="#">game1</a>
+                            <a href="../BrickBreaker/SubPage.html">BrickBreaker</a>
                         </li>
                         <li class="main-nav__item">
-                            <a href="#">game2</a>
+                            <a href="../ShutingSubPage/SubPage.html">ShutingGame</a>
                         </li>
                         <li class="main-nav__item">
                             <a href="#">game3</a>
@@ -31,20 +31,34 @@
                         </li>
                     </ul>
                 </nav>
-                <div>
-                    <ul class="rank">
-                        <li class="main-nav__item">
-                            <a href="./RankPage.html">Rank</a>
+                <div class="login">
+                    <ul>
+                        <li>
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
         <main>
-            <div class="mainRank">
-                <div class="">
-                    <!-- 자바스크립트 사용해야할듯 -->
+            <div class="login-main">
+                <div class="signin">
+                    <p>SIGN IN</p>
                 </div>
+                <section class="section1">
+                    <div class="login-id">
+                        <p>ID</p>
+                        <textarea name="id" id="id" cols="20" rows="1"></textarea>
+                    </div>
+                    <div class="login-password">
+                        <p>PASSWORD</p>
+                        <textarea name="id" id="id" cols="20" rows="1"></textarea>
+                    </div>
+                </section>
+                <section class="section2">
+                    <div class="login-btn">
+                        <a href="../MainPage/MainPage.html">LOGIN</a>
+                    </div>
+                </section>
             </div>
         </main>
         <!-- FOOTER -->
