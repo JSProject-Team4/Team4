@@ -11,7 +11,7 @@ const $hp = document.querySelector(".hp");
 const $reloadbox = document.querySelector('.reloadbox');
 // 크기
 const WIDTH = 465;
-let HEIGHT = window.innerHeight - 78;
+let HEIGHT = window.innerHeight - 76;
 
 // 최대 총알 갯수
 const MAX_BULLETS = 10;
@@ -19,7 +19,7 @@ const MAX_BULLETS = 10;
 canvas.width = WIDTH;
 canvas.height = HEIGHT;
 
-let bgImage, charecterImg, bulletImage, enemyImage, gameOverImage, itemImage;
+let bgImage, charecterImg, bulletImage, enemyImage, gameOverImage, itemImage,gunImage;
 let currentBullets = MAX_BULLETS;
 
 let gameLoopInterval; // 게임 루프의 타이머 변수
@@ -29,7 +29,7 @@ let gameStatus = false;
 let score = 0;
 // 캐릭터 좌표
 let spaceShipX = 210;
-let spaceShipY = HEIGHT - 64;
+let spaceShipY = HEIGHT - 68;
 // 컨버스 그리기
 
 // 창화면시 게임 크기 조절
@@ -316,6 +316,9 @@ const loadImage = () => {
 
   enemy2Image = new Image();
   enemy2Image.src = "Image/enemy2.png";
+
+  gunImage= new Image();
+  gunImage.src = "Image/gun.png";
 };
 const createBullet = () => {
   if (gameStatus) {
@@ -335,10 +338,10 @@ const createEnemy = () => {
   }, 1500);
 };
 let enemy2List = [];
-
+let einterval;
 function createEnemy2() {
   if (gameStatus && !enemy2Spawned) {
-    const einterval = setInterval(() => {
+    einterval = setInterval(() => {
       if (gameStatus) {
         let e2 = new Enemy2(); // 새로운 적 객체 생성
         e2.init();
@@ -425,15 +428,15 @@ const rederHendler = () => {
   c.fillText(`Score : ${score}`, 20, 20);
   c.fillText(`Bullet : ${currentBullets}`, 360, 20);
 
-  c.fillStyle = "white";
-  c.font = "20px Arial";
+  c.fillStyle = "black";
+  c.font = "15px DungGeunMo";
 
   // 아이템 드랍
   for (let i = 0; i < itemList.length; i++) {
-    c.drawImage(itemImage, itemList[i].x, itemList[i].y);
+    c.drawImage(gunImage, itemList[i].x, itemList[i].y);
   }
   c.fillStyle = "white";
-  c.font = "20px Arial";
+  // c.font = "20px DOSIyagiMedium";
   // 총알 추가
   for (let i = 0; i < bulletList.length; i++) {
     if (bulletList[i].alive) {
@@ -468,6 +471,7 @@ const restartGame = () => {
   score = 0;
   spaceShipX = 210;
   bulletList = [];
+  clearInterval(einterval);
   enemyList = [];
   enemy2List = [];
   itemList = [];
