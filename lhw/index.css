@@ -1,5 +1,17 @@
 @import url(common.css);
 /* @import url(../Common/Common.css); */
+@font-face {
+  font-family: 'DOSIyagiMedium';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/DOSIyagiMedium.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'DungGeunMo';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
   .wrapper {  
     /* background: #A9BCF5; */
     width: 100%;
@@ -18,7 +30,7 @@
     margin: 0 auto;
     position: fixed;
     z-index: 999;
-    font-family: 'NeoDunggeunmo';
+    font-family: 'DungGeunMo';
     background: rgba(0, 0, 0, 0.5);
   
     display: flex;
