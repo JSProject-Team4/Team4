@@ -11,12 +11,13 @@
     width: 100%;
     top: 0;
     left: 0;
-    z-index: 999;
+    
   }
   .wrapper .header .header-main {
     width: 100%;
     margin: 0 auto;
     position: fixed;
+    z-index: 999;
     font-family: 'NeoDunggeunmo';
     background: rgba(0, 0, 0, 0.5);
   
