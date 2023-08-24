@@ -22,7 +22,9 @@
   
     background: rgba(0, 0, 0, 0.5);
     color: #fff;
-  
+    font-size: 1.1em;
+    font-weight: 500;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -42,7 +44,6 @@
   }
   .wrapper .header .header-main .main-nav .main-nav__item a {
     display: block;
-    font-weight: 700;
     padding: 0 30px;
   }
   .wrapper .header .header-main .login {
