@@ -140,10 +140,19 @@
 }
 .wrapper main .mainprofile .gmprofile {
     width: 150px;
+    background: #8dd1d3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 30px;
 }
 .wrapper main .mainprofile .gmprofile p {
     font-size: 1.5em;
-    padding: 0 0 20px 0; 
+    padding: 20px; 
+    background: #000;
+    border-radius: 30px;
+    margin: 5px;
 }
 .wrapper main .section1 .profile .mainImg {
     display: flex;
@@ -186,3 +195,23 @@
     align-content: center;
 }
 
+
+@media screen and (max-width: 1200px) {
+    .wrapper main .mainprofile .gmTitle .title {
+        font-size: 4em;
+    }
+  }
+@media screen and (max-width: 840px) {
+    .wrapper main .mainprofile .gmTitle .title {
+        font-size: 5em;
+    }
+    .wrapper main .section1 .profile .mainImg {
+        display: none;
+    }
+    .wrapper main .mainprofile .gmprofile p{
+        width: 300px;
+    }
+    .wrapper main .section1 .profile .mainprofile {
+        width: 100%;
+    }
+  }
