@@ -39,7 +39,7 @@
     display: flex;
     flex-direction: row;
     color: #fff;
-    font-size: 1.1em;
+    font-size: 1.5em;
     font-weight: 500;
   }
   .wrapper .header .header-main .main-nav .main-nav__item a {
@@ -143,7 +143,7 @@
     /* background: #8dd1d3; */
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: start;
     flex-direction: column;
     border-radius: 30px;
 }
