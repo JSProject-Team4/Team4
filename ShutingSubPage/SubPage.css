@@ -186,3 +186,23 @@
     align-content: center;
 }
 
+
+@media screen and (max-width: 1200px) {
+    .wrapper main .mainprofile .gmTitle .title {
+        font-size: 4em;
+    }
+  }
+@media screen and (max-width: 840px) {
+    .wrapper main .mainprofile .gmTitle .title {
+        font-size: 5em;
+    }
+    .wrapper main .section1 .profile .mainImg {
+        display: none;
+    }
+    .wrapper main .mainprofile .gmprofile p{
+        width: 300px;
+    }
+    .wrapper main .section1 .profile .mainprofile {
+        width: 100%;
+    }
+  }
