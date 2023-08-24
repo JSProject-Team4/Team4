@@ -1,4 +1,4 @@
-@import url(common.css);
+@import url(../Common/Common.css);
   .wrapper {
     /* background: #A9BCF5; */
     width: 100%;
@@ -75,8 +75,8 @@ body {
   position: relative;
 } */
 .box{
-  width: 415px;height: 100vh;
-  /* position: re; */
+  width: 415px;height: 90vh;
+  position: absolute;
   display: flex;
   flex-direction: column-reverse;
   align-items: center;
@@ -113,6 +113,16 @@ body {
     left: 130px;
     display: none;
 }
+.leftboxs .hpimg{
+  width: 50px;height: 50px;
+background: url(./Image/hpimg)no-repeat;
+background-size: contain;
+background-position: center;
+position: fixed;
+top: 76px;
+z-index: 11;
+}
+
 .leftboxs .hpbox{
   display: flex;
   flex-direction: column-reverse;
@@ -122,17 +132,22 @@ body {
   right:0;
   bottom:0;
   position: absolute;
+  background-color: #7CFC00;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+  border: 2px solid #000;
 }
-.leftboxs .hpbox h2{
-  font-size: 20px;
-  margin: 5px;
-  color: #fff;
-  border-radius: 700;
-}
+
 .leftboxs .hpbox .hp{
-  width: 100%;height: 100%;
-  margin-top: 10px;
-  background: yellowgreen;
+  z-index: 10;
+  width: 40px;
+  height: 100%;
+  background-color: #FF0000;
+  border-radius: 15px;
+  transition: width 0.3s ease-in-out;
 }
 
 .rightboxs .bulletbox{
