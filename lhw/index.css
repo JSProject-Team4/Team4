@@ -132,7 +132,7 @@ z-index: 11;
   right:0;
   bottom:0;
   position: absolute;
-  background-color: #7CFC00;
+  background-color: #FF0000;
   border-radius: 15px;
   display: flex;
   align-items: center;
@@ -145,7 +145,7 @@ z-index: 11;
   z-index: 10;
   width: 40px;
   height: 100%;
-  background-color: #FF0000;
+  background-color: #7CFC00;
   border-radius: 15px;
   transition: width 0.3s ease-in-out;
 }
