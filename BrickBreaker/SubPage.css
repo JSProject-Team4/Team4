@@ -2,7 +2,7 @@
 
 .wrapper{
     /* background: #A9BCF5; */
-    background: url(./SubPageImg/벽돌깨기배경.png) no-repeat;
+    background: url(./SubPageImg/바다.jpg) no-repeat;
     background-position: 0 0;
     background-size: cover;
     width: 100%;
@@ -140,7 +140,7 @@
 }
 .wrapper main .mainprofile .gmprofile {
     width: 150px;
-    background: #8dd1d3;
+    /* background: #8dd1d3; */
     display: flex;
     justify-content: center;
     align-items: center;
