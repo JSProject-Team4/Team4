@@ -62,7 +62,7 @@
     padding-bottom: 200px;
     display: flex;
     flex-direction: column;
-    text-shadow: 10px 6px 6px #6E6E6E;
+    text-shadow: 10px 6px 6px rgba(50, 50, 50, 0.7);
 }
 .wrapper main .maintitle .title {
     text-align: center;
