@@ -99,6 +99,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+    
 }
 .wrapper main .section1 .profile {
     width: 90%;
@@ -106,18 +107,19 @@
     flex-direction: row;
     align-content: center;
     justify-content: space-evenly;
-    flex-wrap: wrap;
-}
-.wrapper main .section1 .profile div {
+    
 }
 .wrapper main .section1 .profile .mainprofile {
-}
-.wrapper main .section1 .profile .mainprofile div {
-    width: 45%;
+    width: 55%;
     display: flex;
     flex-direction: column;
+    
     justify-content: center;
     align-content: center;
+
+}
+.wrapper main .section1 .profile .mainprofile div {
+    width: 60%;
 
     padding: 45px 0;
 }
@@ -142,13 +144,13 @@
     font-size: 1.5em;
     padding: 0 0 20px 0; 
 }
-.wrapper main .mainImg {
+.wrapper main .section1 .profile .mainImg {
     display: flex;
-    justify-content: right;
+    justify-content: end;
     align-content: center;
     width: 40%;
 }
-.wrapper main .mainImg ul li img{
+.wrapper main .section1 .profile .mainImg ul li img{
     width: 432px;
     height: 630px;
 }
