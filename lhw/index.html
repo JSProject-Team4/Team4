@@ -25,15 +25,18 @@
             href="../MainPage/MainPage.html"
             class="header-logo"
           >
-            logo
+            <img
+              src="../MainPage/MainPageImg/팩맨logo2.png"
+              alt="logo"
+            />
           </a>
           <nav class="main-nav">
             <ul class="main-nav__items">
               <li class="main-nav__item">
-                <a href="#">game1</a>
+                <a href="../BrickBreaker/SubPage.html">BrickBreaker</a>
               </li>
               <li class="main-nav__item">
-                <a href="#">game2</a>
+                <a href="../ShootingSubPage/SubPage.html">ShootingGame</a>
               </li>
               <li class="main-nav__item">
                 <a href="#">game3</a>
@@ -47,17 +50,29 @@
       </div>
       <!-- MAIN -->
       <main class="main">
-        <audio id="game-music" loop><source src="Image/gameMusic.mp3" type="audio/mpeg"></audio>
-          
-        <audio id="game-music2"><source src="Image/die.mp3" type="audio/mpeg"></audio>
-        
+        <audio
+          id="game-music"
+          loop
+        >
+          <source
+            src="Image/gameMusic.mp3"
+            type="audio/mpeg"
+          />
+        </audio>
+
+        <audio id="game-music2">
+          <source
+            src="Image/die.mp3"
+            type="audio/mpeg"
+          />
+        </audio>
+
         <!-- <div class="scoreBoard">
           <p class="scoreTitle">Score Ranking</p>
           <ul class="scoreRank"></ul>
         </div> -->
 
         <div class="leftboxs boxs">
-          
           <div class="hpbox">
             <div class="hpimg"></div>
             <div class="hp"></div>

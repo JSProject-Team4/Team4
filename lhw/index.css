@@ -1,4 +1,5 @@
 @import url(../Common/Common.css);
+@import url(./common.css);
   .wrapper {
     /* background: #A9BCF5; */
     width: 100%;
@@ -10,8 +11,6 @@
     width: 100%;
     top: 0;
     left: 0;
-    
-    position: fixed;
   }
   .wrapper .header .header-main {
     width: 100%;
@@ -25,20 +24,26 @@
     align-items: center;
   }
   .wrapper .header .header-main .header-logo {
-    padding: 30px;
-    color: #fff;
+    height: 76px;
+    padding: 0 10px;
+  }
+  .wrapper .header .header-main .header-logo img {
+    width: 76px;
+    height: 76px;
   }
   
   .wrapper .header .header-main .main-nav .main-nav__items {
     display: flex;
     flex-direction: row;
     color: #fff;
+    font-size: 1.5em;
+    font-weight: 500;
   }
   .wrapper .header .header-main .main-nav .main-nav__item a {
     display: block;
-    font-weight: 700;
     padding: 0 15px;
   }
+
   /* main */
 body {
     overflow: hidden;
