@@ -40,6 +40,7 @@ let spaceShipX = 210;
 let spaceShipY = HEIGHT - 68;
 // 컨버스 그리기
 
+let reloadAdd;
 // 창화면시 게임 크기 조절
 window.addEventListener("resize", () => {
   let HEIGHT = window.innerHeight - 78;
@@ -47,16 +48,18 @@ window.addEventListener("resize", () => {
 });
 // 총알 hp UI
 // 총알 리로드 주기 
-
-const reloadboxcontraller=()=>{
-  if(gameOver){
-    $reloadbox.classList.remove("animate-reloadbox");
-
-  }
-  else{
-    $reloadbox.classList.add("animate-reloadbox");
-  }
+const reloadStart=()=>{
+  $reloadbox.classList.add("animate-reloadbox");
+  reloadAdd=setInterval(() => {
+      currentBullets++;
+      uiEvent();
+  }, 5000);
 };
+const reloadEnd=()=>{
+  clearInterval(reloadAdd);
+  $reloadbox.classList.remove("animate-reloadbox");
+};
+
 
 
 const uiEvent = () => {
@@ -286,6 +289,7 @@ function Enemy() {
       decreaseHp();
       if (hpcount >= 3) {
         gameOver = true;
+        reloadEnd();
         pauseMusic();
       }
     }
@@ -312,6 +316,7 @@ function Enemy2() {
       decreaseHp();
       if (hpcount >= 3) {
         gameOver = true;
+        reloadEnd();
         pauseMusic();
       }
     }
@@ -393,13 +398,7 @@ const createItem = () => {
 };
 
 
-setInterval(() => {
-  if (gameStatus===true) {
-    reloadboxcontraller();
-    currentBullets++;
-    uiEvent();
-  }
-}, 5000);
+
 // 음악 재생
 function playMusic() {
   gameMusic.play();
@@ -502,6 +501,7 @@ const startEvent = () => {
   const removeUi = () => {
     if (!gameOver) {
       playMusic();
+      reloadStart();
       $backDrop.style.display = "none";
       $gameStart.style.display = "none";
       gameStatus = true;
@@ -542,11 +542,10 @@ const restartGame = () => {
         $backDrop.style.display = "none";
         gameStatus = true;
         playMusic();
+        reloadStart();
         saveScore = score;
         restartGame();
 
-        // 스코어보드에 점수 추가
-        // addScoreRankHandler();
       });
     } else {
       // 게임 루프 내용 실행
@@ -557,21 +556,6 @@ const restartGame = () => {
   }, 1000 / 60); // 60FPS에 가까운 속도로 실행하도록 설정
 };
 
-// // 게임 스코어 보드(랭킹) div
-// const $ScoreBoard = document.querySelector('.ScoreBoard');
-// const $ScoreBoardUl = document.querySelector('.scoreRank');
-// let saveScore;
-// function addScoreRankHandler() {
-//   if (saveScore > 0) {
-//     const addLi = document.createElement('li');
-//     const addT = document.createTextNode(`${saveScore} Point`);
-//     addLi.appendChild(addT);
-
-//     $ScoreBoardUl.appendChild(addLi);
-//   }
-// }
-
-// 게임 초기화 및 루프 시작
 
 loadImage();
 keyboardListener();

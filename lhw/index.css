@@ -169,7 +169,7 @@ z-index: 11;
 
 }
 .rightboxs .bulletbox .reloadbox {
-  height: 40px;
+  height: 25%;
   width: 35px;
   /* background-image: url('./Image/reroadAM.png'); */
   overflow: hidden;
