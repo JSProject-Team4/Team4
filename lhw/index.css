@@ -118,6 +118,25 @@ body {
     left: 130px;
     display: none;
 }
+.thunderbox {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+.thunderbox .thunder{
+  z-index: 11;
+  width: 470px;
+  height: 100%;
+  position: absolute;
+  background:url(Image/thunder.png) no-repeat;
+  /* background-size: contain; */
+  background-position: center;
+  background-origin: content-box;
+  /* left: 858px; */
+  display: none;
+  
+}
 .leftboxs .hpimg{
   width: 50px;height: 50px;
 background: url(./Image/hpimg)no-repeat;
@@ -251,4 +270,4 @@ top: 0;
 
 
 
-  
+
