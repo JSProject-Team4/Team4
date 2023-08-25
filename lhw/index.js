@@ -60,6 +60,26 @@ const reloadEnd=()=>{
   clearInterval(reloadAdd);
   $reloadbox.classList.remove("animate-reloadbox");
 };
+const specialMoveHandler=()=>{
+  // for(let i=0;i<enemyList.length;i++){
+  //   c.drawImage(boomImage, enemyList[i].x-160, enemyList[i].y-200);
+  //   enemyDie = true;
+  //   setTimeout(() => {
+  //     enemyDie = false;
+  //   }, 300);
+  // }
+  // for(let i=0;i<enemy2List.length;i++){
+  //   c.drawImage(boomImage, enemy2List[i].x-160, enemy2List[i].y-200);
+  //   enemyDie = true;
+  //   setTimeout(() => {
+  //     enemyDie = false;
+  //   }, 300);
+  // }
+  let Addscore=enemyList.length;
+  score+=Addscore;
+  enemy2List=[];
+  enemyList=[];
+};
 
 
 
@@ -170,12 +190,20 @@ function Bullet() {
           
           hitcount++;
           this.alive = false;
-          console.log(hitcount);
           if (hitcount === 2) {
             gameMusic2.play();
             enemy2List.splice(i, 1);
             score = score + 2;
             hitcount = 0;
+            enemyDie=true;
+            die = {
+              x: enemyLeft - 160,
+              y: enemyBottom - 200
+            };
+    
+            setTimeout(() => {
+              enemyDie = false;
+            }, 100);
           }
 
           uiEvent(); // UI 업데이트
@@ -296,6 +324,7 @@ function Enemy() {
         gameOver = true;
         reloadEnd();
         pauseMusic();
+        clearInterval(einterval2);
       }
     }
   };
@@ -323,11 +352,13 @@ function Enemy2() {
         gameOver = true;
         reloadEnd();
         pauseMusic();
+        clearInterval(einterval2);
+
       }
     }
   };
 }
-
+let einterval;
 const loadImage = () => {
   bgImage = new Image();
   bgImage.src = "Image/backgruond.jpg";
@@ -376,10 +407,10 @@ const createEnemy = () => {
   }, 1500);
 };
 let enemy2List = [];
-let einterval;
+let einterval2;
 function createEnemy2() {
   if (gameStatus && !enemy2Spawned) {
-    einterval = setInterval(() => {
+    einterval2 = setInterval(() => {
       if (gameStatus) {
         let e2 = new Enemy2(); // 새로운 적 객체 생성
         e2.init();
@@ -439,6 +470,9 @@ const keyboardListener = () => {
     if (e.keyCode === 32) {
       createBullet();
       uiEvent();
+    }
+    if(e.keyCode===16){
+      specialMoveHandler();
     }
   });
 };
@@ -506,10 +540,12 @@ const rederHendler = () => {
   } //적 추가
   for (let i = 0; i < enemyList.length; i++) {
     c.drawImage(enemyImage, enemyList[i].x, enemyList[i].y);
+
   }
   for (let i = 0; i < enemy2List.length; i++) {
     c.drawImage(enemy2Image, enemy2List[i].x, enemy2List[i].y); // 에너미2 이미지 그리기
   }
+
 };
 
 const startEvent = () => {
