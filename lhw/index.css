@@ -1,18 +1,5 @@
-@import url(common.css);
-/* @import url(../Common/Common.css); */
-@font-face {
-  font-family: 'DOSIyagiMedium';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/DOSIyagiMedium.woff2') format('woff2');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'DungGeunMo';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
-  .wrapper {  
+@import url(../Common/Common.css);
+  .wrapper {
     /* background: #A9BCF5; */
     width: 100%;
     color: #fff;
@@ -24,36 +11,32 @@
     top: 0;
     left: 0;
     
+    position: fixed;
   }
   .wrapper .header .header-main {
     width: 100%;
     margin: 0 auto;
     position: fixed;
     z-index: 999;
-    font-family: 'DungGeunMo';
+  
     background: rgba(0, 0, 0, 0.5);
   
     display: flex;
     align-items: center;
   }
   .wrapper .header .header-main .header-logo {
-    height: 76px;
-    padding: 0 10px;
-  }
-  .wrapper .header .header-main .header-logo img {
-    width: 76px;
-    height: 76px;
+    padding: 30px;
+    color: #fff;
   }
   
   .wrapper .header .header-main .main-nav .main-nav__items {
     display: flex;
     flex-direction: row;
     color: #fff;
-    font-size: 1.5em;
-    font-weight: 500;
   }
   .wrapper .header .header-main .main-nav .main-nav__item a {
     display: block;
+    font-weight: 700;
     padding: 0 15px;
   }
   /* main */
@@ -70,7 +53,6 @@ body {
     background-position: center;
     background-origin: content-box;
     height: 100%;
-    
 
 }
 .main{
@@ -78,8 +60,8 @@ body {
     position: relative;
     display: flex;
 }
-.canvus{
-    display: block;
+.canvas{
+    /* display: block; */
     position: relative; 
 }
 .boxs{
@@ -89,8 +71,11 @@ body {
   align-items: center;
   flex-direction: column;
 }
+/* .gamebox {
+  position: relative;
+} */
 .box{
-  width: 415px;height: 100vh;
+  width: 415px;height: 90vh;
   position: absolute;
   display: flex;
   flex-direction: column-reverse;
@@ -103,33 +88,41 @@ body {
     left: 0;
     width: 100%;
     height: 100vh;
-    z-index: 10;
     background: rgba(0, 0, 0, 0.60);
   }
 .gameStart{
     z-index: 11;
     width: 50%;
-    height: 50%;
+    height: 100%;
     position: absolute;
-    background:url(Image/start.png) no-repeat;
+    background:url(Image/gameStart.jpg) no-repeat;
     background-size: contain;
     background-position: center;
     background-origin: content-box;
-    left: 105px;
-    margin-left: 30px;
+    left: 130px;
 }
 .gameOver{
     z-index: 11;
     width: 50%;
     height: 100%;
     position: absolute;
-    background:url(Image/gameo.png) no-repeat;
+    background:url(Image/gameOver.jpg) no-repeat;
     background-size: contain;
     background-position: center;
     background-origin: content-box;
-    left: 105px;
+    left: 130px;
     display: none;
 }
+.leftboxs .hpimg{
+  width: 50px;height: 50px;
+background: url(./Image/hpimg)no-repeat;
+background-size: contain;
+background-position: center;
+position: fixed;
+top: 76px;
+z-index: 11;
+}
+
 .leftboxs .hpbox{
   display: flex;
   flex-direction: column-reverse;
@@ -139,18 +132,22 @@ body {
   right:0;
   bottom:0;
   position: absolute;
+  background-color: #FF0000;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+  border: 2px solid #000;
 }
-.leftboxs .hpbox h2{
-  font-size: 20px;
-  font-family: 'NeoDunggeunmo';
-  margin: 5px;
-  color: #fff;
-  border-radius: 700;
-}
+
 .leftboxs .hpbox .hp{
-  width: 100%;height: 100%;
-  margin-top: 10px;
-  background: yellowgreen;
+  z-index: 10;
+  width: 40px;
+  height: 100%;
+  background-color: #7CFC00;
+  border-radius: 15px;
+  transition: width 0.3s ease-in-out;
 }
 
 .rightboxs .bulletbox{
@@ -166,37 +163,101 @@ body {
   background: linear-gradient(to bottom, #4a235a, #1a0033);    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 
 }
+.rightboxs .bulletbox .reloadbox {
+  height: 40px;
+  width: 35px;
+  /* background-image: url('./Image/reroadAM.png'); */
+  overflow: hidden;
+}
+.rightboxs .bulletbox .reloadbox img {
+  width: 100%;
+  height: 240px;
+  /* margin-bottom: 10px; */
+}
+.rightboxs .PM {
+  /* background: red; */
+
+}
+.rightboxs .PM img {
+  width: 100%;
+
+  /* border: 3px solid yellow; */
+}
+
+.rightboxs .onTop {
+  position: inherit;
+  top: 0;
+}
+.rightboxs .onTop img {
+  width: 100%;
+  
+}
+
+/* 애니메이션을 트리거하는 클래스를 추가하면 높이가 자연스럽게 증가합니다 */
+.animate-reloadbox {
+  animation: animateHeight 5s linear infinite; /* 10초 동안 animateHeight 애니메이션을 반복 */
+}
+.rightboxs .bulletbox .bulletCount{
+  z-index: 10;
+  font-size: 20px;
+  margin: 5px;
+  color: #fff;
+  border-radius: 700;
+}
 .rightboxs .bulletbox .Ybox{
+  z-index: 10;
+  height: 70%;
   width: 70%;
   display: flex;
   flex-direction: column-reverse;
   align-items: center;
 }
-.rightboxs .bulletbox img{
+.rightboxs .bulletbox .Ybox img{
   border: 3px solid yellow;
   width: 100%;
   margin-bottom: 5px;
 }
-@media screen and (max-height: 1080px) {
-  .main{
-      padding-top: 76px;
-      position: relative;
-      display: flex;
+
+@keyframes animateHeight {
+  0%  {
+    height: 0%;
   }
-    .gameStart{
-        width: 70%;
-        left: 50px;
-        bottom: 150px;
-    }
-    .gameOver{
-        width: 70%;
-        height: 100%;
-        bottom: 150px;
-        left: 50px;
-    }
-    .canvus{
-        width: 342PX;
-    }
+  100% {
+    height: 25%;
   }
+}
+
+
+
+/* 스코어 보드 */
+.scoreBoard {
+  width: 300px;
+  height: 20rem;
+  margin-left: 50px;
+  /* position: absolute; */
+  background: #fff;
+  border-radius: 30px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: #000;
+}
+.scoreBoard .scoreTitle {
+  color: #000;
+  font-weight: 700;
+  font-size: 1.5em;
+  padding: 5px;
+  margin-bottom: 20px;
+
+}
+.scoreBoard .scoreRank {
+  width: 80%;
+  height: 70%;
+  background: #82f7ff;
+  border-radius: 30px;
+  padding: 5px;
+}
 
   

@@ -6,8 +6,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0"
     />
-    <link rel="shortcut icon" href="../MainPage/MainPageImg/팩맨.ico">
-    <title>슈팅게임</title>
+    <title>Document</title>
     <script
       src="index.js"
       defer
@@ -22,16 +21,19 @@
       <!-- HEADER -->
       <div class="header">
         <div class="header-main clearfix">
-          <a href="../MainPage/MainPage.html" class="header-logo">
-            <img src="../MainPage/MainPageImg/팩맨logo2.png" alt="logo">
+          <a
+            href="../MainPage/MainPage.html"
+            class="header-logo"
+          >
+            logo
           </a>
           <nav class="main-nav">
             <ul class="main-nav__items">
               <li class="main-nav__item">
-                <a href="../BrickBreaker/SubPage.html">BrickBreaker</a>
+                <a href="#">game1</a>
               </li>
               <li class="main-nav__item">
-                <a href="../ShootingSubPage/SubPage.html">ShootingGame</a>
+                <a href="#">game2</a>
               </li>
               <li class="main-nav__item">
                 <a href="#">game3</a>
@@ -45,33 +47,58 @@
       </div>
       <!-- MAIN -->
       <main class="main">
-          <div class="leftboxs boxs">
-            <div class="hpbox">
-              <div class="hp"></div>
-              <h2>hp</h2>
-            </div>
-          </div>
-
-          <div class="gamebox">
-            <div class="box">
-                <div class="gameStart"></div>
-                <div class="gameOver"></div>
-            </div>
-            <canvas class="canvas"></canvas>
-            
-          </div>
-          <div class="rightboxs boxs">
-            <div class="bulletbox">
-              <div class="Ybox">
-              </div>
-            </div>
-
-          </div>
+        <audio id="game-music" loop><source src="Image/gameMusic.mp3" type="audio/mpeg"></audio>
+          
+        <audio id="game-music2"><source src="Image/die.mp3" type="audio/mpeg"></audio>
         
+        <!-- <div class="scoreBoard">
+          <p class="scoreTitle">Score Ranking</p>
+          <ul class="scoreRank"></ul>
+        </div> -->
+
+        <div class="leftboxs boxs">
+          
+          <div class="hpbox">
+            <div class="hpimg"></div>
+            <div class="hp"></div>
+          </div>
+        </div>
+
+        <div class="gamebox">
+          <div class="box">
+            <div class="gameStart"></div>
+            <div class="gameOver"></div>
+          </div>
+          <canvas class="canvas"></canvas>
+        </div>
+
+        <div class="rightboxs boxs">
+          <div class="bulletbox">
+            <div class="Ybox"></div>
+            <div class="onTop">
+              <img
+                src="./Image/reroadPM.png"
+                alt=""
+              />
+            </div>
+            <div class="reloadbox">
+              <img
+                src="./Image/spring.png"
+                alt="재장전탄약"
+              />
+            </div>
+            <div class="PM">
+              <img
+                src="./Image/reroadAM.png"
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
+
         <div class="backdrop"></div>
       </main>
       <!-- FOOTER -->
-      
     </div>
   </body>
 </html>
