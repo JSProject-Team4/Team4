@@ -134,13 +134,15 @@ function Bullet() {
 
         enemyDie = true;
         die = {
-          x: enemyLeft - 160,
-          y: enemyBottom - 200
+          // x: enemyLeft - 160,
+          // y: enemyBottom - 200
+          x: enemyLeft,
+          y: enemyBottom
         };
 
         setTimeout(() => {
           enemyDie = false;
-        }, 100);
+        }, 1000);
 
 
         uiEvent(); // UI 업데이트
@@ -464,7 +466,28 @@ const update = () => {
     enemy2List[i].update();
   }
 };
+
+// gif 프레임
+let boomFrameIndex = 0; // 현재 폭발 이미지의 프레임 인덱스
+let lastBoomFrameTime = 0; // 마지막으로 폭발 이미지의 프레임이 업데이트된 시간
+const boomFrameDuration = 100; // 각 프레임의 지속시간 (밀리초)
+const numFrames = 29; // 프레임 개수
+
+const updateBoomFrame = (timestamp) => {
+  const deltaTime = timestamp - lastBoomFrameTime;
+
+  if (deltaTime >= boomFrameDuration) {
+    boomFrameIndex = (boomFrameIndex + 1) % numFrames;
+    lastBoomFrameTime = timestamp;
+  }
+};
+
+// gif 프레임 END
+
+
+
 const rederHendler = () => {
+  c.clearRect(0, 0, canvas.width, canvas.height); // 캔버스 지우기
   c.drawImage(bgImage, 0, 0, canvas.width, canvas.height);
   c.drawImage(charecterImg, spaceShipX, spaceShipY);
   // 스코어
@@ -474,10 +497,7 @@ const rederHendler = () => {
   c.fillStyle = "black";
   c.font = "15px DungGeunMo";
 
-  if (enemyDie === true) {
-    c.drawImage(boomImage, die.x, die.y);
-  }
-
+  
   // 아이템 드랍
   for (let i = 0; i < itemList.length; i++) {
     c.drawImage(gunImage, itemList[i].x, itemList[i].y);
@@ -495,6 +515,25 @@ const rederHendler = () => {
   }
   for (let i = 0; i < enemy2List.length; i++) {
     c.drawImage(enemy2Image, enemy2List[i].x, enemy2List[i].y); // 에너미2 이미지 그리기
+  }
+
+  if (enemyDie === true) {
+    updateBoomFrame(Date.now()); // 폭발 이미지 프레임 업데이트
+    const frameWidth = boomImage.width;
+    const frameHeight = boomImage.height; // 프레임의 높이는 이미지의 높이와 같습니다.
+    const offsetX = (frameWidth - enemyImage.width) / 2; // 적 이미지와 폭발 이미지의 가로 중심 차이 계산
+    const offsetY = (frameHeight - enemyImage.height) / 2; // 적 이미지와 폭발 이미지의 세로 중심 차이 계산
+    c.drawImage(
+      boomImage,
+      boomFrameIndex * frameWidth,
+      0,
+      frameWidth,
+      frameHeight,
+      die.x - offsetX, // 수정된 x 좌표
+      die.y - offsetY, // 수정된 y 좌표
+      frameWidth,
+      frameHeight
+    );
   }
 };
 
