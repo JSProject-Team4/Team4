@@ -1,18 +1,21 @@
-const canvas = document.querySelector('canvas');
-const c = canvas.getContext('2d');
+const canvas = document.querySelector("canvas");
+const c = canvas.getContext("2d");
 // html 태그 불러오기
-const $gameStart = document.querySelector('.gameStart');
-const $backDrop = document.querySelector('body .backdrop');
-const $gameOver = document.querySelector('.gameOver');
-const $main = document.querySelector('.main');
-const $gamebox = document.querySelector('.gamebox');
-const $bulletbox = document.querySelector('.Ybox');
-const $hp = document.querySelector('.hp');
+const $gameStart = document.querySelector(".gameStart");
+const $backDrop = document.querySelector("body .backdrop");
+const $gameOver = document.querySelector(".gameOver");
+const $main = document.querySelector(".main");
+const $gamebox = document.querySelector(".gamebox");
+const $bulletbox = document.querySelector(".Ybox");
+const $hp = document.querySelector(".hp");
 const $reloadbox = document.querySelector('.reloadbox');
-const gameMusic = document.getElementById('game-music');
-const gameMusic2 = document.getElementById('game-music2');
+const gameMusic = document.getElementById("game-music");
+const gameMusic2 = document.getElementById("game-music2");
 let enemyDie = false;
-let die;
+let die = {
+  x: 0,
+  y: 0
+};
 
 // 크기
 const WIDTH = 465;
@@ -24,13 +27,7 @@ const MAX_BULLETS = 10;
 canvas.width = WIDTH;
 canvas.height = HEIGHT;
 
-let bgImage,
-  charecterImg,
-  bulletImage,
-  enemyImage,
-  gameOverImage,
-  itemImage,
-  gunImage;
+let bgImage, charecterImg, bulletImage, enemyImage, gameOverImage, itemImage,gunImage;
 let currentBullets = MAX_BULLETS;
 
 let gameLoopInterval; // 게임 루프의 타이머 변수
@@ -44,20 +41,23 @@ let spaceShipY = HEIGHT - 68;
 // 컨버스 그리기
 
 // 창화면시 게임 크기 조절
-window.addEventListener('resize', () => {
+window.addEventListener("resize", () => {
   let HEIGHT = window.innerHeight - 78;
   canvas.style.height = `${HEIGHT}px`; // 높이 설정
 });
 // 총알 hp UI
-// 총알 리로드 주기
+// 총알 리로드 주기 
 
-const reloadboxcontraller = () => {
-  if (gameOver) {
-    $reloadbox.classList.remove('animate-reloadbox');
-  } else {
-    $reloadbox.classList.add('animate-reloadbox');
+const reloadboxcontraller=()=>{
+  if(gameOver){
+    $reloadbox.classList.remove("animate-reloadbox");
+
+  }
+  else{
+    $reloadbox.classList.add("animate-reloadbox");
   }
 };
+
 
 const uiEvent = () => {
   function removeAllChildren(parent) {
@@ -66,12 +66,13 @@ const uiEvent = () => {
     }
   }
   if (!gameStatus) {
+    
     removeAllChildren($bulletbox);
-
+    
     for (let i = 0; i < MAX_BULLETS; i++) {
-      const $bullet = document.createElement('img');
-      $bullet.src = 'Image/bullet.png';
-      $bullet.alt = '';
+      const $bullet = document.createElement("img");
+      $bullet.src = "Image/bullet.png";
+      $bullet.alt = "";
       $bulletbox.appendChild($bullet);
     }
   }
@@ -81,9 +82,9 @@ const uiEvent = () => {
       currentBullets = 15;
     }
     for (let i = 0; i < currentBullets; i++) {
-      const $bullet = document.createElement('img');
-      $bullet.src = 'Image/bullet.png';
-      $bullet.alt = '';
+      const $bullet = document.createElement("img");
+      $bullet.src = "Image/bullet.png";
+      $bullet.alt = "";
       $bulletbox.appendChild($bullet);
     }
   }
@@ -131,20 +132,18 @@ function Bullet() {
         this.alive = false;
         enemyList.splice(i, 1);
 
-
         enemyDie = true;
         die = {
-          x: enemyLeft,
-          y: enemyTop,
-          width: enemyImage.width,
-          height: enemyImage.height,
+          x: enemyLeft - 160,
+          y: enemyBottom - 200
         };
+
         setTimeout(() => {
           enemyDie = false;
-        }, 1000);
+        }, 100);
+
 
         uiEvent(); // UI 업데이트
-        // 여기임
       }
     }
     if (enemy2List) {
@@ -164,6 +163,7 @@ function Bullet() {
           bulletRight > enemyLeft &&
           bulletLeft < enemyRight
         ) {
+          
           hitcount++;
           this.alive = false;
           console.log(hitcount);
@@ -235,7 +235,7 @@ function Item() {
 let hpcount = 0;
 const decreaseHp = () => {
   hpcount += 1;
-  const heightValues = ['100', '66%', '33%', '0'];
+  const heightValues = ["100", "66%", "33%", "0"];
   $hp.style.height = heightValues[hpcount];
 };
 const EnemyRetouch = (value) => {
@@ -320,33 +320,33 @@ function Enemy2() {
 
 const loadImage = () => {
   bgImage = new Image();
-  bgImage.src = 'Image/backgruond.jpg';
+  bgImage.src = "Image/backgruond.jpg";
 
   charecterImg = new Image();
-  charecterImg.src = 'Image/spaceShip.png';
+  charecterImg.src = "Image/spaceShip.png";
 
   bulletImage = new Image();
-  bulletImage.src = 'Image/bullet.png';
+  bulletImage.src = "Image/bullet.png";
 
   enemyImage = new Image();
-  enemyImage.src = 'Image/enemy.png';
+  enemyImage.src = "Image/enemy.png";
 
   gameOverImage = new Image();
-  gameOverImage.src = 'Image/gameOver.jpg';
+  gameOverImage.src = "Image/gameOver.jpg";
 
   itemImage = new Image();
-  itemImage.src = 'Image/item.png';
+  itemImage.src = "Image/item.png";
 
-  gameOverImage.src = 'Image/gameOver.jpg';
+  gameOverImage.src = "Image/gameOver.jpg";
 
   enemy2Image = new Image();
-  enemy2Image.src = 'Image/enemy2.png';
+  enemy2Image.src = "Image/enemy2.png";
 
-  gunImage = new Image();
-  gunImage.src = 'Image/gun.png';
-
-  boomImage = new Image();
-  booImage.src = 'Image/--unscreen.gif';
+  gunImage= new Image();
+  gunImage.src = "Image/gun.png";
+  
+  boomImage= new Image();
+  boomImage.src = "Image/unscreen.gif";
 };
 const createBullet = () => {
   if (gameStatus) {
@@ -392,8 +392,9 @@ const createItem = () => {
   }, 5000);
 };
 
+
 setInterval(() => {
-  if (gameStatus === true) {
+  if (gameStatus===true) {
     reloadboxcontraller();
     currentBullets++;
     uiEvent();
@@ -416,10 +417,10 @@ function stopMusic() {
 }
 let keysDown = {};
 const keyboardListener = () => {
-  document.addEventListener('keydown', (e) => {
+  document.addEventListener("keydown", (e) => {
     keysDown[e.keyCode] = true;
   });
-  document.addEventListener('keyup', (e) => {
+  document.addEventListener("keyup", (e) => {
     delete keysDown[e.keyCode];
     if (e.keyCode === 32) {
       createBullet();
@@ -470,18 +471,18 @@ const rederHendler = () => {
   c.fillText(`Score : ${score}`, 20, 20);
   c.fillText(`Bullet : ${currentBullets}`, 360, 20);
 
-  c.fillStyle = 'black';
-  c.font = '15px DungGeunMo';
+  c.fillStyle = "black";
+  c.font = "15px DungGeunMo";
 
   if (enemyDie === true) {
-    c.drawImage(boomImage, die.x, die.y, die.width, die.height);
+    c.drawImage(boomImage, die.x, die.y);
   }
 
   // 아이템 드랍
   for (let i = 0; i < itemList.length; i++) {
     c.drawImage(gunImage, itemList[i].x, itemList[i].y);
   }
-  c.fillStyle = 'white';
+  c.fillStyle = "white";
   // c.font = "20px DOSIyagiMedium";
   // 총알 추가
   for (let i = 0; i < bulletList.length; i++) {
@@ -501,13 +502,13 @@ const startEvent = () => {
   const removeUi = () => {
     if (!gameOver) {
       playMusic();
-      $backDrop.style.display = 'none';
-      $gameStart.style.display = 'none';
+      $backDrop.style.display = "none";
+      $gameStart.style.display = "none";
       gameStatus = true;
     }
   };
-  $backDrop.addEventListener('click', () => removeUi());
-  $gameStart.addEventListener('click', () => removeUi());
+  $backDrop.addEventListener("click", () => removeUi());
+  $gameStart.addEventListener("click", () => removeUi());
 };
 const restartGame = () => {
   // 초기화 작업
@@ -520,7 +521,7 @@ const restartGame = () => {
   enemyList = [];
   enemy2List = [];
   itemList = [];
-
+  
   enemy2Spawned = false; // enemy2Spawned 변수 초기화
 
   clearInterval(gameLoopInterval); // 기존의 게임 루프 중단
@@ -529,16 +530,16 @@ const restartGame = () => {
   gameLoopInterval = setInterval(() => {
     if (gameOver) {
       clearInterval(gameLoopInterval); // 게임 종료 시 타이머 중단
-      $gameOver.style.display = 'block';
-      $backDrop.style.display = 'block';
+      $gameOver.style.display = "block";
+      $backDrop.style.display = "block";
 
-      $gameOver.addEventListener('click', () => {
+      $gameOver.addEventListener("click", () => {
         hpcount = 0; // hp 초기화
-        $hp.style.height = '100%';
+        $hp.style.height = "100%";
         uiEvent();
         // 숨겨진 UI들 표시
-        $gameOver.style.display = 'none';
-        $backDrop.style.display = 'none';
+        $gameOver.style.display = "none";
+        $backDrop.style.display = "none";
         gameStatus = true;
         playMusic();
         saveScore = score;
