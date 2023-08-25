@@ -473,8 +473,8 @@ const rederHendler = () => {
   c.fillStyle = 'black';
   c.font = '15px DungGeunMo';
 
-  if (enemyDie) {
-    c.drawImage(boomImage, 0, 0, die.width, die.height);
+  if (enemyDie === true) {
+    c.drawImage(boomImage, die.x, die.y, die.width, die.height);
   }
 
   // 아이템 드랍
