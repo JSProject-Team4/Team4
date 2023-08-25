@@ -130,6 +130,18 @@ body {
     left: 105px;
     display: none;
 }
+.thunder{
+  z-index: 10;
+  width: 50%;
+  height: 100%;
+  position: absolute;
+  background:url(Image/thunder.png) no-repeat;
+  background-size: contain;
+  background-position: center;
+  background-origin: content-box;
+  left: 105px;
+  display: none;
+}
 .leftboxs .hpbox{
   display: flex;
   flex-direction: column-reverse;
