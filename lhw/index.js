@@ -1,16 +1,21 @@
-const canvas = document.querySelector('canvas');
-const c = canvas.getContext('2d');
+const canvas = document.querySelector("canvas");
+const c = canvas.getContext("2d");
 // html 태그 불러오기
-const $gameStart = document.querySelector('.gameStart');
-const $backDrop = document.querySelector('body .backdrop');
-const $gameOver = document.querySelector('.gameOver');
-const $main = document.querySelector('.main');
-const $gamebox = document.querySelector('.gamebox');
-const $bulletbox = document.querySelector('.Ybox');
-const $hp = document.querySelector('.hp');
+const $gameStart = document.querySelector(".gameStart");
+const $backDrop = document.querySelector("body .backdrop");
+const $gameOver = document.querySelector(".gameOver");
+const $main = document.querySelector(".main");
+const $gamebox = document.querySelector(".gamebox");
+const $bulletbox = document.querySelector(".Ybox");
+const $hp = document.querySelector(".hp");
 const $reloadbox = document.querySelector('.reloadbox');
-const gameMusic = document.getElementById('game-music');
-const gameMusic2 = document.getElementById('game-music2');
+const gameMusic = document.getElementById("game-music");
+const gameMusic2 = document.getElementById("game-music2");
+let enemyDie = false;
+let die = {
+  x: 0,
+  y: 0
+};
 
 // 크기
 const WIDTH = 465;
@@ -22,13 +27,7 @@ const MAX_BULLETS = 10;
 canvas.width = WIDTH;
 canvas.height = HEIGHT;
 
-let bgImage,
-  charecterImg,
-  bulletImage,
-  enemyImage,
-  gameOverImage,
-  itemImage,
-  gunImage;
+let bgImage, charecterImg, bulletImage, enemyImage, gameOverImage, itemImage,gunImage;
 let currentBullets = MAX_BULLETS;
 
 let gameLoopInterval; // 게임 루프의 타이머 변수
@@ -40,6 +39,7 @@ let score = 0;
 let spaceShipX = 210;
 let spaceShipY = HEIGHT - 68;
 // 컨버스 그리기
+
 let reloadHandler;
 // 창화면시 게임 크기 조절
 window.addEventListener('resize', () => {
@@ -63,11 +63,6 @@ const reloadEnd=()=>{
     console.log('test');
 
 }
-
-
-
-
-
 const uiEvent = () => {
   function removeAllChildren(parent) {
     while (parent.firstChild) {
@@ -94,7 +89,6 @@ const uiEvent = () => {
       $bullet.alt = '';
       $bulletbox.appendChild($bullet);
     }
-    
   }
 };
 uiEvent();
@@ -139,6 +133,17 @@ function Bullet() {
         score++;
         this.alive = false;
         enemyList.splice(i, 1);
+
+
+        enemyDie = true;
+        die = {
+          x: enemyLeft - 160,
+          y: enemyBottom - 200
+        };
+
+        setTimeout(() => {
+          enemyDie = false;
+        }, 100);
         uiEvent(); // UI 업데이트
       }
     }
@@ -318,30 +323,34 @@ function Enemy2() {
 
 const loadImage = () => {
   bgImage = new Image();
-  bgImage.src = 'Image/backgruond.jpg';
+
+  bgImage.src = "Image/backgruond.jpg";
 
   charecterImg = new Image();
-  charecterImg.src = 'Image/spaceShip.png';
+  charecterImg.src = "Image/spaceShip.png";
 
   bulletImage = new Image();
-  bulletImage.src = 'Image/bullet.png';
+  bulletImage.src = "Image/bullet.png";
 
   enemyImage = new Image();
-  enemyImage.src = 'Image/enemy.png';
+  enemyImage.src = "Image/enemy.png";
 
   gameOverImage = new Image();
-  gameOverImage.src = 'Image/gameOver.jpg';
+  gameOverImage.src = "Image/gameOver.jpg";
 
   itemImage = new Image();
-  itemImage.src = 'Image/item.png';
+  itemImage.src = "Image/item.png";
 
-  gameOverImage.src = 'Image/gameOver.jpg';
+  gameOverImage.src = "Image/gameOver.jpg";
 
   enemy2Image = new Image();
-  enemy2Image.src = 'Image/enemy2.png';
+  enemy2Image.src = "Image/enemy2.png";
 
-  gunImage = new Image();
-  gunImage.src = 'Image/gun.png';
+  gunImage= new Image();
+  gunImage.src = "Image/gun.png";
+  
+  boomImage= new Image();
+  boomImage.src = "Image/unscreen.gif";
 };
 const createBullet = () => {
   if (gameStatus) {
@@ -520,7 +529,6 @@ const restartGame = () => {
   enemyList = [];
   enemy2List = [];
   itemList = [];
-
   enemy2Spawned = false; // enemy2Spawned 변수 초기화
 
   clearInterval(gameLoopInterval); // 기존의 게임 루프 중단
@@ -546,13 +554,11 @@ const restartGame = () => {
       });
     } else {
       // 게임 루프 내용 실행
-
       update();
       rederHendler();
     }
   }, 1000 / 60); // 60FPS에 가까운 속도로 실행하도록 설정
 };
-
 loadImage();
 keyboardListener();
 createEnemy();
