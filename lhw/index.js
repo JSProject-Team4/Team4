@@ -40,51 +40,53 @@ let spaceShipX = 210;
 let spaceShipY = HEIGHT - 68;
 // 컨버스 그리기
 
+let reloadHandler;
 // 창화면시 게임 크기 조절
-window.addEventListener("resize", () => {
+window.addEventListener('resize', () => {
   let HEIGHT = window.innerHeight - 78;
   canvas.style.height = `${HEIGHT}px`; // 높이 설정
 });
 // 총알 hp UI
-// 총알 리로드 주기 
+// 총알 리로드 주기
 
-const reloadboxcontraller=()=>{
-  if(gameOver){
-    $reloadbox.classList.remove("animate-reloadbox");
-
-  }
-  else{
-    $reloadbox.classList.add("animate-reloadbox");
-  }
+const reloadStart = () => {
+  $reloadbox.classList.add('animate-reloadbox');
+  reloadHandler = setInterval(() => {
+    currentBullets++;
+    uiEvent();
+  }, 5000);
 };
 
+const reloadEnd=()=>{
+    $reloadbox.classList.remove('animate-reloadbox');
+    clearInterval(reloadHandler);
+    console.log('test');
 
+}
 const uiEvent = () => {
   function removeAllChildren(parent) {
     while (parent.firstChild) {
       parent.removeChild(parent.firstChild);
     }
   }
-  if (!gameStatus) {
-    
+  if (gameStatus !== true) {
     removeAllChildren($bulletbox);
-    
+
     for (let i = 0; i < MAX_BULLETS; i++) {
-      const $bullet = document.createElement("img");
-      $bullet.src = "Image/bullet.png";
-      $bullet.alt = "";
+      const $bullet = document.createElement('img');
+      $bullet.src = 'Image/bullet.png';
+      $bullet.alt = '';
       $bulletbox.appendChild($bullet);
     }
-  }
-  if (!gameOver) {
+  } else if (gameStatus === true) {
     removeAllChildren($bulletbox);
     if (currentBullets >= 15) {
       currentBullets = 15;
     }
     for (let i = 0; i < currentBullets; i++) {
-      const $bullet = document.createElement("img");
-      $bullet.src = "Image/bullet.png";
-      $bullet.alt = "";
+      const $bullet = document.createElement('img');
+      $bullet.src = 'Image/bullet.png';
+      $bullet.alt = '';
       $bulletbox.appendChild($bullet);
     }
   }
@@ -132,6 +134,7 @@ function Bullet() {
         this.alive = false;
         enemyList.splice(i, 1);
 
+
         enemyDie = true;
         die = {
           x: enemyLeft - 160,
@@ -141,8 +144,6 @@ function Bullet() {
         setTimeout(() => {
           enemyDie = false;
         }, 100);
-
-
         uiEvent(); // UI 업데이트
       }
     }
@@ -163,7 +164,6 @@ function Bullet() {
           bulletRight > enemyLeft &&
           bulletLeft < enemyRight
         ) {
-          
           hitcount++;
           this.alive = false;
           console.log(hitcount);
@@ -235,7 +235,7 @@ function Item() {
 let hpcount = 0;
 const decreaseHp = () => {
   hpcount += 1;
-  const heightValues = ["100", "66%", "33%", "0"];
+  const heightValues = ['100', '66%', '33%', '0'];
   $hp.style.height = heightValues[hpcount];
 };
 const EnemyRetouch = (value) => {
@@ -249,6 +249,7 @@ const EnemyRetouch = (value) => {
     result = value === true ? 6 : 8;
     if (!enemy2Spawned) {
       createEnemy2();
+      createEnemy3();
       enemy2Spawned = true; // createEnemy2() 함수가 실행되었음을 표시
     }
   } else if (score <= 25) {
@@ -286,6 +287,7 @@ function Enemy() {
       decreaseHp();
       if (hpcount >= 3) {
         gameOver = true;
+        reloadEnd();
         pauseMusic();
       }
     }
@@ -313,6 +315,7 @@ function Enemy2() {
       if (hpcount >= 3) {
         gameOver = true;
         pauseMusic();
+        reloadEnd();
       }
     }
   };
@@ -320,6 +323,7 @@ function Enemy2() {
 
 const loadImage = () => {
   bgImage = new Image();
+
   bgImage.src = "Image/backgruond.jpg";
 
   charecterImg = new Image();
@@ -365,6 +369,14 @@ const createEnemy = () => {
     }
   }, 1500);
 };
+const createEnemy3 = () => {
+  const einterval = setInterval(() => {
+    if (gameStatus) {
+      let e1 = new Enemy();
+      e1.init();
+    }
+  }, 3000);
+};
 let enemy2List = [];
 let einterval;
 function createEnemy2() {
@@ -392,14 +404,6 @@ const createItem = () => {
   }, 5000);
 };
 
-
-setInterval(() => {
-  if (gameStatus===true) {
-    reloadboxcontraller();
-    currentBullets++;
-    uiEvent();
-  }
-}, 5000);
 // 음악 재생
 function playMusic() {
   gameMusic.play();
@@ -417,14 +421,22 @@ function stopMusic() {
 }
 let keysDown = {};
 const keyboardListener = () => {
-  document.addEventListener("keydown", (e) => {
+  document.addEventListener('keydown', (e) => {
     keysDown[e.keyCode] = true;
   });
-  document.addEventListener("keyup", (e) => {
+  document.addEventListener('keyup', (e) => {
     delete keysDown[e.keyCode];
     if (e.keyCode === 32) {
       createBullet();
       uiEvent();
+    }
+    if(e.keyCode===16){
+      for(let i=0;i<enemyList.length;i++){
+        console.log(enemyList[i].x);
+        console.log(enemyList[i].y);
+      }
+      enemy2List=[];
+      enemyList=[];
     }
   });
 };
@@ -471,19 +483,14 @@ const rederHendler = () => {
   c.fillText(`Score : ${score}`, 20, 20);
   c.fillText(`Bullet : ${currentBullets}`, 360, 20);
 
-  c.fillStyle = "black";
-  c.font = "15px DungGeunMo";
-
-  if (enemyDie === true) {
-    c.drawImage(boomImage, die.x, die.y);
-  }
+  c.fillStyle = 'black';
+  c.font = '15px DungGeunMo';
 
   // 아이템 드랍
   for (let i = 0; i < itemList.length; i++) {
     c.drawImage(gunImage, itemList[i].x, itemList[i].y);
   }
-  c.fillStyle = "white";
-  // c.font = "20px DOSIyagiMedium";
+  c.fillStyle = 'white';
   // 총알 추가
   for (let i = 0; i < bulletList.length; i++) {
     if (bulletList[i].alive) {
@@ -502,13 +509,14 @@ const startEvent = () => {
   const removeUi = () => {
     if (!gameOver) {
       playMusic();
-      $backDrop.style.display = "none";
-      $gameStart.style.display = "none";
+      reloadStart();
+      $backDrop.style.display = 'none';
+      $gameStart.style.display = 'none';
       gameStatus = true;
     }
   };
-  $backDrop.addEventListener("click", () => removeUi());
-  $gameStart.addEventListener("click", () => removeUi());
+  $backDrop.addEventListener('click', () => removeUi());
+  $gameStart.addEventListener('click', () => removeUi());
 };
 const restartGame = () => {
   // 초기화 작업
@@ -521,7 +529,6 @@ const restartGame = () => {
   enemyList = [];
   enemy2List = [];
   itemList = [];
-  
   enemy2Spawned = false; // enemy2Spawned 변수 초기화
 
   clearInterval(gameLoopInterval); // 기존의 게임 루프 중단
@@ -530,49 +537,28 @@ const restartGame = () => {
   gameLoopInterval = setInterval(() => {
     if (gameOver) {
       clearInterval(gameLoopInterval); // 게임 종료 시 타이머 중단
-      $gameOver.style.display = "block";
-      $backDrop.style.display = "block";
+      $gameOver.style.display = 'block';
+      $backDrop.style.display = 'block';
 
-      $gameOver.addEventListener("click", () => {
+      $gameOver.addEventListener('click', () => {
         hpcount = 0; // hp 초기화
-        $hp.style.height = "100%";
+        $hp.style.height = '100%';
         uiEvent();
+        reloadStart();
         // 숨겨진 UI들 표시
-        $gameOver.style.display = "none";
-        $backDrop.style.display = "none";
+        $gameOver.style.display = 'none';
+        $backDrop.style.display = 'none';
         gameStatus = true;
         playMusic();
-        saveScore = score;
         restartGame();
-
-        // 스코어보드에 점수 추가
-        // addScoreRankHandler();
       });
     } else {
       // 게임 루프 내용 실행
-
       update();
       rederHendler();
     }
   }, 1000 / 60); // 60FPS에 가까운 속도로 실행하도록 설정
 };
-
-// // 게임 스코어 보드(랭킹) div
-// const $ScoreBoard = document.querySelector('.ScoreBoard');
-// const $ScoreBoardUl = document.querySelector('.scoreRank');
-// let saveScore;
-// function addScoreRankHandler() {
-//   if (saveScore > 0) {
-//     const addLi = document.createElement('li');
-//     const addT = document.createTextNode(`${saveScore} Point`);
-//     addLi.appendChild(addT);
-
-//     $ScoreBoardUl.appendChild(addLi);
-//   }
-// }
-
-// 게임 초기화 및 루프 시작
-
 loadImage();
 keyboardListener();
 createEnemy();
