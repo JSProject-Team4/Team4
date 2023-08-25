@@ -23,13 +23,15 @@
     width: 100%;
     top: 0;
     left: 0;
-    
+    position: fixed;
+
   }
   .wrapper .header .header-main {
     width: 100%;
     margin: 0 auto;
     position: fixed;
     z-index: 999;
+
     font-family: 'DungGeunMo';
     background: rgba(0, 0, 0, 0.5);
   
@@ -78,8 +80,8 @@ body {
     position: relative;
     display: flex;
 }
-.canvus{
-    display: block;
+.canvas{
+    /* display: block; */
     position: relative; 
 }
 .boxs{
@@ -89,8 +91,11 @@ body {
   align-items: center;
   flex-direction: column;
 }
+/* .gamebox {
+  position: relative;
+} */
 .box{
-  width: 415px;height: 100vh;
+  width: 415px;height: 90vh;
   position: absolute;
   display: flex;
   flex-direction: column-reverse;
@@ -103,7 +108,6 @@ body {
     left: 0;
     width: 100%;
     height: 100vh;
-    z-index: 10;
     background: rgba(0, 0, 0, 0.60);
   }
 .gameStart{
@@ -130,17 +134,14 @@ body {
     left: 105px;
     display: none;
 }
-.thunder{
-  z-index: 10;
-  width: 50%;
-  height: 100%;
-  position: absolute;
-  background:url(Image/thunder.png) no-repeat;
-  background-size: contain;
-  background-position: center;
-  background-origin: content-box;
-  left: 105px;
-  display: none;
+.leftboxs .hpimg{
+  width: 50px;height: 50px;
+background: url(./Image/hpimg)no-repeat;
+background-size: contain;
+background-position: center;
+position: fixed;
+top: 76px;
+z-index: 11;
 }
 .leftboxs .hpbox{
   display: flex;
@@ -151,18 +152,21 @@ body {
   right:0;
   bottom:0;
   position: absolute;
-}
-.leftboxs .hpbox h2{
-  font-size: 20px;
-  font-family: 'NeoDunggeunmo';
-  margin: 5px;
-  color: #fff;
-  border-radius: 700;
+  background-color: #FF0000;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+  border: 2px solid #000;
 }
 .leftboxs .hpbox .hp{
-  width: 100%;height: 100%;
-  margin-top: 10px;
-  background: yellowgreen;
+  z-index: 10;
+  width: 40px;
+  height: 100%;
+  background-color: #7CFC00;
+  border-radius: 15px;
+  transition: width 0.3s ease-in-out;
 }
 
 .rightboxs .bulletbox{
@@ -178,16 +182,101 @@ body {
   background: linear-gradient(to bottom, #4a235a, #1a0033);    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 
 }
+.rightboxs .bulletbox .reloadbox {
+  height: 40px;
+  width: 35px;
+  /* background-image: url('./Image/reroadAM.png'); */
+  overflow: hidden;
+}
+.rightboxs .bulletbox .reloadbox img {
+  width: 100%;
+  height: 240px;
+  /* margin-bottom: 10px; */
+}
+.rightboxs .PM {
+  /* background: red; */
+
+}
+.rightboxs .PM img {
+  width: 100%;
+
+  /* border: 3px solid yellow; */
+}
+
+.rightboxs .onTop {
+  position: inherit;
+  top: 0;
+}
+.rightboxs .onTop img {
+  width: 100%;
+  
+}
+
+/* 애니메이션을 트리거하는 클래스를 추가하면 높이가 자연스럽게 증가합니다 */
+.animate-reloadbox {
+  animation: animateHeight 5s linear infinite; /* 10초 동안 animateHeight 애니메이션을 반복 */
+}
+.rightboxs .bulletbox .bulletCount{
+  z-index: 10;
+  font-size: 20px;
+  margin: 5px;
+  color: #fff;
+  border-radius: 700;
+}
 .rightboxs .bulletbox .Ybox{
+  z-index: 10;
+  height: 70%;
   width: 70%;
   display: flex;
   flex-direction: column-reverse;
   align-items: center;
 }
-.rightboxs .bulletbox img{
+.rightboxs .bulletbox .Ybox img{
   border: 3px solid yellow;
   width: 100%;
   margin-bottom: 5px;
+}
+
+@keyframes animateHeight {
+  0%  {
+    height: 0%;
+  }
+  100% {
+    height: 25%;
+  }
+}
+
+
+
+/* 스코어 보드 */
+.scoreBoard {
+  width: 300px;
+  height: 20rem;
+  margin-left: 50px;
+  /* position: absolute; */
+  background: #fff;
+  border-radius: 30px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: #000;
+}
+.scoreBoard .scoreTitle {
+  color: #000;
+  font-weight: 700;
+  font-size: 1.5em;
+  padding: 5px;
+  margin-bottom: 20px;
+
+}
+.scoreBoard .scoreRank {
+  width: 80%;
+  height: 70%;
+  background: #82f7ff;
+  border-radius: 30px;
+  padding: 5px;
 }
 @media screen and (max-height: 1080px) {
   .main{
