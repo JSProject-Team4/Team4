@@ -39,6 +39,7 @@ let score = 0;
 let spaceShipX = 210;
 let spaceShipY = HEIGHT - 68;
 // 컨버스 그리기
+let bulletAdd=1;
 
 let reloadAdd;
 // 창화면시 게임 크기 조절
@@ -51,7 +52,7 @@ window.addEventListener("resize", () => {
 const reloadStart=()=>{
   $reloadbox.classList.add("animate-reloadbox");
   reloadAdd=setInterval(() => {
-      currentBullets++;
+      currentBullets+=bulletAdd;
       uiEvent();
   }, 5000);
 };
@@ -243,27 +244,31 @@ const decreaseHp = () => {
 };
 const EnemyRetouch = (value) => {
   if (score <= 5) {
-    result = value === true ? 3 : 5;
+    result = value === true ? 2 : 5;
+    
   } else if (score <= 10) {
-    result = value === true ? 4 : 5;
+    result = value === true ? 3 : 5;
   } else if (score <= 15) {
-    result = value === true ? 5 : 0;
+    result = value === true ? 4 : 0;
   } else if (score <= 20) {
-    result = value === true ? 6 : 8;
+    result = value === true ? 5 : 6;
     if (!enemy2Spawned) {
+      bulletAdd=2;
       createEnemy2();
+      createEnemy3();
       enemy2Spawned = true; // createEnemy2() 함수가 실행되었음을 표시
     }
   } else if (score <= 25) {
-    result = value === true ? 7 : 8;
+    
+    result = value === true ? 6 : 7;
   } else if (score <= 35) {
-    result = value === true ? 7 : 9;
+    result = value === true ? 6 : 8;
   } else if (score <= 45) {
-    result = value === true ? 7 : 10;
+    result = value === true ? 7 : 9;
   } else if (score <= 55) {
-    result = value === true ? 8 : 10;
+    result = value === true ? 7 : 9;
   } else {
-    result = value === true ? 8 : 10;
+    result = value === true ? 9 : 10;
   }
   return result;
 };
@@ -382,13 +387,23 @@ function createEnemy2() {
     }, 5000);
   }
 }
+function createEnemy3() {
+  if (gameStatus) {
+    einterval = setInterval(() => {
+      if (gameStatus) {
+        let e2 = new Enemy(); // 새로운 적 객체 생성
+        e2.init();
+        console.log('test');
+      }
+    }, 3000);
+  }
+}
 const createItem = () => {
   const initialItemCount = 5; // 초기 아이템 개수
   for (let i = 0; i < initialItemCount; i++) {
     let item = new Item();
     item.init();
   }
-
   const interval = setInterval(() => {
     if (gameStatus) {
       let item = new Item();
