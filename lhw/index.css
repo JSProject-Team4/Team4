@@ -139,8 +139,6 @@ z-index: 11;
   position: absolute;
   background-color: #FF0000;
   border-radius: 15px;
-  display: flex;
-  align-items: center;
   overflow: hidden;
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
   border: 2px solid #000;
@@ -169,7 +167,7 @@ z-index: 11;
 
 }
 .rightboxs .bulletbox .reloadbox {
-  height: 25%;
+  height: 90%;
   width: 35px;
   /* background-image: url('./Image/reroadAM.png'); */
   overflow: hidden;
@@ -179,8 +177,30 @@ z-index: 11;
   height: 240px;
   /* margin-bottom: 10px; */
 }
-.rightboxs .PM {
-  /* background: red; */
+.rightboxs .bulletbox .betterybox{
+  width: 40px;
+  height: 15%;
+  position: relative;
+  flex: 2;
+  display: flex;
+align-items: center;
+flex-direction: column;
+padding-top: 100px;
+border-bottom: 2px solid yellow;
+border-top: 10px solid #9b59b6;
+
+}
+.testbox{
+  display: flex;
+  flex-direction: column-reverse;
+}
+.rightboxs .bulletbox .charging{
+background: url('Image/0.png') no-repeat ;
+background-size: cover;
+background-position: center;
+width: 40px;height: 65px;
+top: 0;
+
 
 }
 .rightboxs .PM img {
@@ -190,7 +210,8 @@ z-index: 11;
 }
 
 .rightboxs .onTop {
-  position: inherit;
+  position: absolute;
+
   top: 0;
 }
 .rightboxs .onTop img {
@@ -202,20 +223,15 @@ z-index: 11;
 .animate-reloadbox {
   animation: animateHeight 5s linear infinite; /* 10초 동안 animateHeight 애니메이션을 반복 */
 }
-.rightboxs .bulletbox .bulletCount{
-  z-index: 10;
-  font-size: 20px;
-  margin: 5px;
-  color: #fff;
-  border-radius: 700;
-}
 .rightboxs .bulletbox .Ybox{
   z-index: 10;
   height: 70%;
-  width: 70%;
+  width: 75%;
   display: flex;
   flex-direction: column-reverse;
   align-items: center;
+  flex: 3;
+
 }
 .rightboxs .bulletbox .Ybox img{
   border: 3px solid yellow;
@@ -228,41 +244,11 @@ z-index: 11;
     height: 0%;
   }
   100% {
-    height: 25%;
+    height: 90%;
   }
 }
 
 
 
-/* 스코어 보드 */
-.scoreBoard {
-  width: 300px;
-  height: 20rem;
-  margin-left: 50px;
-  /* position: absolute; */
-  background: #fff;
-  border-radius: 30px;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  color: #000;
-}
-.scoreBoard .scoreTitle {
-  color: #000;
-  font-weight: 700;
-  font-size: 1.5em;
-  padding: 5px;
-  margin-bottom: 20px;
-
-}
-.scoreBoard .scoreRank {
-  width: 80%;
-  height: 70%;
-  background: #82f7ff;
-  border-radius: 30px;
-  padding: 5px;
-}
 
   

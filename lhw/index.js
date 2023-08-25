@@ -596,6 +596,7 @@ const restartGame = () => {
         reloadStart();
         saveScore = score;
         restartGame();
+        uiEvent();
 
       });
     } else {
