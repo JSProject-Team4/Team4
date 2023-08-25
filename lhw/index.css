@@ -134,7 +134,7 @@ body {
   background-position: center;
   background-origin: content-box;
   /* left: 858px; */
-  display: flex;
+  display: none;
   
 }
 .leftboxs .hpimg{
