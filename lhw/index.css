@@ -63,6 +63,7 @@ body {
 .canvas{
     /* display: block; */
     position: relative; 
+
 }
 .boxs{
   position: relative;
@@ -128,7 +129,7 @@ z-index: 11;
   flex-direction: column-reverse;
   align-items: center;
   position: absolute;
-  width: 40px;height: 100%;
+  width: 40px;height: 98%;
   right:0;
   bottom:0;
   position: absolute;
@@ -152,7 +153,6 @@ z-index: 11;
 
 .rightboxs .bulletbox{
   width: 40px;height: 100%;
-  border: 2px solid #d35400;
   display: flex;
   flex-direction: column-reverse;
   align-items: center;
@@ -164,7 +164,7 @@ z-index: 11;
 
 }
 .rightboxs .bulletbox .reloadbox {
-  height: 40px;
+  height: 25%;
   width: 35px;
   /* background-image: url('./Image/reroadAM.png'); */
   overflow: hidden;
@@ -172,11 +172,7 @@ z-index: 11;
 .rightboxs .bulletbox .reloadbox img {
   width: 100%;
   height: 240px;
-  /* margin-bottom: 10px; */
-}
-.rightboxs .PM {
-  /* background: red; */
-
+  margin-bottom: 10px;
 }
 .rightboxs .PM img {
   width: 100%;
@@ -196,13 +192,6 @@ z-index: 11;
 /* 애니메이션을 트리거하는 클래스를 추가하면 높이가 자연스럽게 증가합니다 */
 .animate-reloadbox {
   animation: animateHeight 5s linear infinite; /* 10초 동안 animateHeight 애니메이션을 반복 */
-}
-.rightboxs .bulletbox .bulletCount{
-  z-index: 10;
-  font-size: 20px;
-  margin: 5px;
-  color: #fff;
-  border-radius: 700;
 }
 .rightboxs .bulletbox .Ybox{
   z-index: 10;
