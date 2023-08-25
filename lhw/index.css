@@ -1,5 +1,18 @@
-@import url(../Common/Common.css);
-  .wrapper {
+@import url(common.css);
+/* @import url(../Common/Common.css); */
+@font-face {
+  font-family: 'DOSIyagiMedium';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/DOSIyagiMedium.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'DungGeunMo';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+  .wrapper {  
     /* background: #A9BCF5; */
     width: 100%;
     color: #fff;
@@ -10,33 +23,39 @@
     width: 100%;
     top: 0;
     left: 0;
-    
     position: fixed;
+
   }
   .wrapper .header .header-main {
     width: 100%;
     margin: 0 auto;
     position: fixed;
     z-index: 999;
-  
+
+    font-family: 'DungGeunMo';
     background: rgba(0, 0, 0, 0.5);
   
     display: flex;
     align-items: center;
   }
   .wrapper .header .header-main .header-logo {
-    padding: 30px;
-    color: #fff;
+    height: 76px;
+    padding: 0 10px;
+  }
+  .wrapper .header .header-main .header-logo img {
+    width: 76px;
+    height: 76px;
   }
   
   .wrapper .header .header-main .main-nav .main-nav__items {
     display: flex;
     flex-direction: row;
     color: #fff;
+    font-size: 1.5em;
+    font-weight: 500;
   }
   .wrapper .header .header-main .main-nav .main-nav__item a {
     display: block;
-    font-weight: 700;
     padding: 0 15px;
   }
   /* main */
@@ -53,6 +72,7 @@ body {
     background-position: center;
     background-origin: content-box;
     height: 100%;
+    
 
 }
 .main{
@@ -93,24 +113,25 @@ body {
 .gameStart{
     z-index: 11;
     width: 50%;
-    height: 100%;
+    height: 50%;
     position: absolute;
-    background:url(Image/gameStart.jpg) no-repeat;
+    background:url(Image/start.png) no-repeat;
     background-size: contain;
     background-position: center;
     background-origin: content-box;
-    left: 130px;
+    left: 105px;
+    margin-left: 30px;
 }
 .gameOver{
     z-index: 11;
     width: 50%;
     height: 100%;
     position: absolute;
-    background:url(Image/gameOver.jpg) no-repeat;
+    background:url(Image/gameo.png) no-repeat;
     background-size: contain;
     background-position: center;
     background-origin: content-box;
-    left: 130px;
+    left: 105px;
     display: none;
 }
 .leftboxs .hpimg{
@@ -122,7 +143,6 @@ position: fixed;
 top: 76px;
 z-index: 11;
 }
-
 .leftboxs .hpbox{
   display: flex;
   flex-direction: column-reverse;
@@ -140,7 +160,6 @@ z-index: 11;
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
   border: 2px solid #000;
 }
-
 .leftboxs .hpbox .hp{
   z-index: 10;
   width: 40px;
@@ -259,5 +278,26 @@ z-index: 11;
   border-radius: 30px;
   padding: 5px;
 }
+@media screen and (max-height: 1080px) {
+  .main{
+      padding-top: 76px;
+      position: relative;
+      display: flex;
+  }
+    .gameStart{
+        width: 70%;
+        left: 50px;
+        bottom: 150px;
+    }
+    .gameOver{
+        width: 70%;
+        height: 100%;
+        bottom: 150px;
+        left: 50px;
+    }
+    .canvus{
+        width: 342PX;
+    }
+  }
 
   

@@ -13,13 +13,13 @@
   width: 100%;
   top: 0;
   left: 0;
-  z-index: 999;
 }
 .wrapper .header .header-main {
   width: 100%;
-  height: 70px;
+  height: 76px;
   margin: 0 auto;
   position: fixed;
+  z-index: 999;
   top: 0;
 
   background: rgba(0, 0, 0, 0.5);
@@ -28,18 +28,23 @@
   align-items: center;
 }
 .wrapper .header .header-main .header-logo {
-  padding: 30px;
-  color: #fff;
+  height: 76px;
+  padding: 0 10px;
+}
+.wrapper .header .header-main .header-logo img {
+  width: 76px;
+  height: 76px;
 }
 
 .wrapper .header .header-main .main-nav .main-nav__items {
   display: flex;
   flex-direction: row;
   color: #fff;
+  font-size: 1.5em;
+  font-weight: 500;
 }
 .wrapper .header .header-main .main-nav .main-nav__item a {
   display: block;
-  font-weight: 700;
   padding: 0 15px;
 }
 /* footer s
@@ -133,6 +138,8 @@ canvas {
   /* font-family: 'Bagel Fat One', cursive; */
   color: #000;
   padding: 5px;
+  font-size: 1.5em;
+  font-weight: 700;
 }
 
 .wrap {
@@ -148,6 +155,8 @@ canvas {
   align-items: center;
 
   color: #000;
+  font-weight: 700;
+  font-size: 1.5em;
 
   width: 200px;
   margin-top: 20px;
@@ -164,6 +173,7 @@ canvas {
   flex-direction: row;
 
   margin-top: 30px;
+
 }
 
 .setting #pause {
@@ -171,7 +181,7 @@ canvas {
   border: 5px solid #d89797;
   border-radius: 30px;
 
-  font-size: 15px;
+  font-size: 1.5em;
   color: #000;
   font-weight: 700;
   padding: 10px;
@@ -194,7 +204,7 @@ canvas {
   border: 5px solid #d89797;
   border-radius: 30px;
 
-  font-size: 15px;
+  font-size: 1.5em;
   color: #000;
   font-weight: 700;
   padding: 10px;

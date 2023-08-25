@@ -64,19 +64,19 @@ for (let i = 0; i < blockColumn; i++) {
 // 이미지 로딩 및 그리기
 let ballImageLoaded = false;
 let ballImage = new Image();
-ballImage.src = './image/발리볼.png'; 
+ballImage.src = './image/발리볼.png';
 ballImage.onload = function () {
   ballImageLoaded = true;
 };
 let itemImageLoaded = false;
 let itemImage = new Image();
-itemImage.src = './image/star.png'; 
+itemImage.src = './image/star.png';
 itemImage.onload = function () {
   itemImageLoaded = true;
 };
 let blockImageLoaded = false;
 let blockImage = new Image();
-blockImage.src = './image/block.jpg'; 
+blockImage.src = './image/block.jpg';
 blockImage.onload = function () {
   blockImageLoaded = true;
 };
@@ -181,7 +181,7 @@ const bSoundPlay = () => {
   if (firstMusic) bSound.volume = 1;
   bSound.play();
   randomNum = Math.floor(Math.random() * (8 - 1) + 1);
-  console.log(randomNum);
+  // console.log('숫자:', randomNum);
 
   rndm = Math.floor(Math.random() * (3 - 1) + 1);
 };
@@ -221,8 +221,11 @@ function blockDelete() {
           target.status = 0;
           $score.textContent = +$score.textContent + 100;
           bSoundPlay();
+          if (+$score.textContent > 4100) {
+            gameOver();
+          }
           if (randomNum === 2) {
-            console.log('1');
+            console.log('랜덤아이템 드랍!');
             itemDrop = true;
             itemX = target.x + blockWidth / 2 - 12;
             itemY = target.y;
@@ -239,6 +242,9 @@ function blockDelete() {
           target.status = 0;
           $score.textContent = +$score.textContent + 100;
           bSoundPlay();
+          if (+$score.textContent > 4100) {
+            gameOver();
+          }
         }
 
         $pauseScore.textContent = $score.textContent;
@@ -293,13 +299,21 @@ function setTT(e) {
   setTimeout(function () {
     e.textContent = 0;
   }, 10000);
-
 }
 
 let isBig = false;
 // 떨어지는 아이템을 라켓으로 먹으면 능력이 발동하는 함수!!
 function catchItemHandler() {
   if (isBig === false) {
+    if (x < 30) {
+      x = 40;
+      console.log('왼쪽벽으로부터 이동!');
+    } else if (x > 520) {
+      x = 520;
+      console.log('오른벽으로부터 이동!');
+    } else if (y < 30) {
+      y = 40;
+    }
     isBig = true;
     ballRadius = 30;
 
@@ -307,6 +321,8 @@ function catchItemHandler() {
 
     setTimeout(function () {
       ballRadius = 10;
+      itemX=0;
+      itemY=0;
       isBig = false;
     }, 10000);
   }
@@ -323,6 +339,8 @@ function catchItemHandler2() {
     setTimeout(function () {
       racketWidth = 75;
       racketHeight = 10;
+      itemX=0;
+      itemY=0;
       isLong = false;
     }, 10000);
   }
@@ -373,10 +391,9 @@ function draw() {
   drawBall(); // 주인"공" 그리기 함수 호출
   drawRacket(); // 라켓 그리기 함수 호출
   blockDelete();
-
   if (itemDrop === true) {
     drawItem();
-    itemY += 2;
+    itemY += 1;
   }
 
   // ============ 주인"공"을 벽에 튕기게 하는 파트 ============ //
@@ -401,6 +418,14 @@ function draw() {
   // 라켓에 주인"공"이 닿았을 때, 벽에 튀긴것처럼 튕기게 하기
   if (x > racketX && x < racketX + racketWidth && y + ballRadius > racketY) {
     MovingY = -MovingY;
+    if (y + ballRadius >= 460) {
+      y = 450;
+    }
+    if (isBig) {
+      if (y + ballRadius >= 460) {
+        y = 430;
+      }
+    }
     // bSound.volume = 5;
     // bSound.play();
   }
@@ -408,13 +433,11 @@ function draw() {
   // 라켓으로 아이템을 먹으면?
   if (itemX > racketX && racketX + racketWidth && itemY + 10 > racketY) {
     itemDrop = false;
-    console.log('아이템 먹었다~');
 
-    console.log(`rndm: ${rndm}`);
     if (rndm === 2) {
-      catchItemHandler();
+      if (isBig === false) catchItemHandler();
     } else {
-      catchItemHandler2();
+      if (isLong === false) catchItemHandler2();
     }
   }
 
@@ -554,7 +577,7 @@ function pauseDrawing() {
 const $gameStartModal = document.querySelector('.gameStartModal');
 const $gameStartBtn = document.querySelector('.gameStartModal .gameStartBtn');
 $gameStartBtn.addEventListener('click', gameStartHandler);
-console.log($gameStartModal.style.display);
+// console.log($gameStartModal.style.display);
 $btn.disabled = true;
 
 function gameStartHandler() {
@@ -583,12 +606,12 @@ function gameStartHandler() {
 // 게임 클리어 모달
 const $gameClearModal = document.querySelector('.gameClearModal');
 const $gameClearResetBtn = document.querySelector('.gameClearResetBtn');
-console.log($gameClearResetBtn);
+// console.log($gameClearResetBtn);
 $gameClearResetBtn.addEventListener('click', resetBtnClick);
 
 const $hackBtn = document.querySelector('.hack');
 $hackBtn.addEventListener('click', clearHack);
 function clearHack() {
-  $score.textContent = 4200;
-  gameOver();
+  $score.textContent = 4100;
+  // gameOver();
 }

@@ -10,13 +10,20 @@
       rel="icon"
       href="data:;base64,iVBORw0KGgo="
     />
+    <link
+      rel="shortcut icon"
+      href="../MainPage/MainPageImg/팩맨.ico"
+    />
     <title>격파! 벽돌 부수기</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css"
+    />
     <link
       rel="stylesheet"
       href="index.css"
     />
-    
+
     <script
       src="index.js"
       type="module"
@@ -40,15 +47,18 @@
             href="../MainPage/MainPage.html"
             class="header-logo"
           >
-            logo
+            <img
+              src="../MainPage/MainPageImg/팩맨logo2.png"
+              alt="logo"
+            />
           </a>
           <nav class="main-nav">
             <ul class="main-nav__items">
               <li class="main-nav__item">
-                <a href="#">game1</a>
+                <a href="../BrickBreaker/SubPage.html">BrickBreaker</a>
               </li>
               <li class="main-nav__item">
-                <a href="#">game2</a>
+                <a href="../ShootingSubPage/SubPage.html">ShootingGame</a>
               </li>
               <li class="main-nav__item">
                 <a href="#">game3</a>
@@ -113,7 +123,7 @@
           처음부터
         </button>
       </div>
-      <button class="hack">...</button>
+      <!-- <button class="hack">...</button> -->
       <div class="gameClearModal">
         <div class="gameClearTitle">GAME CLEAR!</div>
 
@@ -146,16 +156,18 @@
       <div class="keyHelp">
         <div class="keySet"></div>
         <div class="timerWrapper">
-          <div class="timerTitle">
-            특수아이템 타이머
-          </div>
+          <div class="timerTitle">랜덤아이템 타이머</div>
           <p>※아이템을 연속으로 먹어도</p>
           <p>시간갱신이 되지않습니다.</p>
           <div class="bigStat">
-            남은 공 변신시간: <p class="bigTimer">0</p>초
+            남은 공 변신시간:
+            <p class="bigTimer">0</p>
+            초
           </div>
           <div class="longStat">
-            남은 라켓 변신시간: <p class="longTimer">0</p>초
+            남은 라켓 변신시간:
+            <p class="longTimer">0</p>
+            초
           </div>
         </div>
       </div>

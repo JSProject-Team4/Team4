@@ -5,15 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="Login.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css">
-    <title>Document</title>
+    <link rel="shortcut icon" href="../MainPage/MainPageImg/팩맨.ico">
+    <title>게임랜드-로그인</title>
 </head>
 <body>
     <div class="wrapper">
         <!-- HEADER -->
         <div class="header">
             <div class="header-main clearfix">
-                <a href="./MainPage.html" class="header-logo">
-                    logo
+                <a href="../MainPage/MainPage.html" class="header-logo">
+                    <img src="../MainPage/MainPageImg/팩맨logo2.png" alt="logo">
                 </a>
                 <nav class="main-nav">
                     <ul class="main-nav__items ">
@@ -21,7 +22,7 @@
                             <a href="../BrickBreaker/SubPage.html">BrickBreaker</a>
                         </li>
                         <li class="main-nav__item">
-                            <a href="../ShutingSubPage/SubPage.html">ShutingGame</a>
+                            <a href="../ShootingSubPage/SubPage.html">ShutingGame</a>
                         </li>
                         <li class="main-nav__item">
                             <a href="#">game3</a>
@@ -40,25 +41,27 @@
             </div>
         </div>
         <main>
-            <div class="login-main">
-                <div class="signin">
-                    <p>SIGN IN</p>
+            <div class="Login">
+                <div class="login-main">
+                    <div class="signin">
+                        <p>SIGN IN</p>
+                    </div>
+                    <section class="section1">
+                        <div class="login-id">
+                            <p>ID</p>
+                            <input type="text" name="id" id="id" cols="20" rows="1"></input>
+                        </div>
+                        <div class="login-password">
+                            <p>PASSWORD</p>
+                            <input type="password" name="id" id="id" cols="20" rows="1"></input>
+                        </div>
+                    </section>
+                    <section class="section2">
+                        <div class="login-btn">
+                            <a href="../MainPage/MainPage.html">LOGIN</a>
+                        </div>
+                    </section>
                 </div>
-                <section class="section1">
-                    <div class="login-id">
-                        <p>ID</p>
-                        <textarea name="id" id="id" cols="20" rows="1"></textarea>
-                    </div>
-                    <div class="login-password">
-                        <p>PASSWORD</p>
-                        <textarea name="id" id="id" cols="20" rows="1"></textarea>
-                    </div>
-                </section>
-                <section class="section2">
-                    <div class="login-btn">
-                        <a href="../MainPage/MainPage.html">LOGIN</a>
-                    </div>
-                </section>
             </div>
         </main>
         <!-- FOOTER -->
@@ -69,7 +72,7 @@
                     <div class="social">
                         <ul>
                             <li><a href="https://github.com/JSProject-Team4/Team4">
-                                <img src="MainPageImg/gitbunlogo.png" alt="GitHub_img">
+                                <img src="../MainPage/MainPageImg/gitbunlogo.png" alt="GitHub_img">
                             </a></li>
                         </ul>
                     </div>

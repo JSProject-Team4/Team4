@@ -1,6 +1,6 @@
 .wrapper {
   /* background: #A9BCF5; */
-  background-image: url(./12.png);
+  background-image: url(./11.png);
   background-repeat: no-repeat;
   background-size: 100% 100%;
 }
@@ -86,6 +86,7 @@
   width: 300px;
   height: 400px;
   margin-bottom: 30px;
+  margin-left: 150px;
 }
 /*-------------------------main------------------------------------*/
 /* footer style */

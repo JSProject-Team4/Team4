@@ -6,7 +6,8 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0"
     />
-    <title>Document</title>
+    <link rel="shortcut icon" href="../MainPage/MainPageImg/팩맨.ico">
+    <title>슈팅게임</title>
     <script
       src="index.js"
       defer
@@ -21,19 +22,16 @@
       <!-- HEADER -->
       <div class="header">
         <div class="header-main clearfix">
-          <a
-            href="../MainPage/MainPage.html"
-            class="header-logo"
-          >
-            logo
+          <a href="../MainPage/MainPage.html" class="header-logo">
+            <img src="../MainPage/MainPageImg/팩맨logo2.png" alt="logo">
           </a>
           <nav class="main-nav">
             <ul class="main-nav__items">
               <li class="main-nav__item">
-                <a href="#">game1</a>
+                <a href="../BrickBreaker/SubPage.html">BrickBreaker</a>
               </li>
               <li class="main-nav__item">
-                <a href="#">game2</a>
+                <a href="../ShootingSubPage/SubPage.html">ShootingGame</a>
               </li>
               <li class="main-nav__item">
                 <a href="#">game3</a>
@@ -62,16 +60,21 @@
             <div class="hpimg"></div>
             <div class="hp"></div>
           </div>
-        </div>
 
-        <div class="gamebox">
-          <div class="box">
-            <div class="gameStart"></div>
-            <div class="gameOver"></div>
+          <div class="gamebox">
+            <div class="box">
+                <div class="gameStart"></div>
+                <div class="gameOver"></div>
+                <div class="thunder"></div>
+            </div>
+            <canvas class="canvas"></canvas>
+            
           </div>
-          <canvas class="canvas"></canvas>
-        </div>
-
+          <div class="rightboxs boxs">
+            <div class="bulletbox">
+              <div class="Ybox">
+              </div>
+            </div>
         <div class="rightboxs boxs">
           <div class="bulletbox">
             <div class="Ybox"></div>
@@ -94,11 +97,11 @@
               />
             </div>
           </div>
-        </div>
-
+        
         <div class="backdrop"></div>
       </main>
       <!-- FOOTER -->
+      
     </div>
   </body>
 </html>

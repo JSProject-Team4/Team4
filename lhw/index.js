@@ -21,6 +21,7 @@ let die = {
 const WIDTH = 465;
 let HEIGHT = window.innerHeight - 76;
 
+
 // 최대 총알 갯수
 const MAX_BULLETS = 10;
 
@@ -28,6 +29,7 @@ canvas.width = WIDTH;
 canvas.height = HEIGHT;
 
 let bgImage, charecterImg, bulletImage, enemyImage, gameOverImage, itemImage,gunImage;
+
 let currentBullets = MAX_BULLETS;
 
 let gameLoopInterval; // 게임 루프의 타이머 변수
@@ -112,20 +114,10 @@ function Bullet() {
   };
   this.checkHit = () => {
     for (let i = 0; i < enemyList.length; i++) {
-      const bulletLeft = this.x;
-      const bulletRight = this.x + bulletImage.width;
-      const bulletTop = this.y;
-      const bulletBottom = this.y + bulletImage.height;
-
-      const enemyLeft = enemyList[i].x;
-      const enemyRight = enemyList[i].x + enemyImage.width;
-      const enemyTop = enemyList[i].y;
-      const enemyBottom = enemyList[i].y + enemyImage.height;
       if (
-        bulletBottom > enemyTop &&
-        bulletTop < enemyBottom &&
-        bulletRight > enemyLeft &&
-        bulletLeft < enemyRight
+        this.y <= enemyList[i].y &&
+        this.x > enemyList[i].x &&
+        this.x <= enemyList[i].x + 40
       ) {
         gameMusic2.play();
         score++;
@@ -210,26 +202,17 @@ const rendomMaker = (MIN, MAX) => {
   let rendomNum = Math.floor(Math.random() * (MAX - MIN + 1));
   return rendomNum;
 };
-let itemList = [];
-function Item() {
-  this.x = 0;
-  this.y = 0;
-  this.init = () => {
-    this.x = rendomMaker(0, canvas.width - 48);
-    this.y = 0;
-
-    itemList.push(this);
-  };
-  this.update = () => {
-    this.y += 2;
-
-    const indexToRemove = itemList.indexOf(this);
-    if (this.y >= canvas.height - 48) {
-      if (indexToRemove !== -1) {
-        itemList.splice(indexToRemove, 1);
-      }
+const decreaseHp=()=> {
+  const heightValues = ['100%', '66%', '33%', '0']; // 높이 값 목록
+  const currentHpValueWithUnit = $hp.style.height + 'px';
+  const currentHpIndex = heightValues.indexOf(currentHpValueWithUnit);
+  console.log(currentHpIndex);
+  if (currentHpIndex !== -1) {
+    const newHpIndex = currentHpIndex - 1;
+    if (newHpIndex >= 0) {
+      $hp.style.height = heightValues[newHpIndex];
     }
-  };
+  }
 }
 
 let hpcount = 0;
@@ -279,10 +262,8 @@ function Enemy() {
 
     const indexToRemove = enemyList.indexOf(this);
 
+
     if (this.y >= canvas.height - 48) {
-      if (indexToRemove !== -1) {
-        enemyList.splice(indexToRemove, 1);
-      }
       decreaseHp();
       if (hpcount >= 3) {
         gameOver = true;
@@ -556,21 +537,6 @@ const restartGame = () => {
     }
   }, 1000 / 60); // 60FPS에 가까운 속도로 실행하도록 설정
 };
-
-// // 게임 스코어 보드(랭킹) div
-// const $ScoreBoard = document.querySelector('.ScoreBoard');
-// const $ScoreBoardUl = document.querySelector('.scoreRank');
-// let saveScore;
-// function addScoreRankHandler() {
-//   if (saveScore > 0) {
-//     const addLi = document.createElement('li');
-//     const addT = document.createTextNode(`${saveScore} Point`);
-//     addLi.appendChild(addT);
-
-//     $ScoreBoardUl.appendChild(addLi);
-//   }
-// }
-
 // 게임 초기화 및 루프 시작
 
 loadImage();
