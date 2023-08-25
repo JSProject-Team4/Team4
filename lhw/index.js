@@ -37,8 +37,6 @@ window.addEventListener('resize', () => {
   canvas.style.height = `${HEIGHT}px`; // 높이 설정
 });
 // 총알 hp UI
-const $createH2 = document.createElement('h2');
-
 const uiEvent = () => {
   function removeAllChildren(parent) {
     while (parent.firstChild) {
@@ -61,13 +59,9 @@ const uiEvent = () => {
       $bulletbox.appendChild($bullet);
     }
   }
-
-  $createH2.textContent=`${currentBullets}`;
-  $createH2.classList='bulletCount';
-  $bulletbox.appendChild($createH2);
-
 };
 uiEvent();
+
 let bulletList = []; //총알들을 저장하는 리스트
 
 function Bullet() {
@@ -134,21 +128,7 @@ function Enemy() {
     enemyList.push(this);
   };
   this.update = () => {
-
-    if (score <= 5) {
-      this.y += 3;
-    } else if (score <= 10) {
-      this.y += 4;
-    } else if (score <= 15) {
-      this.y += 5;
-    } else if (score <= 20) {
-      this.y += 6;
-    } else  {
-      this.y += 7;
-    }
-
-    const indexToRemove = enemyList.indexOf(this);
-
+    this.y += 2;
 
     if (this.y >= canvas.height - 48) {
       decreaseHp();

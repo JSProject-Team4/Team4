@@ -1,78 +1,76 @@
 @import url(common.css);
-/* @import url(../Common/Common.css); */
-  .wrapper {  
-    /* background: #A9BCF5; */
-    width: 100%;
-    color: #fff;
-    font-family: 'DungGeunMo';
-  }
-  /* header style */
-  .wrapper.header {
-    width: 100%;
-    top: 0;
-    left: 0;
-    z-index: 999;
-  }
-  .wrapper .header .header-main {
-    width: 100%;
-    margin: 0 auto;
-    position: fixed;
-    font-family: 'NeoDunggeunmo';
-    background: rgba(0, 0, 0, 0.5);
-  
-    display: flex;
-    align-items: center;
-  }
-  .wrapper .header .header-main .header-logo {
-    padding: 30px;
-    color: #fff;
-  }
-  
-  .wrapper .header .header-main .main-nav .main-nav__items {
-    display: flex;
-    flex-direction: row;
-    color: #fff;
-  }
-  .wrapper .header .header-main .main-nav .main-nav__item a {
-    display: block;
-    font-weight: 700;
-    padding: 0 15px;
-  }
-  /* main */
-body {
-    overflow: hidden;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    margin: 0;
-    justify-content: center;
-    align-items: center;
-    background: url(./Image/plenet.jpg) no-repeat;
-    background-size: cover;
-    background-position: center;
-    background-origin: content-box;
-    height: 100%;
-    
+.wrapper {
+  /* background: #A9BCF5; */
+  width: 100%;
+  color: #fff;
+  font-family: 'DungGeunMo';
+}
+/* header style */
+.wrapper.header {
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 999;
+}
+.wrapper .header .header-main {
+  width: 100%;
+  margin: 0 auto;
+  position: fixed;
+  font-family: 'NeoDunggeunmo';
+  background: rgba(0, 0, 0, 0.5);
 
+  display: flex;
+  align-items: center;
 }
-.main{
-    padding-top: 76px;
-    position: relative;
-    display: flex;
+.wrapper .header .header-main .header-logo {
+  padding: 30px;
+  color: #fff;
 }
-.canvus{
-    display: block;
-    position: relative; 
+
+.wrapper .header .header-main .main-nav .main-nav__items {
+  display: flex;
+  flex-direction: row;
+  color: #fff;
 }
-.boxs{
+.wrapper .header .header-main .main-nav .main-nav__item a {
+  display: block;
+  font-weight: 700;
+  padding: 0 15px;
+}
+/* main */
+body {
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  justify-content: center;
+  align-items: center;
+  background: url(./Image/plenet.jpg) no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-origin: content-box;
+  height: 100%;
+}
+.main {
+  padding-top: 76px;
+  position: relative;
+  display: flex;
+}
+.canvus {
+  display: block;
+  position: relative;
+}
+.boxs {
   position: relative;
   flex: 1;
   display: flex;
   align-items: center;
   flex-direction: column;
 }
-.box{
-  width: 415px;height: 100vh;
+.box {
+  width: 415px;
+  height: 100vh;
   position: absolute;
   display: flex;
   flex-direction: column-reverse;
@@ -80,63 +78,66 @@ body {
   position: absolute;
 }
 .backdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    z-index: 10;
-    background: rgba(0, 0, 0, 0.60);
-  }
-.gameStart{
-    z-index: 11;
-    width: 50%;
-    height: 50%;
-    position: absolute;
-    background:url(Image/start.png) no-repeat;
-    background-size: contain;
-    background-position: center;
-    background-origin: content-box;
-    left: 105px;
-    margin-left: 30px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.6);
 }
-.gameOver{
-    z-index: 11;
-    width: 50%;
-    height: 100%;
-    position: absolute;
-    background:url(Image/gameo.png) no-repeat;
-    background-size: contain;
-    background-position: center;
-    background-origin: content-box;
-    left: 105px;
-    display: none;
+.gameStart {
+  z-index: 11;
+  width: 50%;
+  height: 50%;
+  position: absolute;
+  background: url(Image/start.png) no-repeat;
+  background-size: contain;
+  background-position: center;
+  background-origin: content-box;
+  left: 105px;
+  margin-left: 30px;
 }
-.leftboxs .hpbox{
+.gameOver {
+  z-index: 11;
+  width: 50%;
+  height: 100%;
+  position: absolute;
+  background: url(Image/gameo.png) no-repeat;
+  background-size: contain;
+  background-position: center;
+  background-origin: content-box;
+  left: 105px;
+  display: none;
+}
+.leftboxs .hpbox {
   display: flex;
   flex-direction: column-reverse;
   align-items: center;
   position: absolute;
-  width: 40px;height: 100%;
-  right:0;
-  bottom:0;
+  width: 40px;
+  height: 100%;
+  right: 0;
+  bottom: 0;
   position: absolute;
 }
-.leftboxs .hpbox h2{
+.leftboxs .hpbox h2 {
   font-size: 20px;
   font-family: 'NeoDunggeunmo';
   margin: 5px;
   color: #fff;
   border-radius: 700;
 }
-.leftboxs .hpbox .hp{
-  width: 100%;height: 100%;
+.leftboxs .hpbox .hp {
+  width: 100%;
+  height: 100%;
   margin-top: 10px;
   background: yellowgreen;
 }
 
-.rightboxs .bulletbox{
-  width: 40px;height: 100%;
+.rightboxs .bulletbox {
+  width: 40px;
+  height: 100%;
   border: 2px solid #d35400;
   display: flex;
   flex-direction: column-reverse;
@@ -144,41 +145,39 @@ body {
   position: absolute;
   left: 0;
   bottom: 0;
-    border: 2px solid #9b59b6;
-  background: linear-gradient(to bottom, #4a235a, #1a0033);    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-
+  border: 2px solid #9b59b6;
+  background: linear-gradient(to bottom, #4a235a, #1a0033);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 }
-.rightboxs .bulletbox .Ybox{
+.rightboxs .bulletbox .Ybox {
   width: 70%;
   display: flex;
   flex-direction: column-reverse;
   align-items: center;
 }
-.rightboxs .bulletbox img{
+.rightboxs .bulletbox img {
   border: 3px solid yellow;
   width: 100%;
   margin-bottom: 5px;
 }
 @media screen and (max-height: 1080px) {
-  .main{
-      padding-top: 76px;
-      position: relative;
-      display: flex;
+  .main {
+    padding-top: 76px;
+    position: relative;
+    display: flex;
   }
-    .gameStart{
-        width: 70%;
-        left: 50px;
-        bottom: 150px;
-    }
-    .gameOver{
-        width: 70%;
-        height: 100%;
-        bottom: 150px;
-        left: 50px;
-    }
-    .canvus{
-        width: 342PX;
-    }
+  .gameStart {
+    width: 70%;
+    left: 50px;
+    bottom: 150px;
   }
-
-  
+  .gameOver {
+    width: 70%;
+    height: 100%;
+    bottom: 150px;
+    left: 50px;
+  }
+  .canvus {
+    width: 342px;
+  }
+}
