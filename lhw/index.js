@@ -11,6 +11,7 @@ const $hp = document.querySelector(".hp");
 const $reloadbox = document.querySelector('.reloadbox');
 const gameMusic = document.getElementById("game-music");
 const gameMusic2 = document.getElementById("game-music2");
+const $thunder = document.querySelector('.thunder');
 let enemyDie = false;
 let die = {
   x: 0,
@@ -60,7 +61,7 @@ const reloadEnd=()=>{
   clearInterval(reloadAdd);
   $reloadbox.classList.remove("animate-reloadbox");
 };
-const specialMoveHandler=()=>{
+const specialMoveHandler=(event)=>{
   // for(let i=0;i<enemyList.length;i++){
   //   c.drawImage(boomImage, enemyList[i].x-160, enemyList[i].y-200);
   //   enemyDie = true;
@@ -75,6 +76,15 @@ const specialMoveHandler=()=>{
   //     enemyDie = false;
   //   }, 300);
   // }
+  $thunder.style.display = 'block';
+
+  // 1초 후에 요소를 다시 숨기도록 설정
+  setTimeout(() => {
+      $thunder.style.display = 'none';
+  }, 200);
+
+  
+  
   let Addscore=enemyList.length;
   score+=Addscore;
   enemy2List=[];
@@ -464,6 +474,9 @@ let keysDown = {};
 const keyboardListener = () => {
   document.addEventListener("keydown", (e) => {
     keysDown[e.keyCode] = true;
+    if(e.keyCode===16){
+      specialMoveHandler(e);
+    }
   });
   document.addEventListener("keyup", (e) => {
     delete keysDown[e.keyCode];
@@ -472,7 +485,6 @@ const keyboardListener = () => {
       uiEvent();
     }
     if(e.keyCode===16){
-      specialMoveHandler();
     }
   });
 };
