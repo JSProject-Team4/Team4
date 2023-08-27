@@ -11,6 +11,11 @@ const $hp = document.querySelector(".hp");
 const $reloadbox = document.querySelector(".reloadbox");
 const gameMusic = document.getElementById("game-music");
 const gameMusic2 = document.getElementById("game-music2");
+const gameMusic3 = document.getElementById("game-music3");
+const gameMusic4 = document.getElementById("game-music4");
+const gameMusic5 = document.getElementById("game-music5");
+const gameMusic6 = document.getElementById("game-music6");
+const gun = document.getElementById("gun");
 const $thunder = document.querySelector(".thunder");
 let enemyDie = false;
 let die = {
@@ -54,11 +59,22 @@ window.addEventListener("resize", () => {
   let HEIGHT = window.innerHeight - 78;
   canvas.style.height = `${HEIGHT}px`; // 높이 설정
 });
+
+function shakeScreen() {
+  canvas.classList.add("shake");
+
+  setTimeout(() => {
+    canvas.classList.remove("shake");
+  }, 500);
+}
 // 총알 hp UI
 // 총알 리로드 주기
 const reloadStart = () => {
   $reloadbox.classList.add("animate-reloadbox");
   reloadAdd = setInterval(() => {
+    gameMusic3.currentTime=0;
+    gameMusic3.play();
+    setTimeout(()=>{gameMusic3.pause()},1000);
     currentBullets += bulletAdd;
     uiEvent();
   }, 5000);
@@ -69,18 +85,26 @@ const reloadEnd = () => {
 };
 const specialMoveHandler = (event) => {
   if (imgCount1 === 5 || imgCount2 === 5 || imgCount3 === 5) {
-    changeSM(false);
-    $thunder.style.display = "block";
-    // 1초 후에 요소를 다시 숨기도록 설정
+    changeSM(false);      gameMusic6.currentTime = 0;
+    gameMusic6.play();
     setTimeout(() => {
-      $thunder.style.display = "none";
-    }, 200);
-    let Addscore = enemyList.length;
-    score += Addscore;
-    enemy2List = [];
-    enemyList = [];
-    imgCount3 = 1;
-    imgCount2 = 1;
+      $thunder.style.display = "block";
+      shakeScreen();
+      $main.classList.add("special-effect");
+      setTimeout(() => {
+        $thunder.style.display = "none";
+        $main.classList.remove("special-effect");
+      }, 600);
+      
+      let Addscore = enemyList.length;
+      score += Addscore;
+      enemy2List = [];
+      enemyList = [];
+      imgCount3 = 1;
+      imgCount2 = 1;
+    }, 1000);
+    
+    // 1초 후에 요소를 다시 숨기도록 설정
   }
 };
 
@@ -153,7 +177,7 @@ const changeSM = (e) => {
       iterationCount = 0;
     }
   }
-  let intervalId = setInterval(runForLoop, 5000); // 1초마다 runForLoop 함수 실행
+  let intervalId = setInterval(runForLoop, 3000); // 1초마다 runForLoop 함수 실행
   if (e === false) {
     clearInterval(intervalId);
   }
@@ -239,6 +263,7 @@ function Bullet() {
         bulletRight > enemyLeft &&
         bulletLeft < enemyRight
       ) {
+        gameMusic2.currentTime = 0;
         gameMusic2.play();
         score++;
         this.alive = false;
@@ -277,6 +302,7 @@ function Bullet() {
           hitcount++;
           this.alive = false;
           if (hitcount === 2) {
+            gameMusic2.currentTime = 0;
             gameMusic2.play();
             enemy2List.splice(i, 1);
             score = score + 2;
@@ -315,7 +341,12 @@ function Bullet() {
         ) {
           this.alive = false;
           itemList.splice(i, 1);
-          if (currentBullets < 15) {
+          if (currentBullets <= 10) {
+            gameMusic3.currentTime = 0;
+            gameMusic3.play();
+            setTimeout(() => {
+              gameMusic3.pause();
+            }, 1000);
             currentBullets = currentBullets + 5;
             uiEvent(); // UI 업데이트
           }
@@ -401,11 +432,16 @@ function Enemy() {
 
     if (this.y >= canvas.height - 48) {
       if (indexToRemove !== -1) {
+        gameMusic5.currentTime = 0;
+        gameMusic5.play();
+        shakeScreen();
         enemyList.splice(indexToRemove, 1);
       }
       decreaseHp();
       if (hpcount >= 3) {
         gameOver = true;
+        gameMusic4.currentTime = 0;
+        gameMusic4.play();
         reloadEnd();
         pauseMusic();
         clearInterval(einterval2);
@@ -429,11 +465,16 @@ function Enemy2() {
 
     if (this.y >= canvas.height - 48) {
       if (indexToRemove !== -1) {
+        gameMusic5.currentTime = 0;
+        gameMusic5.play();
+        shakeScreen();
         enemy2List.splice(indexToRemove, 1);
       }
       decreaseHp();
       if (hpcount >= 3) {
         gameOver = true;
+        gameMusic4.currentTime = 0;
+        gameMusic4.play();
         reloadEnd();
         pauseMusic();
         clearInterval(einterval2);
@@ -547,11 +588,17 @@ const keyboardListener = () => {
     keysDown[e.keyCode] = true;
     if (e.keyCode === 16) {
       specialMoveHandler(e);
+
     }
   });
   document.addEventListener("keyup", (e) => {
     delete keysDown[e.keyCode];
     if (e.keyCode === 32) {
+      if(currentBullets!==0){
+        gun.currentTime=0;
+        gun.volume=0.4;
+        gun.play();
+      }
       createBullet();
       uiEvent();
     }
@@ -671,7 +718,7 @@ const restartGame = () => {
           clearInterval(intervalId);
         }
         resetSM();
-
+        gameMusic4.pause();
         hpcount = 0; // hp 초기화
         $hp.style.height = "100%";
         uiEvent();
