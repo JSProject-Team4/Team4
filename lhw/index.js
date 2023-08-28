@@ -62,20 +62,20 @@ const reloadEnd=()=>{
   $reloadbox.classList.remove("animate-reloadbox");
 };
 const specialMoveHandler=(event)=>{
-  // for(let i=0;i<enemyList.length;i++){
-  //   c.drawImage(boomImage, enemyList[i].x-160, enemyList[i].y-200);
-  //   enemyDie = true;
-  //   setTimeout(() => {
-  //     enemyDie = false;
-  //   }, 300);
-  // }
-  // for(let i=0;i<enemy2List.length;i++){
-  //   c.drawImage(boomImage, enemy2List[i].x-160, enemy2List[i].y-200);
-  //   enemyDie = true;
-  //   setTimeout(() => {
-  //     enemyDie = false;
-  //   }, 300);
-  // }
+  for(let i=0;i<enemyList.length;i++){
+    c.drawImage(boomImage, enemyList[i].x-160, enemyList[i].y-200);
+    enemyDie = true;
+    setTimeout(() => {
+      enemyDie = false;
+    }, 300);
+  }
+  for(let i=0;i<enemy2List.length;i++){
+    c.drawImage(boomImage, enemy2List[i].x-160, enemy2List[i].y-200);
+    enemyDie = true;
+    setTimeout(() => {
+      enemyDie = false;
+    }, 300);
+  }
   $thunder.style.display = 'block';
 
   // 1초 후에 요소를 다시 숨기도록 설정
@@ -606,7 +606,6 @@ const restartGame = () => {
         gameStatus = true;
         playMusic();
         reloadStart();
-        saveScore = score;
         restartGame();
         uiEvent();
 
