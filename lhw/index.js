@@ -446,6 +446,7 @@ function Enemy() {
         reloadEnd();
         pauseMusic();
         clearInterval(einterval2);
+        
       }
     }
   };
@@ -696,11 +697,6 @@ const restartGame = () => {
   gameOver = false;
   score = 0;
   spaceShipX = 210;
-  let iterationCount = 0;
-  let asdf = 0;
-  let imgCount1 = 1;
-  let imgCount2 = 1;
-  let imgCount3 = 1;
   bulletList = [];
   clearInterval(einterval);
   enemyList = [];
@@ -719,9 +715,6 @@ const restartGame = () => {
       $backDrop.style.display = 'block';
 
       $gameOver.addEventListener('click', () => {
-        if (!gameStatus) {
-          clearInterval(intervalId);
-        }
         resetSM();
         gameMusic4.pause();
         hpcount = 0; // hp 초기화
