@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <link rel="shortcut icon" href="./MainPageImg/아이콘.ico">
+    <title>게임랜드</title>
+    <script
+      src="index.js"
+      defer
+    ></script>
+    <link
+      rel="stylesheet"
+      href="index.css"
+    />
+  </head>
+  <body>
+    <div class="wrapper">
+      <!-- HEADER -->
+      <div class="header">
+        <div class="header-main clearfix">
+          <a
+            href="../MainPage/MainPage.html"
+            class="header-logo"
+          >
+            <img
+              src="../MainPage/MainPageImg/팩맨logo2.png"
+              alt="logo"
+            />
+          </a>
+          <nav class="main-nav">
+            <ul class="main-nav__items">
+              <li class="main-nav__item">
+                <a href="../BrickBreaker/SubPage.html">BrickBreaker</a>
+              </li>
+              <li class="main-nav__item">
+                <a href="../ShootingSubPage/SubPage.html">ShootingGame</a>
+              </li>
+              <li class="main-nav__item">
+                <a href="#">Game1</a>
+              </li>
+              <li class="main-nav__item">
+                <a href="#">Game2</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <!-- MAIN -->
+      <main class="main">
+        <audio
+          id="game-music"
+          loop
+        >
+          <source
+            src="Image/gameMusic.mp3"
+            type="audio/mpeg"
+          />
+        </audio>
+
+        <audio id="game-music2"><source src="Image/die.mp3"></audio>
+        <audio id="game-music3"><source src="Image/reload.mp3"></audio>
+        <audio id="game-music4"><source src="Image/die2.mp3"></audio>
+        <audio id="game-music5"><source src="Image/attack.wav"></audio>
+        <audio id="game-music6"><source src="Image/Laser.mp3"></audio>
+        <audio id="gun"><source src="Image/gun.wav"></audio>
+
+        <!-- <div class="scoreBoard">
+          <p class="scoreTitle">Score Ranking</p>
+          <ul class="scoreRank"></ul>
+        </div> -->
+
+        <div class="leftboxs boxs">
+          <div class="hpbox">
+            <div class="hpimg"></div>
+            <div class="hp"></div>
+          </div>
+        </div>
+
+        <div class="gamebox">
+          <div class="box">
+            <div class="gameStart"></div>
+            <div class="gameOver"></div>
+          </div>
+          <div class="thunderbox">
+            <div class="thunder"></div>
+          </div>
+          <canvas class="canvas"></canvas>
+        </div>
+
+        <div class="rightboxs boxs">
+          <div class="bulletbox">
+            <div class="Ybox"></div>
+
+            <div class="betterybox">
+              <div class="charging c1"></div>
+              <div class="charging c2"></div>
+              <div class="charging c3"></div>
+            </div>
+
+
+
+            <div class="testbox">
+              <div class="reloadbox">
+                <img
+                  src="./Image/spring.png"
+                  alt="재장전탄약"
+                />
+              </div>
+              <div class="PM">
+                <img
+                  src="./Image/reroadAM.png"
+                  alt=""
+                />
+              </div>
+              <div class="onTop">
+                <img
+                  src="./Image/reroadPM.png"
+                  alt=""
+                />
+              </div>
+
+
+
+
+
+            </div>
+          </div>
+        </div>
+
+        <div class="backdrop"></div>
+      </main>
+      <!-- FOOTER -->
+    </div>
+  </body>
+</html>

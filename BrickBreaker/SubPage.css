@@ -1,0 +1,225 @@
+@import url('../Common/Common.css');
+
+.wrapper{
+    /* background: #A9BCF5; */
+    background: url(./SubPageImg/바다.jpg) no-repeat;
+    background-position: 0 0;
+    background-size: cover;
+    width: 100%;
+    color: #fff;
+    font-family: 'DungGeunMo';
+}
+/* header style */
+.wrapper.header {
+    width: 100%;
+    top: 0;
+    left: 0;
+  }
+  .wrapper .header .header-main {
+    width: 100%;
+    margin: 0 auto;
+    position: fixed;
+    z-index: 999;
+  
+    background: rgba(0, 0, 0, 0.5);
+  
+    display: flex;
+    align-items: center;
+  }
+  .wrapper .header .header-main .header-logo {
+    height: 76px;
+    padding: 0 10px;
+  }
+  .wrapper .header .header-main .header-logo img {
+    width: 76px;
+    height: 76px;
+  }
+  
+  .wrapper .header .header-main .main-nav .main-nav__items {
+    display: flex;
+    flex-direction: row;
+    color: #fff;
+    font-size: 1.5em;
+    font-weight: 500;
+  }
+  .wrapper .header .header-main .main-nav .main-nav__item a {
+    display: block;
+    padding: 0 15px;
+  }
+
+/* footer style */
+.wrapper .footer {
+   height: 70px;
+}
+
+.wrapper .footer .footer_wrap {
+    width: 100%;
+    height: 70px;
+    background: rgb(33, 32, 39);
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.wrapper .footer .footer_wrap .social ul{
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.wrapper .footer .footer_wrap .social ul li img {
+    margin-top: 40px;
+    width: 55px;
+    height: 30px;
+}
+.wrapper .footer .footer_wrap p {
+    margin-top: 30px;
+    text-align: right;
+    font-size: 13px;
+    color: #ccc;
+}
+.wrapper .footer .footer_wrap .copyright {
+    margin: 20px 10px 0 0 ;
+    text-align: right;
+    font-size: 13px;
+    color: #ccc;
+}
+
+/* main */
+.wrapper main {
+    padding-top: 250px;
+    
+}
+.wrapper main section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.wrapper main .section1 {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    
+}
+.wrapper main .section1 .profile {
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: space-evenly;
+    
+}
+.wrapper main .section1 .profile .mainprofile {
+    width: 55%;
+    display: flex;
+    flex-direction: column;
+    
+    justify-content: center;
+    align-content: center;
+
+}
+.wrapper main .section1 .profile .mainprofile div {
+    width: 60%;
+
+    padding: 45px 0;
+}
+.wrapper main .mainprofile .gmTitle .title {
+    font-family: 'DungGeunMo';
+    font-size: 6em;
+}
+.wrapper main .mainprofile .gamestart {
+    font-family: 'DungGeunMo';
+    font-size: 4.0em;
+    color: rgba(0, 0, 0, 0.8);
+}
+.wrapper main .mainprofile .gamestart a {
+    background: rgb(255, 255, 255);
+    padding: 0 30px;
+    border-radius: 30px;
+}
+.wrapper main .mainprofile .gmprofile {
+    width: 150px;
+    /* background: #8dd1d3; */
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-direction: column;
+    border-radius: 30px;
+}
+.wrapper main .mainprofile .gmprofile p {
+    font-size: 1.5em;
+    padding: 20px; 
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 30px;
+    margin: 5px;
+}
+.wrapper main .section1 .profile .mainImg {
+    display: flex;
+    justify-content: end;
+    align-content: center;
+    width: 40%;
+}
+.wrapper main .section1 .profile .mainImg ul li img{
+    width: 432px;
+    height: 630px;
+}
+.wrapper main .section2 div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+}
+.wrapper main .section2 .others {
+    margin: 60px;
+    padding: 100px 0 40px 40px;
+    font-size: 3em;
+    border-bottom: 2px solid #fff;
+}
+.wrapper main .section2 .othersImg {
+    padding: 80px 0 140px 0;
+
+}
+.wrapper main .section2 .othersImg ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-content: center;
+    flex-wrap: wrap;
+}
+.wrapper main .section2 .othersImg a img {
+    width: 288px;
+    height: 420px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.wrapper main .section2 .othersImg li:hover img {
+    box-shadow: 15px 10px 6px rgba(0, 0, 0, 0.6);
+}
+.wrapper main .section2 .othersImg li:active img {
+    transform: scale(1.05);
+    transition: all 0.01s linear;
+}
+
+
+@media screen and (max-width: 1200px) {
+    .wrapper main .mainprofile .gmTitle .title {
+        font-size: 4em;
+    }
+  }
+@media screen and (max-width: 840px) {
+    .wrapper main .mainprofile .gmTitle .title {
+        font-size: 5em;
+    }
+    .wrapper main .section1 .profile .mainImg {
+        display: none;
+    }
+    .wrapper main .mainprofile .gmprofile p{
+        width: 300px;
+    }
+    .wrapper main .section1 .profile .mainprofile {
+        width: 100%;
+    }
+  }

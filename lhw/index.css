@@ -1,0 +1,291 @@
+@import url(../Common/Common.css);
+@import url(./common.css);
+  .wrapper {
+    /* background: #A9BCF5; */
+    width: 100%;
+    color: #fff;
+    font-family: 'DungGeunMo';
+  }
+  /* header style */
+  .wrapper.header {
+    width: 100%;
+    top: 0;
+    left: 0;
+  }
+  .wrapper .header .header-main {
+    width: 100%;
+    margin: 0 auto;
+    position: fixed;
+    z-index: 999;
+  
+    background: rgba(0, 0, 0, 0.5);
+  
+    display: flex;
+    align-items: center;
+  }
+  .wrapper .header .header-main .header-logo {
+    height: 76px;
+    padding: 0 10px;
+  }
+  .wrapper .header .header-main .header-logo img {
+    width: 76px;
+    height: 76px;
+  }
+  
+  .wrapper .header .header-main .main-nav .main-nav__items {
+    display: flex;
+    flex-direction: row;
+    color: #fff;
+    font-size: 1.5em;
+    font-weight: 500;
+  }
+  .wrapper .header .header-main .main-nav .main-nav__item a {
+    display: block;
+    padding: 0 15px;
+  }
+
+  /* main */
+body {
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    justify-content: center;
+    align-items: center;
+    background: url(./Image/plenet.jpg) no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-origin: content-box;
+    height: 100%;
+
+}
+.special-effect {
+  background-color: white; /* 하얀 배경색으로 설정 */
+  transition: background-color 0.2s ease-in-out; /* 부드러운 전환 효과를 위한 트랜지션 설정 */
+}
+.main{
+    padding-top: 76px;
+    position: relative;
+    display: flex;
+}
+.canvas{
+    /* display: block; */
+    position: relative; 
+}
+.boxs{
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+/* .gamebox {
+  position: relative;
+} */
+.box{
+  width: 415px;height: 90vh;
+  position: absolute;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  position: absolute;
+}
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.60);
+  }
+.gameStart{
+    z-index: 11;
+    width: 50%;
+    height: 100%;
+    position: absolute;
+    background:url(Image/gameStart.jpg) no-repeat;
+    background-size: contain;
+    background-position: center;
+    background-origin: content-box;
+    left: 130px;
+}
+.gameOver{
+    z-index: 11;
+    width: 50%;
+    height: 100%;
+    position: absolute;
+    background:url(Image/gameOver.jpg) no-repeat;
+    background-size: contain;
+    background-position: center;
+    background-origin: content-box;
+    left: 130px;
+    display: none;
+}
+.thunderbox {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+.thunderbox .thunder{
+  z-index: 11;
+  width: 470px;
+  height: 100%;
+  position: absolute;
+  background:url(Image/thunder.png) no-repeat;
+  /* background-size: contain; */
+  background-position: center;
+  background-origin: content-box;
+  /* left: 858px; */
+  display: none;
+}
+
+.leftboxs .hpimg{
+  width: 50px;height: 50px;
+background: url(./Image/hpimg)no-repeat;
+background-size: contain;
+background-position: center;
+position: fixed;
+top: 76px;
+z-index: 11;
+}
+
+.leftboxs .hpbox{
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  position: absolute;
+  width: 40px;height: 100%;
+  right:0;
+  bottom:0;
+  position: absolute;
+  background-color: #FF0000;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+  border: 2px solid #000;
+}
+
+.leftboxs .hpbox .hp{
+  z-index: 10;
+  width: 40px;
+  height: 100%;
+  background-color: #7CFC00;
+  border-radius: 15px;
+  transition: width 0.3s ease-in-out;
+}
+
+.rightboxs .bulletbox{
+  width: 40px;height: 100%;
+  border: 2px solid #d35400;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+    border: 2px solid #9b59b6;
+  background: linear-gradient(to bottom, #4a235a, #1a0033);    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+
+}
+.rightboxs .bulletbox .reloadbox {
+  height: 90%;
+  width: 35px;
+  /* background-image: url('./Image/reroadAM.png'); */
+  overflow: hidden;
+}
+.rightboxs .bulletbox .reloadbox img {
+  width: 100%;
+  height: 240px;
+  /* margin-bottom: 10px; */
+}
+.rightboxs .bulletbox .betterybox{
+  width: 40px;
+  height: 15%;
+  position: relative;
+  flex: 2;
+  display: flex;
+align-items: center;
+flex-direction: column;
+padding-top: 100px;
+border-bottom: 2px solid yellow;
+border-top: 10px solid #9b59b6;
+
+}
+.testbox{
+  display: flex;
+  flex-direction: column-reverse;
+}
+.rightboxs .bulletbox .charging{
+background: url('Image/0.png') no-repeat ;
+background-size: cover;
+background-position: center;
+width: 40px;height: 65px;
+top: 0;
+
+
+}
+.rightboxs .PM img {
+  width: 100%;
+
+  /* border: 3px solid yellow; */
+}
+
+.rightboxs .onTop {
+  position: absolute;
+
+  top: 0;
+}
+.rightboxs .onTop img {
+  width: 100%;
+  
+}
+
+/* 애니메이션을 트리거하는 클래스를 추가하면 높이가 자연스럽게 증가합니다 */
+.animate-reloadbox {
+  animation: animateHeight 5s linear infinite; /* 10초 동안 animateHeight 애니메이션을 반복 */
+}
+.rightboxs .bulletbox .Ybox{
+  z-index: 10;
+  height: 70%;
+  width: 75%;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  flex: 3;
+
+}
+.rightboxs .bulletbox .Ybox img{
+  border: 3px solid yellow;
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+@keyframes animateHeight {
+  0%  {
+    height: 0%;
+  }
+  100% {
+    height: 90%;
+  }
+}
+.shake {
+  animation: shake 0.5s ease-in-out;
+}
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-10px);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translateX(10px);
+  }
+}
+
+
+
+
+

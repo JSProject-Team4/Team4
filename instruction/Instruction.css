@@ -1,0 +1,127 @@
+.wrapper {
+  /* background: #A9BCF5; */
+  background-image: url(./12.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+/* header style */
+.wrapper.header {
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 999;
+}
+.wrapper .header .header-main {
+  width: 100%;
+  height: 70px;
+  margin: 0 auto;
+  position: fixed;
+  font-family: 'NeoDunggeunmo';
+  background: rgba(0, 0, 0, 0.5);
+
+  display: flex;
+  align-items: center;
+}
+.wrapper .header .header-main .header-logo {
+  padding: 30px;
+  color: #fff;
+}
+
+.wrapper .header .header-main .main-nav .main-nav__items {
+  display: flex;
+  flex-direction: row;
+  color: #fff;
+}
+.wrapper .header .header-main .main-nav .main-nav__item a {
+  display: block;
+  font-weight: 700;
+  padding: 0 15px;
+}
+/*------main*-----------*/
+.main {
+  display: flex;
+  flex-direction: row;
+}
+.main .section1 {
+  display: flex;
+  flex-direction: column;
+}
+.wrapper .main-body1 {
+  float: right;
+  margin-left: 40px;
+  margin-top: 60px;
+  width: 400px;
+  height: 600px;
+}
+
+.wrapper .main-body2 {
+  font-size: 10em;
+  color: #fff;
+  text-shadow: 2px 2px 2px gray;
+  font-family: 'NeoDunggeunmo';
+  margin-left: 20px;
+}
+.wrapper .main-body3 {
+  font-size: 1.5em;
+  color: #fff;
+  font-weight: bold;
+  font-family: 'NeoDunggeunmo';
+  margin-left: 20px;
+}
+.wrapper .main-body4 {
+  display: inline-block;
+  margin: 0 5px;
+}
+.wrapper .main-body4 .main-body2-img2 {
+  float: left;
+  width: 400px;
+  height: 200px;
+  margin-top: 350px;
+  margin-left: 100px;
+}
+.wrapper .main-body5 {
+  text-align: center;
+}
+.wrapper .main-body5 .main-body2-img3 {
+  width: 300px;
+  height: 400px;
+  margin-bottom: 30px;
+}
+/*-------------------------main------------------------------------*/
+/* footer style */
+.wrapper .footer {
+  height: 70px;
+}
+
+.wrapper .footer .footer_wrap {
+  width: 100%;
+  height: 70px;
+  background: rgb(132, 130, 147);
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.wrapper .footer .footer_wrap .social ul {
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.wrapper .footer .footer_wrap .social ul li img {
+  margin-top: 40px;
+  width: 55px;
+  height: 30px;
+}
+.wrapper .footer .footer_wrap p {
+  margin-top: 30px;
+  text-align: right;
+  font-size: 13px;
+  color: #ccc;
+}
+.wrapper .footer .footer_wrap .copyright {
+  margin: 20px 10px 0 0;
+  text-align: right;
+  font-size: 13px;
+  color: #ccc;
+}

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <link
+      rel="icon"
+      href="data:;base64,iVBORw0KGgo="
+    />
+    <link
+      rel="shortcut icon"
+      href="../MainPage/MainPageImg/아이콘.ico"
+    />
+    <title>격파! 벽돌 부수기</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="index.css"
+    />
+
+    <script
+      src="index.js"
+      type="module"
+      defer
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&family=Pangolin&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="wrapper">
+      <!-- 헤더 -->
+      <div class="header">
+        <div class="header-main clearfix">
+          <a
+            href="../MainPage/MainPage.html"
+            class="header-logo"
+          >
+            <img
+              src="../MainPage/MainPageImg/팩맨logo2.png"
+              alt="logo"
+            />
+          </a>
+          <nav class="main-nav">
+            <ul class="main-nav__items">
+              <li class="main-nav__item">
+                <a href="../BrickBreaker/SubPage.html">BrickBreaker</a>
+              </li>
+              <li class="main-nav__item">
+                <a href="../ShootingSubPage/SubPage.html">ShootingGame</a>
+              </li>
+              <li class="main-nav__item">
+                <a href="#">Game1</a>
+              </li>
+              <li class="main-nav__item">
+                <a href="#">Game2</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <!-- 헤더 끝 -->
+      <div class="title">
+        <h1>격파! 벽돌 부수기</h1>
+      </div>
+
+      <div class="wrap">
+        <div id="header">
+          <h2>
+            Score:
+            <h2 id="score"></h2>
+          </h2>
+        </div>
+        <div class="setting">
+          <button id="pause">일시정지</button>
+          <button id="bgm">
+            <div class="custom-loader"></div>
+            BGM ON/OFF
+          </button>
+        </div>
+      </div>
+
+      <div class="pauseModal">
+        <div class="pauseTitle">일시정지</div>
+        <div class="scoreStatus">
+          현재 스코어:
+          <p class="sscore">0</p>
+          점
+        </div>
+        <div class="pauseChoice">
+          <button class="pauseResetBtn">
+            <span class="lnr lnr-undo"> </span>
+            처음부터
+          </button>
+          <button class="pauseExitBtn">
+            <span class="lnr lnr-cross"> </span>
+            돌아가기
+          </button>
+        </div>
+      </div>
+      <div class="backdrop"></div>
+
+      <div class="gameOverModal">
+        <div class="gameOverTitle">GAME OVER</div>
+        <div class="scoreStatus">
+          현재 스코어:
+          <p class="ssscore">0</p>
+          점
+        </div>
+        <button class="gameOverResetBtn">
+          <span class="lnr lnr-undo"> </span>
+          처음부터
+        </button>
+      </div>
+      <!-- <button class="hack">...</button> -->
+      <div class="gameClearModal">
+        <div class="gameClearTitle">GAME CLEAR!</div>
+
+        <div class="gameClearText">당신이 이번 여름의 격파왕입니다!</div>
+        <div class="banana"></div>
+        <button class="gameClearResetBtn">
+          <span class="lnr lnr-undo"> </span>
+          처음부터
+        </button>
+      </div>
+
+      <!-- <canvas
+      id="Canvas"
+      width="480"
+      height="500"
+    ></canvas> -->
+      <div class="canvasWrap">
+        <canvas
+          id="Canvas"
+          width="560"
+          height="500"
+        ></canvas>
+
+        <div class="gameStartModal">
+          <div class="gameStartTitle">격파! 벽돌 부수기</div>
+          <button class="gameStartBtn">게임시작</button>
+        </div>
+      </div>
+
+      <div class="keyHelp">
+        <div class="keySet"></div>
+        <div class="timerWrapper">
+          <div class="timerTitle">랜덤아이템 타이머</div>
+          <p>※아이템을 연속으로 먹어도</p>
+          <p>시간갱신이 되지않습니다.</p>
+          <div class="bigStat">
+            남은 공 변신시간:
+            <p class="bigTimer">0</p>
+            초
+          </div>
+          <div class="longStat">
+            남은 라켓 변신시간:
+            <p class="longTimer">0</p>
+            초
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

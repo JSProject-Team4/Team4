@@ -1,0 +1,154 @@
+@import url('../Common/Common.css');
+
+.wrapper{
+    /* background: #A9BCF5; */
+    font-family: 'DungGeunMo';
+    background: url(../MainPage/MainPageImg/main.png) no-repeat;
+    background-position: 0 0;
+    background-size: cover;
+
+}
+/* header style */
+.wrapper.header {
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 999;
+  }
+  .wrapper .header .header-main {
+    width: 100%;
+    margin: 0 auto;
+    position: fixed;
+  
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    font-size: 1.5em;
+    font-weight: 500;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .wrapper .header .header-main .header-logo {
+    height: 76px;
+    padding: 0 10px;
+  }
+  .wrapper .header .header-main .header-logo img {
+    width: 76px;
+    height: 76px;
+  }
+  
+  .wrapper .header .header-main .main-nav .main-nav__items {
+    display: flex;
+    flex-direction: row;
+  }
+  .wrapper .header .header-main .main-nav .main-nav__item a {
+    display: block;
+    padding: 0 30px;
+  }
+  .wrapper .header .header-main .login {
+    padding: 0 50px;
+    }
+
+/* main */
+.wrapper main {
+    display: flex;
+    flex-direction: column;
+    padding-top: 376px;
+
+    width: 100%;
+    height: 1400px;
+}
+.wrapper .Login {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+.wrapper .login-main {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 370px;
+    height: 400px;
+    background: #31816b;
+    padding: 40px 0;
+    border-radius: 10px 10px;
+    color: #fff;
+
+    font-size: 2em;
+    box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.8);
+}
+.wrapper .login-main .signin p {
+    font-size: 50px;
+}
+.wrapper .login-main section {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+.wrapper .login-main .section1 {
+    display: flex;
+    flex-direction: column;
+}
+.wrapper .login-main .section1 div {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    
+    padding: 30px;
+}
+.wrapper .login-main .section1 .login-id p {
+    padding: 0 55px;
+}
+
+.wrapper .login-main .section1 .login-password p {
+    padding: 0 7px
+}
+.wrapper .login-main .section2 {
+    padding-top: 20px;
+}
+.wrapper .login-main .section2 .login-btn {
+    background: rgb(255, 255, 255);
+    padding: 10px 40px;
+    border-radius: 10px 10px;
+    color: #000;
+}
+
+/* footer style */
+.wrapper .footer {
+   height: 70px;
+}
+
+.wrapper .footer .footer_wrap {
+    width: 100%;
+    height: 70px;
+    background: rgb(33, 32, 39);
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.wrapper .footer .footer_wrap .social ul{
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.wrapper .footer .footer_wrap .social ul li img {
+    margin-top: 40px;
+    width: 55px;
+    height: 30px;
+}
+.wrapper .footer .footer_wrap p {
+    margin-top: 30px;
+    text-align: right;
+    font-size: 13px;
+    color: #ccc;
+}
+.wrapper .footer .footer_wrap .copyright {
+    margin: 20px 10px 0 0 ;
+    text-align: right;
+    font-size: 13px;
+    color: #ccc;
+}
+/* main */
